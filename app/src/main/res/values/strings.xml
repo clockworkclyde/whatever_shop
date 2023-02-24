@@ -1,3 +1,12 @@
 <resources>
    <string name="app_name">eshop</string>
+   <string name="title_sign_in">Sign in</string>
+   <string name="hint_firstname">First name</string>
+   <string name="btn_sign_in">Sign in</string>
+   <string name="sign_in_already_have_acc">Already have an account?</string>
+   <string name="txt_btn_login">Log in</string>
+   <string name="txt_btn_google_sign_in">Sign in with Google</string>
+   <string name="txt_btn_apple_sign_in">Sign in with Apple</string>
+   <string name="hint_lastname">Last name</string>
+   <string name="hint_email">Email</string>
 </resources>

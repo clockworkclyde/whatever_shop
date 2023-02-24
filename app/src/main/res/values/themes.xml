@@ -11,6 +11,7 @@
       <item name="colorOnSecondary">@color/black</item>
       <!-- Status bar color. -->
       <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+      <item name="android:editTextColor">@null</item>
       <!-- Customize your theme here. -->
    </style>
 
@@ -30,31 +31,40 @@
       <item name="android:textColor">@color/base_light_gray</item>
    </style>
 
-   <style name="TextViewStyle.TextInput" parent="TextViewStyle.TextInput.Small" />
-
-   <style name="TextViewStyle.TextInput.Small">
+   <style name="TextViewStyle.TextInput">
+      <item name="fontFamily">@font/mon_medium</item>
       <item name="android:textColor">@color/base_dark_gray</item>
-      <item name="android:textSize">11sp</item>
+      <item name="android:textSize">10sp</item>
    </style>
 
    <style name="PrimaryRoundedButton" parent="TextAppearance.MaterialComponents.Button">
       <item name="android:textAppearance">@style/TextViewStyle.ButtonText</item>
+      <item name="android:elevation">0dp</item>
+      <item name="android:paddingTop">@dimen/button_inner_padding</item>
+      <item name="android:paddingBottom">@dimen/button_inner_padding</item>
+      <item name="android:textColor">@color/text_primary_button</item>
       <item name="cornerRadius">@dimen/bg_button_radius</item>
       <item name="android:textAllCaps">false</item>
       <item name="backgroundTint">@color/primary_button_states</item>
    </style>
 
-   <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-      <item name="hintEnabled">false</item>
-      <item name="backgroundTint">@color/bg_text_input</item>
-      <item name="boxCornerRadiusBottomEnd">@dimen/bg_radius_text_input</item>
-      <item name="boxCornerRadiusBottomStart">@dimen/bg_radius_text_input</item>
-      <item name="boxCornerRadiusTopEnd">@dimen/bg_radius_text_input</item>
-      <item name="boxCornerRadiusTopStart">@dimen/bg_radius_text_input</item>
+<!--   <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
+<!--      <item name="hintEnabled">false</item>-->
+<!--      <item name="boxStrokeWidth">0dp</item>-->
+<!--      <item name="android:layout_height">30dp</item>-->
+<!--      <item name="boxBackgroundColor">@color/bg_text_input</item>-->
+<!--      <item name="boxCornerRadiusBottomEnd">@dimen/bg_radius_text_input</item>-->
+<!--      <item name="boxCornerRadiusBottomStart">@dimen/bg_radius_text_input</item>-->
+<!--      <item name="boxCornerRadiusTopEnd">@dimen/bg_radius_text_input</item>-->
+<!--      <item name="boxCornerRadiusTopStart">@dimen/bg_radius_text_input</item>-->
+<!--   </style>-->
+
+   <style name="TextInputStyle">
+      <item name="android:gravity">center</item>
+      <item name="android:textAppearance">@style/TextViewStyle.TextInput</item>
+      <item name="android:background">@drawable/bg_text_input</item>
+      <item name="android:layout_height">32dp</item>
    </style>
 
-   <style name="TextInputStyle" parent="Widget.AppCompat.EditText">
-      <item name="android:textAppearance">@style/TextViewStyle.TextInput.Small</item>
-   </style>
 
 </resources>
