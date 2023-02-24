@@ -33,6 +33,7 @@ ext.libs = [
 
         // viewModel ktx
         viewModelKtx               : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}",
+        lifecycleKtx               : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}",
 
         // Timber logger
         timber                     : "com.jakewharton.timber:timber:5.0.1",
