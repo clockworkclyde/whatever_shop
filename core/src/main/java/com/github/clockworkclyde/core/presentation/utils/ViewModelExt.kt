@@ -1,4 +1,4 @@
-package com.github.clockworkclyde.core.common
+package com.github.clockworkclyde.core.presentation.utils
 
 import com.github.clockworkclyde.core.dto.IEvent
 import com.github.clockworkclyde.core.presentation.viewmodels.IBaseFlowViewModel

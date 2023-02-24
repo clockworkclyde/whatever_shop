@@ -1,9 +1,11 @@
 package com.github.clockworkclyde.core.presentation.fragments
 
-import androidx.viewbinding.ViewBinding
-import com.github.clockworkclyde.core.presentation.viewmodels.BaseFlowViewModel
+import androidx.databinding.ViewDataBinding
+import com.github.clockworkclyde.core.presentation.viewmodels.IEventViewModel
 
-interface IBaseFragment<V: ViewBinding, VM: BaseFlowViewModel> {
+interface IBaseFragment<V: ViewDataBinding, VM: IEventViewModel> {
+
+   val viewModel: VM?
 
    val binding: V
 
