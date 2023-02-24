@@ -1,6 +1,7 @@
 package com.github.clockworkclyde.core.presentation.utils
 
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -16,6 +17,14 @@ import kotlinx.coroutines.launch
 fun Fragment.launchAndRepeatOnState(state: Lifecycle.State, block: suspend () -> Unit) {
    viewLifecycleOwner.lifecycleScope.launch {
       viewLifecycleOwner.repeatOnLifecycle(state) {
+         block()
+      }
+   }
+}
+
+fun AppCompatActivity.launchAndRepeatOnState(state: Lifecycle.State, block: suspend () -> Unit) {
+   lifecycleScope.launch {
+      repeatOnLifecycle(state) {
          block()
       }
    }
