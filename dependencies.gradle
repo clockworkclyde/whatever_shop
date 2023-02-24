@@ -1,0 +1,39 @@
+ext.versions = [
+        kotlinCoreKtx   : '1.9.0',
+        retrofix        : '2.9.0',
+        glide           : '4.13.2',
+        adapterDelegates: '4.3.2',
+        dagger          : '2.45',
+        lifecycle       : '2.4.0',
+]
+
+ext.libs = [
+        kotlinCoreKtx              : "androidx.core:core-ktx:${versions.kotlinCoreKtx}",
+        appCompat                  : "androidx.appcompat:appcompat:1.6.1",
+        material                   : "com.google.android.material:material:1.8.0",
+        constraintLayout           : "androidx.constraintlayout:constraintlayout:2.1.4",
+
+        // Network
+        retrofit                   : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+        gson                       : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+        okhttpLogging              : "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2",
+        coroutinesAdapterRetrofit  : "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2",
+
+        //Glide
+        glide                      : "com.github.bumptech.glide:glide:${versions.glide}",
+        glideKapt                  : "com.github.bumptech.glide:compiler:${versions.glide}",
+
+        // Adapter Delegates
+        adapterDelegates           : "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:$versions.adapterDelegates",
+        adapterDelegatesViewBinding: "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$versions.adapterDelegates",
+
+        // DI
+        dagger                     : "com.google.dagger:dagger:${versions.dagger}",
+        daggerKapt                 : "com.google.dagger:dagger-compiler:${versions.dagger}",
+
+        // viewModel ktx
+        viewModelKtx               : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}",
+
+        // Timber logger
+        timber                     : "com.jakewharton.timber:timber:5.0.1",
+]
