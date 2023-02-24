@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -40,6 +41,8 @@ android {
 dependencies {
     implementation project(":core")
     implementation project(":domain")
+    implementation project(":data")
+    implementation project(":providers")
 
     implementation libs.dagger
     kapt libs.daggerKapt

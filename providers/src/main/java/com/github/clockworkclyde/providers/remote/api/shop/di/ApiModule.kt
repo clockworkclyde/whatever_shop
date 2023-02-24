@@ -3,11 +3,14 @@ package com.github.clockworkclyde.providers.remote.api.shop.di
 import com.github.clockworkclyde.providers.remote.api.shop.EShopApi
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
 @Module
+@InstallIn(SingletonComponent::class)
 class ApiModule {
 
    @Provides

@@ -3,7 +3,7 @@ ext.versions = [
         retrofit        : '2.9.0',
         glide           : '4.13.2',
         adapterDelegates: '4.3.2',
-        dagger          : '2.45',
+        dagger          : '2.42',
         lifecycle       : '2.4.0',
 ]
 
@@ -28,8 +28,8 @@ ext.libs = [
         adapterDelegatesViewBinding: "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$versions.adapterDelegates",
 
         // DI
-        dagger                     : "com.google.dagger:dagger:${versions.dagger}",
-        daggerKapt                 : "com.google.dagger:dagger-compiler:${versions.dagger}",
+        dagger                     : "com.google.dagger:hilt-android:${versions.dagger}",
+        daggerKapt                 : "com.google.dagger:hilt-compiler:${versions.dagger}",
 
         // viewModel & lifecycle ktx
         viewModelKtx               : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}",
