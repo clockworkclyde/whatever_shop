@@ -13,4 +13,6 @@
    <string name="login">Login</string>
    <string name="catalog">Catalog</string>
    <string name="hint_password">Password</string>
+   <string name="title_login">Welcome back</string>
+   <string name="show_or_hide_pass">Show or hide password</string>
 </resources>

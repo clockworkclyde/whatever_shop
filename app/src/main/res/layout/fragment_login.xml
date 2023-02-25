@@ -24,7 +24,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_horizontal"
-          android:text="@string/title_sign_in" />
+          android:text="@string/title_login" />
 
       <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/firstNameTextInput"
@@ -35,15 +35,34 @@
           android:inputType="text"
           android:text="@{viewModel.firstName}" />
 
-      <com.google.android.material.textfield.TextInputEditText
-          android:id="@+id/passwordTextInput"
-          style="@style/TextInputStyle"
+      <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
+          android:layout_height="wrap_content"
           android:layout_marginTop="32dp"
-          android:drawableEnd="@drawable/ic_password_hidden_eye"
-          android:hint="@string/hint_password"
-          android:inputType="textPassword"
-          android:text="@{viewModel.password}" />
+          android:orientation="horizontal">
+
+         <com.google.android.material.textfield.TextInputEditText
+             android:id="@+id/passwordTextInput"
+             style="@style/TextInputStyle"
+             android:layout_width="0dp"
+             android:hint="@string/hint_password"
+             android:inputType="textPassword"
+             android:text="@{viewModel.password}"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <ImageButton
+             android:id="@+id/imgBtnChangePasswordVisibility"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:backgroundTint="@android:color/transparent"
+             android:contentDescription="@string/show_or_hide_pass"
+             android:src="@drawable/ic_password_hidden_eye"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
 
       <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/stub"

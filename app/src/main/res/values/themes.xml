@@ -23,7 +23,7 @@
    <style name="TextViewStyle.Title">
       <item name="android:textSize">26sp</item>
       <item name="android:textColor">@color/base_black</item>
-      <item name="fontFamily">@font/mon_medium</item>
+      <item name="fontFamily">@font/mon_bold</item>
    </style>
 
    <style name="TextViewStyle.ButtonText">
