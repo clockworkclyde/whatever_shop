@@ -1,7 +1,7 @@
 package com.github.clockworkclyde.core.presentation.activities
 
 import android.os.Bundle
-import android.os.PersistableBundle
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -10,27 +10,32 @@ import androidx.navigation.fragment.NavHostFragment
 import com.github.clockworkclyde.core.navigation.INavigationEventHandler
 import com.github.clockworkclyde.core.presentation.utils.launchAndRepeatOnState
 import kotlinx.coroutines.flow.Flow
+import timber.log.Timber
 
-abstract class NavHostActivity : AppCompatActivity() {
+abstract class NavHostActivity : AppCompatActivity {
 
-   abstract val navigator: INavigationEventHandler
+   constructor() : super()
+   constructor(@LayoutRes layoutId: Int) : super(layoutId)
+
+   abstract val navigationHandler: INavigationEventHandler
 
    abstract val hostFragmentId: Int
 
-   val hostFragment: NavHostFragment? get() = supportFragmentManager.findFragmentById(hostFragmentId) as NavHostFragment?
+   protected val hostFragment: NavHostFragment? get() = supportFragmentManager.findFragmentById(hostFragmentId) as NavHostFragment?
 
-   val currentFragment: Fragment? get() = hostFragment?.childFragmentManager?.primaryNavigationFragment
+   protected val currentFragment: Fragment? get() = hostFragment?.childFragmentManager?.primaryNavigationFragment
 
-   val navHostController: NavController get() = hostFragment?.navController ?: throw IllegalStateException("Cannot find nav controller")
+   protected val navHostController: NavController get() = hostFragment?.navController ?: throw IllegalStateException("Cannot find nav controller")
 
-   override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-      super.onCreate(savedInstanceState, persistentState)
+   override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(savedInstanceState)
       handleNavigationCommands()
    }
 
    open fun handleNavigationCommands() {
-      navigator.commands.collectWhileStarted { handler ->
+      navigationHandler.commands.collectWhileStarted { handler ->
          navHostController.let(handler)
+         Timber.e("Navigation command was handled when current fragment is $currentFragment")
       }
    }
 

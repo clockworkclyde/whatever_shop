@@ -1,6 +1,6 @@
 package com.github.clockworkclyde.core.dto
 
-import com.github.clockworkclyde.core.common.SingleInHandler
+import com.github.clockworkclyde.core.common.InHandler
 import com.github.clockworkclyde.core.common.UnitHandler
 
 @Suppress("UNCHECKED_CAST")
@@ -20,13 +20,13 @@ abstract class Result<out T : Any> : IResult {
 
    override fun flatMap(mapper: (IResult) -> IResult): IResult = mapper(this)
 
-   override fun <R> applyIfSuccess(onSuccess: SingleInHandler<R>): IResult {
+   override fun <R> applyIfSuccess(onSuccess: InHandler<R>): IResult {
       return this.also { result ->
          if (result is Success) (data as R)?.let { onSuccess(it) }
       }
    }
 
-   fun applyIfError(onError: SingleInHandler<ResultThrowable.Error>): IResult {
+   fun applyIfError(onError: InHandler<ResultThrowable.Error>): IResult {
       return this.also {
          if (it is ResultThrowable.Error) onError.invoke(it)
       }

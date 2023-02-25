@@ -11,4 +11,6 @@
    <string name="hint_email">Email</string>
    <string name="sign_in">Sign In</string>
    <string name="login">Login</string>
+   <string name="catalog">Catalog</string>
+   <string name="hint_password">Password</string>
 </resources>

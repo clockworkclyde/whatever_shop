@@ -4,7 +4,7 @@ import com.github.clockworkclyde.core.dto.Result
 import kotlinx.coroutines.flow.Flow
 
 typealias UnitHandler = () -> Unit
-typealias SingleInHandler<T> = (T) -> Unit
+typealias InHandler<T> = (T) -> Unit
 typealias DoubleInHandler<T, R> = (T, R) -> Unit
 typealias OutHandler<T> = () -> T
 typealias InOutHandler<T> = (T) -> T
