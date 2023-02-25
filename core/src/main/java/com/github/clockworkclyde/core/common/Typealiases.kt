@@ -14,3 +14,4 @@ typealias FlowResultList<T> = Flow<List<Result<T>>>
 typealias FlowResult<T> = Flow<Result<T>>
 
 typealias AnyResult = Result<Any>
+typealias FlowAnyResult = Flow<Result<Any>>

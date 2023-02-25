@@ -13,6 +13,8 @@ interface IBaseFragment<V: ViewDataBinding, VM: IEventViewModel> {
 
    fun initViews()
 
+   fun handleResultError()
+
    fun initBinding(binding: V)
 
 }

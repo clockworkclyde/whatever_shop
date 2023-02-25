@@ -1,6 +1,7 @@
 package com.github.clockworkclyde.core.utils
 
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.ViewDataBinding
@@ -50,3 +51,5 @@ fun EditText.clearError() {
 }
 
 fun EditText.hasError(): Boolean = this.error != null
+
+fun Fragment.toast(message: Any? = "", duration: Int = Toast.LENGTH_SHORT) = Toast.makeText(requireContext(), message.toString(), duration).show()

@@ -20,19 +20,19 @@ abstract class Result<out T : Any> : IResult {
 
    override fun flatMap(mapper: (IResult) -> IResult): IResult = mapper(this)
 
-   override fun <R> applyIfSuccess(onSuccess: InHandler<R>): IResult {
+   override fun <R> applyOnSuccess(onSuccess: InHandler<R>): IResult {
       return this.also { result ->
          if (result is Success) (data as R)?.let { onSuccess(it) }
       }
    }
 
-   fun applyIfError(onError: InHandler<ResultThrowable.Error>): IResult {
+   fun applyOnError(onError: InHandler<ResultThrowable.Error>): IResult {
       return this.also {
          if (it is ResultThrowable.Error) onError.invoke(it)
       }
    }
 
-   override fun applyIfEmpty(onEmpty: UnitHandler): IResult {
+   override fun applyOnEmpty(onEmpty: UnitHandler): IResult {
       return this.also {
          if (it is Empty) onEmpty.invoke()
       }

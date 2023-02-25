@@ -13,6 +13,9 @@ interface UserDao {
    suspend fun storeUser(user: UserEntity)
 
    @Query("SELECT * FROM UserEntity WHERE email = :email")
-   suspend fun findExistingUser(email: String): UserEntity?
+   suspend fun findUserByEmail(email: String): UserEntity?
+
+   @Query("SELECT * FROM UserEntity WHERE firstName = :firstName")
+   suspend fun findUserByName(firstName: String): UserEntity?
 
 }

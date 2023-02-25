@@ -28,7 +28,7 @@ data class UserEntity(
    }
 
    companion object {
-      fun UserDto.fromDomain(): UserEntity = object : IConvertableTo<UserEntity> {
+      fun UserDto.toDbEntity(): UserEntity = object : IConvertableTo<UserEntity> {
          override fun convertTo(): UserEntity {
             return UserEntity(
                id = id,

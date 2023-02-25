@@ -13,6 +13,6 @@ interface IResult {
 
    fun flatMap(mapper: InOutHandler<IResult>): IResult
 
-   fun <R : Any?> applyIfSuccess(onSuccess: InHandler<R>): IResult
-   fun applyIfEmpty(onEmpty: UnitHandler): IResult
+   fun <R : Any?> applyOnSuccess(onSuccess: InHandler<R>): IResult
+   fun applyOnEmpty(onEmpty: UnitHandler): IResult
 }
