@@ -1,4 +1,4 @@
-package com.github.clockworkclyde.core.presentation.utils
+package com.github.clockworkclyde.core.utils
 
 import android.view.View
 

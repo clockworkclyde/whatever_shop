@@ -48,6 +48,8 @@ abstract class Result<out T : Any> : IResult {
 
    object Empty : NothingResult()
 
+   open class EmptySuccess : Success<Boolean>(true)
+
    abstract class ResultThrowable : NothingResult() {
       open var code: Int = 0
       open var message: Any? = null

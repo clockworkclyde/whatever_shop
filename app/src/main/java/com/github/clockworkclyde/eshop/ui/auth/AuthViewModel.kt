@@ -1,10 +1,10 @@
 package com.github.clockworkclyde.eshop.ui.auth
 
 import androidx.lifecycle.viewModelScope
-import com.github.clockworkclyde.core.presentation.utils.orFalse
+import com.github.clockworkclyde.core.utils.orFalse
 import com.github.clockworkclyde.core.presentation.viewmodels.BaseFlowViewModel
-import com.github.clockworkclyde.domain.validate.ValidateEmailUseCase
-import com.github.clockworkclyde.domain.validate.ValidateFieldIsNotEmptyUseCase
+import com.github.clockworkclyde.domain.usecases.validate.ValidateEmailUseCase
+import com.github.clockworkclyde.domain.usecases.validate.ValidateFieldIsNotEmptyUseCase
 import com.github.clockworkclyde.eshop.di.IoDispatcher
 import com.github.clockworkclyde.core.navigation.INavigator
 import com.github.clockworkclyde.eshop.navigation.directions.auth.AuthDirections

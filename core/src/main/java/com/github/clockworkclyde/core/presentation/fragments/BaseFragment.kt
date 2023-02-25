@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import com.github.clockworkclyde.core.presentation.utils.launchAndRepeatOnState
+import com.github.clockworkclyde.core.utils.launchAndRepeatOnState
 import com.github.clockworkclyde.core.presentation.viewmodels.BaseFlowViewModel
 import kotlinx.coroutines.flow.Flow
 

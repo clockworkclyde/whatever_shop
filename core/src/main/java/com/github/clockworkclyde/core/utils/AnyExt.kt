@@ -1,4 +1,4 @@
-package com.github.clockworkclyde.core.presentation.utils
+package com.github.clockworkclyde.core.utils
 
 fun <T: Boolean?> T.orFalse(): Boolean = this ?: false
 

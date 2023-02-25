@@ -1,13 +1,13 @@
 package com.github.clockworkclyde.providers.resources
 
 import android.content.Context
-import com.github.clockworkclyde.data.sources.ResourcesProvider
+import com.github.clockworkclyde.core.common.IResourcesProvider
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class AndroidResourcesProvider @Inject constructor(
    @ApplicationContext private val context: Context
-): ResourcesProvider {
+): IResourcesProvider {
 
    override fun getString(id: Int): String = context.getString(id)
 

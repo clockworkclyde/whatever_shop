@@ -1,4 +1,4 @@
-package com.github.clockworkclyde.providers.remote.api
+package com.github.clockworkclyde.providers.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module

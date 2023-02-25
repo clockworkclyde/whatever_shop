@@ -1,4 +1,4 @@
-package com.github.clockworkclyde.domain
+package com.github.clockworkclyde.domain.usecases
 
 import kotlinx.coroutines.flow.Flow
 

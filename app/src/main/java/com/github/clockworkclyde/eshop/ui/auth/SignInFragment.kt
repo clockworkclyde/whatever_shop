@@ -2,7 +2,7 @@ package com.github.clockworkclyde.eshop.ui.auth
 
 import androidx.fragment.app.viewModels
 import com.github.clockworkclyde.core.presentation.fragments.BaseFragment
-import com.github.clockworkclyde.core.presentation.utils.onTextChanged
+import com.github.clockworkclyde.core.utils.onTextChanged
 import com.github.clockworkclyde.eshop.databinding.FragmentSignInBinding
 import dagger.hilt.android.AndroidEntryPoint
 

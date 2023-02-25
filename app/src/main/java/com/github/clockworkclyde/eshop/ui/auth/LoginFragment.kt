@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.viewModels
 import com.github.clockworkclyde.core.presentation.fragments.BaseFragment
-import com.github.clockworkclyde.core.presentation.utils.onTextChanged
+import com.github.clockworkclyde.core.utils.onTextChanged
 import com.github.clockworkclyde.eshop.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
