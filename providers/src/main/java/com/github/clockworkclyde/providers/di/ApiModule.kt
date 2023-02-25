@@ -1,6 +1,6 @@
-package com.github.clockworkclyde.providers.remote.api.shop.di
+package com.github.clockworkclyde.providers.di
 
-import com.github.clockworkclyde.providers.remote.api.shop.EShopApi
+import com.github.clockworkclyde.providers.remote.api.EShopApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

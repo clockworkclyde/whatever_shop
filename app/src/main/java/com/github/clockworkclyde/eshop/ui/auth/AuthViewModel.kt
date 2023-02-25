@@ -1,23 +1,38 @@
 package com.github.clockworkclyde.eshop.ui.auth
 
 import androidx.lifecycle.viewModelScope
-import com.github.clockworkclyde.core.presentation.utils.orFalse
+import com.github.clockworkclyde.core.common.AnyResult
+import com.github.clockworkclyde.core.common.FlowAnyResult
+import com.github.clockworkclyde.core.utils.orFalse
 import com.github.clockworkclyde.core.presentation.viewmodels.BaseFlowViewModel
-import com.github.clockworkclyde.domain.validate.ValidateEmailUseCase
-import com.github.clockworkclyde.domain.validate.ValidateFieldIsNotEmptyUseCase
+import com.github.clockworkclyde.domain.usecases.validate.ValidateEmailUseCase
+import com.github.clockworkclyde.domain.usecases.validate.ValidateFieldIsNotEmptyUseCase
 import com.github.clockworkclyde.eshop.di.IoDispatcher
 import com.github.clockworkclyde.core.navigation.INavigator
+import com.github.clockworkclyde.core.utils.applyIfError
+import com.github.clockworkclyde.core.utils.applyIfSuccess
+import com.github.clockworkclyde.core.utils.toEmptySuccess
+import com.github.clockworkclyde.domain.usecases.auth.LoginAttempt
+import com.github.clockworkclyde.domain.usecases.auth.LoginAttemptUseCase
+import com.github.clockworkclyde.domain.usecases.auth.SignInAttempt
+import com.github.clockworkclyde.domain.usecases.auth.SignInAttemptUseCase
 import com.github.clockworkclyde.eshop.navigation.directions.auth.AuthDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
    private val validateEmail: ValidateEmailUseCase,
    private val validateIsNotEmpty: ValidateFieldIsNotEmptyUseCase,
+   private val signInAttempt: SignInAttemptUseCase,
+   private val loginAttempt: LoginAttemptUseCase,
    private val navigator: INavigator,
    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : BaseFlowViewModel() {
@@ -29,44 +44,88 @@ class AuthViewModel @Inject constructor(
    val emailError = MutableSharedFlow<String>()
    val passwordError = MutableSharedFlow<String>()
 
-   override val supportFlow: Flow<Boolean> by lazy {
+   override val resultFlow: MutableSharedFlow<AnyResult> by lazy {
+      MutableSharedFlow(
+         replay = sharedFlowOptions.replay,
+         extraBufferCapacity = sharedFlowOptions.bufferCapacity,
+         onBufferOverflow = sharedFlowOptions.bufferOverflow
+      )
+   }
+
+   /* Sign in validation */
+   override val supportFlow: Flow<SignInAttempt> by lazy {
+      val firstName = firstName.value
+      val lastName = lastName.value
+      val email = email.value
       flow {
          val firstNameHasError =
-            validateIsNotEmpty(firstName.value)?.also { firstNameError.emit(it) }?.isNotEmpty()
+            validateIsNotEmpty(firstName)?.also { firstNameError.emit(it) }?.isNotEmpty()
                .orFalse()
          val lastNameHasError =
-            validateIsNotEmpty(lastName.value)?.also { lastNameError.emit(it) }?.isNotEmpty()
+            validateIsNotEmpty(lastName)?.also { lastNameError.emit(it) }?.isNotEmpty()
                .orFalse()
          val emailHasError =
-            validateEmail(email.value)?.also { emailError.emit(it) }?.isNotEmpty().orFalse()
-         emit(firstNameHasError && lastNameHasError && emailHasError)
+            validateEmail(email)?.also { emailError.emit(it) }?.isNotEmpty().orFalse()
+
+         if (!(firstNameHasError && lastNameHasError && emailHasError)) {
+            emit(SignInAttempt(firstName = firstName, lastName = lastName, email = email))
+         }
+      }
+   }
+
+   @OptIn(FlowPreview::class)
+   private val signInFlow: FlowAnyResult by lazy {
+      supportFlow
+         //.debounce(200L)
+         .flatMapConcat {
+         flow {
+            signInAttempt.invoke(it)
+               .applyIfError { resultFlow.emit(it) }
+               .applyIfSuccess { emit(toEmptySuccess()) }
+         }
       }
    }
 
    fun onCreateAccountClicked() {
       viewModelScope.launch(ioDispatcher) {
-         supportFlow.collect { hasErrors ->
-            if (!hasErrors) processNavEvent(destinations.signInToCatalogCleared(), navigator)
+         signInFlow.collect {
+            if (it.isSuccess()) processNavEvent(destinations.signInToCatalogCleared(), navigator)
          }
       }
    }
 
    /* Login validation */
-   private val secondSupportFlow: Flow<Boolean> by lazy {
+   private val secondSupportFlow: Flow<LoginAttempt> by lazy {
+      val firstName = firstName.value
+      val pass = password.value
       flow {
          val firstNameHasError =
-            validateIsNotEmpty(firstName.value)?.also { firstNameError.emit(it) }?.isNotEmpty()
+            validateIsNotEmpty(firstName)?.also { firstNameError.emit(it) }?.isNotEmpty()
                .orFalse()
          val passwordHasError =
-            validateIsNotEmpty(password.value)?.also { passwordError.emit(it) }?.isNotEmpty().orFalse()
-         emit(firstNameHasError && passwordHasError)
+            validateIsNotEmpty(pass)?.also { passwordError.emit(it) }?.isNotEmpty()
+               .orFalse()
+
+         if (!(firstNameHasError && passwordHasError)) {
+            emit(LoginAttempt(firstName, pass))
+         }
+      }
+   }
+
+   private val loginFlow: FlowAnyResult by lazy {
+      secondSupportFlow.flatMapConcat {
+         flow {
+            loginAttempt(it)
+               .applyIfError { resultFlow.emit(it) }
+               .applyIfSuccess { emit(toEmptySuccess()) }
+         }
       }
    }
 
    fun onLoginAttemptClicked() {
       viewModelScope.launch(ioDispatcher) {
-         secondSupportFlow.collect { hasErrors ->
-            if (!hasErrors) processNavEvent(destinations.loginToCatalogCleared(), navigator)
+         loginFlow.collect {
+            if (it.isSuccess()) processNavEvent(destinations.loginToCatalogCleared(), navigator)
          }
       }
    }

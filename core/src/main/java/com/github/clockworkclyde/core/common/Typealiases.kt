@@ -12,3 +12,6 @@ typealias InOutHandler<T> = (T) -> T
 typealias FlowList<T> = Flow<List<T>>
 typealias FlowResultList<T> = Flow<List<Result<T>>>
 typealias FlowResult<T> = Flow<Result<T>>
+
+typealias AnyResult = Result<Any>
+typealias FlowAnyResult = Flow<Result<Any>>

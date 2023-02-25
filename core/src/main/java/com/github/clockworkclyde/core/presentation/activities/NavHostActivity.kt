@@ -8,7 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.github.clockworkclyde.core.navigation.INavigationEventHandler
-import com.github.clockworkclyde.core.presentation.utils.launchAndRepeatOnState
+import com.github.clockworkclyde.core.utils.launchAndRepeatOnState
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 

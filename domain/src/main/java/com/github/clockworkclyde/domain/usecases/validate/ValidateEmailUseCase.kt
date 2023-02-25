@@ -1,13 +1,13 @@
-package com.github.clockworkclyde.domain.validate
+package com.github.clockworkclyde.domain.usecases.validate
 
 import android.util.Patterns
-import com.github.clockworkclyde.data.sources.ResourcesProvider
-import com.github.clockworkclyde.domain.IUseCase
+import com.github.clockworkclyde.core.common.IResourcesProvider
+import com.github.clockworkclyde.domain.usecases.IUseCase
 import com.github.clockworkclyde.domain.R
 import javax.inject.Inject
 
 class ValidateEmailUseCase @Inject constructor(
-   private val resources: ResourcesProvider
+   private val resources: IResourcesProvider
 ) : IValidateEmailUseCase {
 
    override suspend fun invoke(param: String): String? {

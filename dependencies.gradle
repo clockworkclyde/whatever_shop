@@ -42,4 +42,9 @@ ext.libs = [
         // Navigation Component
         navigationUiFragmentKtx    : "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
         navigationUiKtx            : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
+
+        // Room db
+        room                       : "androidx.room:room-runtime:2.5.0",
+        roomKapt                   : "androidx.room:room-compiler:2.5.0",
+        roomKtx                    : "androidx.room:room-ktx:2.5.0",
 ]
