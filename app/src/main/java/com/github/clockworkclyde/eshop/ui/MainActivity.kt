@@ -1,11 +1,9 @@
 package com.github.clockworkclyde.eshop.ui
 
-import android.os.Bundle
 import com.github.clockworkclyde.core.navigation.Navigator
 import com.github.clockworkclyde.core.presentation.activities.NavHostActivity
 import com.github.clockworkclyde.eshop.R
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint

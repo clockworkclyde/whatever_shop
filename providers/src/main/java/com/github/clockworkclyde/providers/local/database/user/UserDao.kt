@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.github.clockworkclyde.data.UserEntity
+import com.github.clockworkclyde.data.models.local.UserEntity
 
 @Dao
 interface UserDao {

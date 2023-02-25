@@ -1,9 +1,9 @@
-package com.github.clockworkclyde.data
+package com.github.clockworkclyde.data.models.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.github.clockworkclyde.core.common.IConvertableTo
-import com.github.clockworkclyde.domain.dto.UserDto
+import com.github.clockworkclyde.domain.model.User
 
 @Entity
 data class UserEntity(
@@ -16,10 +16,10 @@ data class UserEntity(
    val firstName: String? = null,
    @JvmField
    val lastName: String? = null
-) : IConvertableTo<UserDto> {
+) : IConvertableTo<User> {
 
-   override fun convertTo(): UserDto {
-      return UserDto(
+   override fun convertTo(): User {
+      return User(
          id = id,
          email = email,
          firstName = firstName,
@@ -28,7 +28,7 @@ data class UserEntity(
    }
 
    companion object {
-      fun UserDto.toDbEntity(): UserEntity = object : IConvertableTo<UserEntity> {
+      fun User.toDbEntity(): UserEntity = object : IConvertableTo<UserEntity> {
          override fun convertTo(): UserEntity {
             return UserEntity(
                id = id,

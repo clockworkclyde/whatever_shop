@@ -19,12 +19,9 @@ import com.github.clockworkclyde.domain.usecases.auth.SignInAttemptUseCase
 import com.github.clockworkclyde.eshop.navigation.directions.auth.AuthDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -89,7 +86,7 @@ class AuthViewModel @Inject constructor(
    fun onCreateAccountClicked() {
       viewModelScope.launch(ioDispatcher) {
          signInFlow.collect {
-            if (it.isSuccess()) processNavEvent(destinations.signInToCatalogCleared(), navigator)
+            if (it.isSuccess()) processNavEvent(destinations.signInToShopCategoriesCleared(), navigator)
          }
       }
    }
@@ -125,7 +122,7 @@ class AuthViewModel @Inject constructor(
    fun onLoginAttemptClicked() {
       viewModelScope.launch(ioDispatcher) {
          loginFlow.collect {
-            if (it.isSuccess()) processNavEvent(destinations.loginToCatalogCleared(), navigator)
+            if (it.isSuccess()) processNavEvent(destinations.loginToShopCategoriesCleared(), navigator)
          }
       }
    }

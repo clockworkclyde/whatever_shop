@@ -15,4 +15,7 @@
    <string name="hint_password">Password</string>
    <string name="title_login">Welcome back</string>
    <string name="show_or_hide_pass">Show or hide password</string>
+   <string name="hint_search_categories">What are you looking for ?</string>
+   <string name="btn_category_view_all">View all</string>
+   <string name="format_price_us">$ %1$s</string>
 </resources>
