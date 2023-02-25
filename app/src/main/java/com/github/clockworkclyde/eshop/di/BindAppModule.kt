@@ -1,19 +1,19 @@
 package com.github.clockworkclyde.eshop.di
 
+import com.github.clockworkclyde.core.navigation.INavigator
 import com.github.clockworkclyde.core.navigation.Navigator
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineScope
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NavigationModule {
+interface BindAppModule {
 
    @Singleton
-   @Provides
-   fun provideNavigator(scope: CoroutineScope) = Navigator(scope)
+   @Binds
+   fun bindNavigator(impl: Navigator): INavigator
 
 }

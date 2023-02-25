@@ -13,6 +13,9 @@
       <action
           android:id="@+id/action_signInFragment_to_loginFragment"
           app:destination="@id/loginFragment" />
+      <action
+          android:id="@+id/action_signInFragment_to_catalogFragment"
+          app:destination="@id/catalogFragment" />
    </fragment>
 
    <fragment
@@ -20,6 +23,16 @@
        android:name="com.github.clockworkclyde.eshop.ui.auth.LoginFragment"
        android:label="@string/login"
        tools:layout="@layout/fragment_login" >
+      <action
+          android:id="@+id/action_loginFragment_to_catalogFragment"
+          app:destination="@id/catalogFragment" />
+   </fragment>
+
+   <fragment
+       android:id="@+id/catalogFragment"
+       android:name="com.github.clockworkclyde.eshop.ui.catalog.ShopCatalogFragment"
+       android:label="@string/catalog"
+       tools:layout="@layout/fragment_shop_catalog" >
    </fragment>
 
 </navigation>

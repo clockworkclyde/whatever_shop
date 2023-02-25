@@ -40,6 +40,13 @@ inline fun <reified V : ViewDataBinding, reified VM : IEventViewModel> IBaseFrag
 
 inline fun EditText.onTextChanged(crossinline listener: (String) -> Unit) {
    doOnTextChanged { text, _, _, _ ->
+      //if (this.hasError()) this.clearError()
       listener(text?.toString().orEmpty())
    }
 }
+
+fun EditText.clearError() {
+   this.error = null
+}
+
+fun EditText.hasError(): Boolean = this.error != null
