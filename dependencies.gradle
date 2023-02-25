@@ -31,9 +31,10 @@ ext.libs = [
         dagger                     : "com.google.dagger:hilt-android:${versions.dagger}",
         daggerKapt                 : "com.google.dagger:hilt-compiler:${versions.dagger}",
 
-        // viewModel & lifecycle ktx
+        // Android Ktx
         viewModelKtx               : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}",
         lifecycleKtx               : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}",
+        fragmentKtx                : "androidx.fragment:fragment-ktx:1.5.5",
 
         // Timber logger
         timber                     : "com.jakewharton.timber:timber:5.0.1",

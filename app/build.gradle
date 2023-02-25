@@ -27,7 +27,7 @@ android {
         }
     }
     buildFeatures {
-        viewBinding true
+        dataBinding true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -52,6 +52,9 @@ dependencies {
     implementation libs.appCompat
     implementation libs.material
     implementation libs.constraintLayout
+
+    implementation libs.viewModelKtx
+    implementation libs.fragmentKtx
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

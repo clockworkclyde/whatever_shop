@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.viewbinding.ViewBinding
-import com.github.clockworkclyde.core.common.launchAndRepeatOnState
+import com.github.clockworkclyde.core.presentation.utils.launchAndRepeatOnState
 import com.github.clockworkclyde.core.presentation.viewmodels.BaseFlowViewModel
 import kotlinx.coroutines.flow.Flow
 
-abstract class BaseFragment<V: ViewBinding, VM: BaseFlowViewModel>: Fragment(), IBaseFragment<V, VM> {
+abstract class BaseFragment<V: ViewDataBinding, VM: BaseFlowViewModel>: Fragment(), IBaseFragment<V, VM> {
+
+   override val viewModel: VM? = null
 
    private var _binding: V? = null
    final override val binding: V = _binding ?: error("Cannot access view")
@@ -22,6 +24,7 @@ abstract class BaseFragment<V: ViewBinding, VM: BaseFlowViewModel>: Fragment(), 
       savedInstanceState: Bundle?
    ): View? {
       _binding = inflateView()
+      initBinding(binding)
       return binding.root
    }
 
@@ -29,6 +32,8 @@ abstract class BaseFragment<V: ViewBinding, VM: BaseFlowViewModel>: Fragment(), 
       super.onViewCreated(view, savedInstanceState)
       initViews()
    }
+
+   override fun initViews() = Unit
 
    override fun initBinding(binding: V) = Unit
 
