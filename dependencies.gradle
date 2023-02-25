@@ -5,6 +5,7 @@ ext.versions = [
         adapterDelegates: '4.3.2',
         dagger          : '2.42',
         lifecycle       : '2.4.0',
+        navigation      : '2.4.2',
 ]
 
 ext.libs = [
@@ -34,8 +35,11 @@ ext.libs = [
         // Android Ktx
         viewModelKtx               : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}",
         lifecycleKtx               : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}",
-        fragmentKtx                : "androidx.fragment:fragment-ktx:1.5.5",
 
         // Timber logger
         timber                     : "com.jakewharton.timber:timber:5.0.1",
+
+        // Navigation Component
+        navigationUiFragmentKtx    : "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
+        navigationUiKtx            : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
 ]

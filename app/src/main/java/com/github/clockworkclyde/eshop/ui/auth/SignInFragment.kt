@@ -4,8 +4,10 @@ import androidx.fragment.app.viewModels
 import com.github.clockworkclyde.core.presentation.fragments.BaseFragment
 import com.github.clockworkclyde.core.presentation.utils.onTextChanged
 import com.github.clockworkclyde.eshop.databinding.FragmentSignInBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SignInFragment : BaseFragment<FragmentSignInBinding, AuthViewModel>() {
+@AndroidEntryPoint
+class SignInFragment: BaseFragment<FragmentSignInBinding, AuthViewModel>() {
 
    override fun inflateView() = FragmentSignInBinding.inflate(layoutInflater)
 
@@ -18,6 +20,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding, AuthViewModel>() {
 
    override fun initBinding(binding: FragmentSignInBinding) {
       binding.viewModel = viewModel
+      binding.lifecycleOwner = this
    }
 
    private fun setUpOnInputTextChanged() {

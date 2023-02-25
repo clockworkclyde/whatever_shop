@@ -10,7 +10,3 @@ import javax.inject.Qualifier
 open class AppModule {
 
 }
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class ApplicationContext

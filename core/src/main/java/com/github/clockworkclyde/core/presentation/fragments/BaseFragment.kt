@@ -16,7 +16,7 @@ abstract class BaseFragment<V: ViewDataBinding, VM: BaseFlowViewModel>: Fragment
    override val viewModel: VM? = null
 
    private var _binding: V? = null
-   final override val binding: V = _binding ?: error("Cannot access view")
+   override val binding: V get() = _binding ?: throw IllegalStateException("Cannot access view")
 
    override fun onCreateView(
       inflater: LayoutInflater,

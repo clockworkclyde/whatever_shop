@@ -9,4 +9,6 @@
    <string name="txt_btn_apple_sign_in">Sign in with Apple</string>
    <string name="hint_lastname">Last name</string>
    <string name="hint_email">Email</string>
+   <string name="sign_in">Sign In</string>
+   <string name="login">Login</string>
 </resources>
