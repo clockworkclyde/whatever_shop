@@ -6,15 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
-import com.github.clockworkclyde.core.navigation.INavigationHandler
+import com.github.clockworkclyde.core.navigation.INavigationEventHandler
 import com.github.clockworkclyde.core.presentation.utils.launchAndRepeatOnState
 import kotlinx.coroutines.flow.Flow
 
 abstract class NavHostActivity : AppCompatActivity() {
 
-   abstract val navigator: INavigationHandler
+   abstract val navigator: INavigationEventHandler
 
    abstract val hostFragmentId: Int
 
@@ -22,16 +21,16 @@ abstract class NavHostActivity : AppCompatActivity() {
 
    val currentFragment: Fragment? get() = hostFragment?.childFragmentManager?.primaryNavigationFragment
 
-   val navHostController: NavController? get() = hostFragment?.navController
+   val navHostController: NavController get() = hostFragment?.navController ?: throw IllegalStateException("Cannot find nav controller")
 
    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
       super.onCreate(savedInstanceState, persistentState)
       handleNavigationCommands()
    }
 
-   private fun handleNavigationCommands() {
+   open fun handleNavigationCommands() {
       navigator.commands.collectWhileStarted { handler ->
-         navHostController?.let(handler)
+         navHostController.let(handler)
       }
    }
 

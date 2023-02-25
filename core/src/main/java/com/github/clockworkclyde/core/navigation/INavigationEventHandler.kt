@@ -2,6 +2,6 @@ package com.github.clockworkclyde.core.navigation
 
 import kotlinx.coroutines.flow.MutableSharedFlow
 
-interface INavigationHandler {
+interface INavigationEventHandler {
    val commands: MutableSharedFlow<NavigationHandler>
 }

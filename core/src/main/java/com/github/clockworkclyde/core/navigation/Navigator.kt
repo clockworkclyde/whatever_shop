@@ -2,10 +2,8 @@ package com.github.clockworkclyde.core.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
-import com.github.clockworkclyde.core.navigation.directions.INavEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,7 +11,7 @@ typealias NavigationHandler = (NavController) -> Unit
 
 class Navigator @Inject constructor(
    private val coroutineScope: CoroutineScope
-): INavigator, INavigationHandler {
+): INavigator, INavigationEventHandler {
 
    override val commands = MutableSharedFlow<NavigationHandler>()
 

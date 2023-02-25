@@ -6,8 +6,5 @@ import com.github.clockworkclyde.eshop.databinding.FragmentLoginBinding
 
 class LoginFragment: BaseFragment<FragmentLoginBinding, BaseFlowViewModel>() {
 
-   override fun inflateView(): FragmentLoginBinding {
-      TODO("Not yet implemented")
-   }
-
+   override fun inflateView() = FragmentLoginBinding.inflate(layoutInflater)
 }

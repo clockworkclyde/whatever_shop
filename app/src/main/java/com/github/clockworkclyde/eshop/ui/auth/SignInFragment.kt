@@ -7,7 +7,7 @@ import com.github.clockworkclyde.eshop.databinding.FragmentSignInBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignInFragment : BaseFragment<FragmentSignInBinding, AuthViewModel>() {
+class SignInFragment: BaseFragment<FragmentSignInBinding, AuthViewModel>() {
 
    override fun inflateView() = FragmentSignInBinding.inflate(layoutInflater)
 
