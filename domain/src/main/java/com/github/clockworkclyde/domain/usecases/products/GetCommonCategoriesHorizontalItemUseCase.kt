@@ -1,6 +1,7 @@
 package com.github.clockworkclyde.domain.usecases.products
 
 import com.github.clockworkclyde.core.common.IResourcesProvider
+import com.github.clockworkclyde.core.common.ResultList
 import com.github.clockworkclyde.core.utils.asyncFlow
 import com.github.clockworkclyde.core.utils.toSuccessResult
 import com.github.clockworkclyde.domain.model.product.CommonCategory
@@ -15,20 +16,16 @@ class GetCommonCategoriesHorizontalItemUseCase @Inject constructor(
    private val resources: IResourcesProvider
 ) : IGetCommonCategoriesUseCase {
 
-   override fun invoke(): Flow<Result<CommonCategoryHorizontalItem>> {
+   override fun invoke(): Flow<ResultList<CommonCategory>> {
       return asyncFlow {
          CommonCategoryEnum.values().map {
             CommonCategory(
                title = resources.getString(it.stringResId),
                imageId = it.imageResId
             )
-         }.toHorizontalItem().toSuccessResult().let { emit(it) }
+         }.toSuccessResult().let { emit(it) }
       }
-   }
-
-   companion object {
-      fun List<CommonCategory>.toHorizontalItem() = CommonCategoryHorizontalItem(items = this)
    }
 }
 
-interface IGetCommonCategoriesUseCase : IUseCase.FlowOut<Result<CommonCategoryHorizontalItem>>
+interface IGetCommonCategoriesUseCase : IUseCase.FlowOut<ResultList<CommonCategory>>

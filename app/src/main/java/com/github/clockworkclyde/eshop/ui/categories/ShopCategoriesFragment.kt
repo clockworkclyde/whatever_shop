@@ -8,11 +8,10 @@ import com.github.clockworkclyde.eshop.ui.categories.adapters.ShopCategoriesRoot
 import com.github.clockworkclyde.domain.model.product.BaseProductCard
 import com.github.clockworkclyde.domain.model.product.CommonCategory
 import com.github.clockworkclyde.domain.model.product.ProductCardHorizontalItem
+import com.github.clockworkclyde.eshop.ui.categories.adapters.ShopCategoriesCommonAdapter
 import com.github.clockworkclyde.eshop.ui.categories.model.ProductCardDiscountProgress
 import com.github.clockworkclyde.eshop.ui.categories.model.ProductCardProgress
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.awaitAll
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ShopCategoriesFragment :
@@ -24,26 +23,34 @@ class ShopCategoriesFragment :
 
    private val adapter by lazy {
       ShopCategoriesRootAdapter(
-         ::onCommonCategoryClick,
          ::onHorizontalItemExpandClick,
          ::onProductCardClick,
          ::onProductCardAddToCartClick
       )
    }
 
+   private val commonCategoryAdapter by lazy {
+      ShopCategoriesCommonAdapter(
+         ::onCommonCategoryClick
+      )
+   }
+
    override fun initViews() {
-      setUpRecyclerView()
+      setUpRecyclerViews()
       setUpCommonCategories()
       observeHorizontalItems()
    }
 
-   private fun setUpRecyclerView() {
+   private fun setUpRecyclerViews() {
       binding.rootRecyclerView.adapter = adapter
+      binding.topCategoriesRecyclerView.adapter = commonCategoryAdapter
    }
 
    private fun setUpCommonCategories() {
-      viewModel.supportFlow.collectWhileStarted {
-
+      viewModel.supportFlow.collectWhileStarted { commonCategories ->
+         commonCategories
+            .applyIfError { commonCategoryAdapter.clear(); toast(it) }
+            .applyIfSuccess { commonCategoryAdapter.items = it }
       }
    }
 

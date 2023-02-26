@@ -13,7 +13,6 @@ import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
 class ShopCategoriesRootAdapter(
-   onCommonCatClickListener: (CommonCategory) -> Unit,
    onHorizontalItemExpandClickListener: (ProductCardHorizontalItem) -> Unit,
    onProdCardClick: (Int, BaseProductCard) -> Unit,
    onProdAddToCartClick: (Int, BaseProductCard) -> Unit,
@@ -22,9 +21,6 @@ class ShopCategoriesRootAdapter(
 
    init {
       delegatesManager
-         .addDelegate(
-            horizontalCommonCategoriesDelegate(onItemClick = onCommonCatClickListener)
-         )
          .addDelegate(
             horizontalCategoriesDelegate(
                onHorizontalItemExpandClick = onHorizontalItemExpandClickListener,
@@ -35,20 +31,6 @@ class ShopCategoriesRootAdapter(
    }
 
    companion object {
-      private fun horizontalCommonCategoriesDelegate(onItemClick: (CommonCategory) -> Unit) =
-         adapterDelegateViewBinding<CommonCategoryHorizontalItem, ListItem, LayoutShopCommonCategoriesHorizontalBinding>(
-            { inflater, container ->
-               LayoutShopCommonCategoriesHorizontalBinding.inflate(inflater, container, false)
-            }) {
-
-            val adapter = ShopCategoriesCommonAdapter(onCatClick = onItemClick)
-            bind {
-               with(binding) {
-                  recyclerView.adapter = adapter
-                  adapter.items = item.items
-               }
-            }
-         }
 
       private fun horizontalCategoriesDelegate(
          onHorizontalItemExpandClick: (ProductCardHorizontalItem) -> Unit,
