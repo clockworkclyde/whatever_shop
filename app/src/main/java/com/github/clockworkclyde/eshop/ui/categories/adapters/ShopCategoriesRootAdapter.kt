@@ -5,10 +5,10 @@ import com.github.clockworkclyde.core.presentation.adapters.ListItem
 import com.github.clockworkclyde.core.utils.safeClick
 import com.github.clockworkclyde.eshop.databinding.LayoutShopCommonCategoriesHorizontalBinding
 import com.github.clockworkclyde.eshop.databinding.LayoutShopProductCategoriesHorizontalBinding
-import com.github.clockworkclyde.eshop.ui.categories.model.BaseProductCard
-import com.github.clockworkclyde.eshop.ui.categories.model.CommonCategory
-import com.github.clockworkclyde.eshop.ui.categories.model.CommonCategoryHorizontalItem
-import com.github.clockworkclyde.eshop.ui.categories.model.ProductCardHorizontalItem
+import com.github.clockworkclyde.domain.model.product.BaseProductCard
+import com.github.clockworkclyde.domain.model.product.CommonCategory
+import com.github.clockworkclyde.domain.model.product.CommonCategoryHorizontalItem
+import com.github.clockworkclyde.domain.model.product.ProductCardHorizontalItem
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 

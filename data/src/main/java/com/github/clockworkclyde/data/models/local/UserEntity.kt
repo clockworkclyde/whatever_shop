@@ -3,7 +3,7 @@ package com.github.clockworkclyde.data.models.local
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.github.clockworkclyde.core.common.IConvertableTo
-import com.github.clockworkclyde.domain.model.User
+import com.github.clockworkclyde.domain.model.user.User
 
 @Entity
 data class UserEntity(

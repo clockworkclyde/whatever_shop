@@ -1,4 +1,4 @@
-package com.github.clockworkclyde.domain.model
+package com.github.clockworkclyde.domain.model.product
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

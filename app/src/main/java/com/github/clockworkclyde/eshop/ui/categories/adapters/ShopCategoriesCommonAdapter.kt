@@ -5,7 +5,7 @@ import com.github.clockworkclyde.core.presentation.adapters.BaseDiffUtilCallback
 import com.github.clockworkclyde.core.presentation.adapters.ListItem
 import com.github.clockworkclyde.core.utils.safeClick
 import com.github.clockworkclyde.eshop.databinding.ItemShopCommonCategoriesBinding
-import com.github.clockworkclyde.eshop.ui.categories.model.CommonCategory
+import com.github.clockworkclyde.domain.model.product.CommonCategory
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 

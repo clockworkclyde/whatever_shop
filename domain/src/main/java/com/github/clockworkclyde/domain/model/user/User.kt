@@ -1,4 +1,4 @@
-package com.github.clockworkclyde.domain.model
+package com.github.clockworkclyde.domain.model.user
 
 data class User(
    val id: Int? = null,

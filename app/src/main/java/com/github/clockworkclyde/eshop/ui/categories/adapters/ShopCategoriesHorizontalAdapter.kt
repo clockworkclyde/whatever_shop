@@ -1,19 +1,26 @@
 package com.github.clockworkclyde.eshop.ui.categories.adapters
 
 import android.app.Activity
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.github.clockworkclyde.core.presentation.adapters.BaseDiffUtilCallback
 import com.github.clockworkclyde.core.presentation.adapters.ListItem
 import com.github.clockworkclyde.core.utils.loadRoundedImage
 import com.github.clockworkclyde.core.utils.safeClick
+import com.github.clockworkclyde.core.utils.setClipToOutline
+import com.github.clockworkclyde.domain.model.product.BaseProductCard
+import com.github.clockworkclyde.domain.model.product.ProductCard
+import com.github.clockworkclyde.domain.model.product.ProductCardDiscount
 import com.github.clockworkclyde.eshop.R
 import com.github.clockworkclyde.eshop.databinding.ItemShopProductCategoriesLargeBinding
 import com.github.clockworkclyde.eshop.databinding.ItemShopProductCategoriesLargeProgressBinding
 import com.github.clockworkclyde.eshop.databinding.ItemShopProductCategoriesSmallBinding
 import com.github.clockworkclyde.eshop.databinding.ItemShopProductCategoriesSmallProgressBinding
-import com.github.clockworkclyde.eshop.ui.categories.model.*
+import com.github.clockworkclyde.eshop.ui.categories.model.ProductCardDiscountProgress
+import com.github.clockworkclyde.eshop.ui.categories.model.ProductCardProgress
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
@@ -57,12 +64,13 @@ class ShopCategoriesHorizontalAdapter(
             ItemShopProductCategoriesSmallBinding.inflate(inflater, container, false)
          }) {
             val resources = context.resources
-            val emptyImgHolder = ContextCompat.getDrawable(context, R.drawable.bg_img_progress)
+            val emptyImgHolder = ContextCompat.getDrawable(context, R.drawable.bg_img_empty)
             val priceFormat = resources.getString(R.string.format_price_us)
             val imgRadius = resources.getDimensionPixelOffset(R.dimen.product_card_radius)
             bind {
                with(binding) {
-                  item.image?.let {
+                  backgroundLayout.setClipToOutline()
+                  item.imageUrl?.let {
                      Glide.with(root).loadRoundedImage(it, imageView, imgRadius)
                   } ?: imageView.setImageDrawable(emptyImgHolder)
 
@@ -103,18 +111,24 @@ class ShopCategoriesHorizontalAdapter(
                ItemShopProductCategoriesLargeBinding.inflate(inflater, container, false)
             }) {
             val resources = context.resources
-            val emptyImgHolder = ContextCompat.getDrawable(context, R.drawable.bg_img_progress)
+            val emptyImgHolder = ContextCompat.getDrawable(context, R.drawable.bg_img_empty_large)
             val priceFormat = resources.getString(R.string.format_price_us)
+            val discountFormat = resources.getString(R.string.format_discount)
             val imgRadius = resources.getDimensionPixelOffset(R.dimen.product_card_radius)
             bind {
+
                with(binding) {
-                  item.image?.let {
+                  backgroundLayout.setClipToOutline()
+                  item.imageUrl?.let {
                      Glide.with(root).loadRoundedImage(it, imageView, imgRadius)
                   } ?: imageView.setImageDrawable(emptyImgHolder)
 
                   categoryTextView.text = item.category
                   titleTextView.text = item.name
                   priceTextView.text = priceFormat.format(item.price)
+
+                  bgDiscountView.isVisible = item.discount > 0
+                  discountTextView.text = item.discount.toString() + "% off "//discountFormat.format(item.discount)
 
                   root.safeClick { onItemClick(absoluteAdapterPosition, item) }
                   btnAddToCart.safeClick { onAddToCartClick(absoluteAdapterPosition, item) }

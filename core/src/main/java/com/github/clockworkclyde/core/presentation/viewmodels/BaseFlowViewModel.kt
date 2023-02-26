@@ -9,8 +9,6 @@ open class BaseFlowViewModel : NavigationViewModel(), IBaseFlowViewModel, IEvent
 
    open val sharedFlowOptions = SharedFlowOptions()
 
-   override val destinations: INavDirections? = null
-
    override val eventsFlow: MutableSharedFlow<IEvent> by lazy {
       MutableSharedFlow(
          replay = 1,

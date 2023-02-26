@@ -1,4 +1,4 @@
-package com.github.clockworkclyde.eshop.ui.categories.model
+package com.github.clockworkclyde.domain.model.product
 
 import com.github.clockworkclyde.core.presentation.adapters.ListItem
 

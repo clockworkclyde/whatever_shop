@@ -7,4 +7,5 @@
    <dimen name="padding_horizontal_product_categories">12dp</dimen>
    <dimen name="padding_vertical_product_categories">8dp</dimen>
    <dimen name="product_card_radius">9dp</dimen>
+   <dimen name="large_product_card_radius">11dp</dimen>
 </resources>

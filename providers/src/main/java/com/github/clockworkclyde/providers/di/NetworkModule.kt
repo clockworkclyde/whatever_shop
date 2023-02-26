@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 open class NetworkModule {
 
-   open fun getBaseUrl() = "https://"
+   open fun getBaseUrl() = "https://run.mocky.io/v3/"
 
    @Provides
    @BaseUrl

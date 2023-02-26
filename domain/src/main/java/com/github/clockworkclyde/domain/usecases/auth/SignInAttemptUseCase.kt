@@ -1,7 +1,7 @@
 package com.github.clockworkclyde.domain.usecases.auth
 
 import com.github.clockworkclyde.core.common.AnyResult
-import com.github.clockworkclyde.domain.model.User
+import com.github.clockworkclyde.domain.model.user.User
 import com.github.clockworkclyde.domain.repository.IUserRepository
 import com.github.clockworkclyde.domain.usecases.IUseCase
 import javax.inject.Inject
