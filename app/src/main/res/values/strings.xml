@@ -19,4 +19,6 @@
    <string name="btn_category_view_all">View all</string>
    <string name="format_price_us">$ %1$s</string>
    <string name="format_discount">%s% off</string>
+   <string name="title_shop_categories">Trade by <font color="#4E55D7">bata</font></string>
+   <string name="location">Location</string>
 </resources>

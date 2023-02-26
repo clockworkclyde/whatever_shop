@@ -60,7 +60,7 @@
 
          <TextView
              android:id="@+id/categoryTextView"
-             style="@style/TextViewStyle.CategoriesCard"
+             style="@style/TextViewStyle.CategoryLabel"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginStart="6dp"
