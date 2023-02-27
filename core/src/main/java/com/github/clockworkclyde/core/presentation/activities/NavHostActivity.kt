@@ -39,6 +39,8 @@ abstract class NavHostActivity : AppCompatActivity {
       }
    }
 
+   fun getNavController(): NavController? = hostFragment?.navController
+
    protected fun <T> Flow<T>.collectWhileStarted(block: (T) -> Unit) {
       launchAndRepeatOnState(Lifecycle.State.STARTED) {
          collect { block.invoke(it) }

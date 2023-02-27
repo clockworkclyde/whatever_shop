@@ -1,6 +1,9 @@
 package com.github.clockworkclyde.core.utils
 
+import android.app.Activity
+import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -63,4 +66,9 @@ fun AsyncListDifferDelegationAdapter<*>.clear() {
 
 fun ViewGroup.setClipToOutline() {
    this.clipToOutline = true
+}
+
+fun View.hideKeyboard() {
+   val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+   imm.hideSoftInputFromWindow(windowToken, 0)
 }

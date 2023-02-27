@@ -8,6 +8,7 @@ import com.github.clockworkclyde.eshop.ui.categories.adapters.ShopCategoriesRoot
 import com.github.clockworkclyde.domain.model.product.BaseProductCard
 import com.github.clockworkclyde.domain.model.product.CommonCategory
 import com.github.clockworkclyde.domain.model.product.ProductCardHorizontalItem
+import com.github.clockworkclyde.eshop.ui.MainActivity
 import com.github.clockworkclyde.eshop.ui.categories.adapters.ShopCategoriesCommonAdapter
 import com.github.clockworkclyde.eshop.ui.categories.model.ProductCardDiscountProgress
 import com.github.clockworkclyde.eshop.ui.categories.model.ProductCardProgress
@@ -33,6 +34,12 @@ class ShopCategoriesFragment :
       ShopCategoriesCommonAdapter(
          ::onCommonCategoryClick
       )
+   }
+
+   override fun onPause() {
+      super.onPause()
+      view?.hideKeyboard()
+      view?.clearFocus()
    }
 
    override fun initViews() {

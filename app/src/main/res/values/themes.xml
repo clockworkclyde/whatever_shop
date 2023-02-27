@@ -91,7 +91,7 @@
    <style name="BottomNavigationStyle">
       <item name="android:background">@drawable/bg_bottom_nav</item>
       <item name="backgroundTint">@null</item>
-      <item name="elevation">1dp</item>
+      <item name="elevation">8dp</item>
       <item name="itemBackground">@drawable/bottom_navigation_item_bg</item>
       <item name="android:minHeight">63dp</item>
       <item name="enforceTextAppearance">true</item>
