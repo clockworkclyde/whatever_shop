@@ -1,6 +1,6 @@
 package com.github.clockworkclyde.data.sources
 
-import com.github.clockworkclyde.data.UserEntity
+import com.github.clockworkclyde.data.models.local.UserEntity
 
 interface IUserLocalDataSource {
    suspend fun saveUser(user: UserEntity)

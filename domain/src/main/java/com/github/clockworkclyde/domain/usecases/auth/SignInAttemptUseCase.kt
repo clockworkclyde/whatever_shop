@@ -1,7 +1,7 @@
 package com.github.clockworkclyde.domain.usecases.auth
 
 import com.github.clockworkclyde.core.common.AnyResult
-import com.github.clockworkclyde.domain.dto.UserDto
+import com.github.clockworkclyde.domain.model.user.User
 import com.github.clockworkclyde.domain.repository.IUserRepository
 import com.github.clockworkclyde.domain.usecases.IUseCase
 import javax.inject.Inject
@@ -12,7 +12,7 @@ class SignInAttemptUseCase @Inject constructor(
 
    override suspend fun invoke(param: SignInAttempt): AnyResult {
       return repository.tryCreateUserAccount(
-         UserDto(
+         User(
             firstName = param.firstName,
             lastName = param.lastName,
             email = param.email

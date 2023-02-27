@@ -1,5 +1,9 @@
 package com.github.clockworkclyde.core.utils
 
+import android.app.Activity
+import android.view.View
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +15,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.github.clockworkclyde.core.dto.IEvent
 import com.github.clockworkclyde.core.dto.UEvent
+import com.github.clockworkclyde.core.presentation.adapters.ListItem
 import com.github.clockworkclyde.core.presentation.fragments.IBaseFragment
 import com.github.clockworkclyde.core.presentation.viewmodels.IEventViewModel
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import kotlinx.coroutines.launch
 
 fun Fragment.launchAndRepeatOnState(state: Lifecycle.State, block: suspend () -> Unit) {
@@ -53,3 +59,16 @@ fun EditText.clearError() {
 fun EditText.hasError(): Boolean = this.error != null
 
 fun Fragment.toast(message: Any? = "", duration: Int = Toast.LENGTH_SHORT) = Toast.makeText(requireContext(), message.toString(), duration).show()
+
+fun AsyncListDifferDelegationAdapter<*>.clear() {
+   this.items = null
+}
+
+fun ViewGroup.setClipToOutline() {
+   this.clipToOutline = true
+}
+
+fun View.hideKeyboard() {
+   val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+   imm.hideSoftInputFromWindow(windowToken, 0)
+}

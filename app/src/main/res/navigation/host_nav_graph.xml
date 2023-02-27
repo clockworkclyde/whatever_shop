@@ -14,8 +14,8 @@
           android:id="@+id/action_signInFragment_to_loginFragment"
           app:destination="@id/loginFragment" />
       <action
-          android:id="@+id/action_signInFragment_to_catalogFragment"
-          app:destination="@id/catalogFragment" />
+          android:id="@+id/action_signInFragment_to_categoriesFragment"
+          app:destination="@id/categoriesFragment" />
    </fragment>
 
    <fragment
@@ -24,15 +24,15 @@
        android:label="@string/login"
        tools:layout="@layout/fragment_login" >
       <action
-          android:id="@+id/action_loginFragment_to_catalogFragment"
-          app:destination="@id/catalogFragment" />
+          android:id="@+id/action_loginFragment_to_categoriesFragment"
+          app:destination="@id/categoriesFragment" />
    </fragment>
 
    <fragment
-       android:id="@+id/catalogFragment"
-       android:name="com.github.clockworkclyde.eshop.ui.catalog.ShopCatalogFragment"
+       android:id="@+id/categoriesFragment"
+       android:name="com.github.clockworkclyde.eshop.ui.categories.ShopCategoriesFragment"
        android:label="@string/catalog"
-       tools:layout="@layout/fragment_shop_catalog" >
+       tools:layout="@layout/fragment_shop_categories" >
    </fragment>
 
 </navigation>

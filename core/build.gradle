@@ -47,6 +47,7 @@ dependencies {
     implementation libs.lifecycleKtx
     implementation libs.navigationUiFragmentKtx
     implementation libs.navigationUiKtx
+    implementation libs.glide
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

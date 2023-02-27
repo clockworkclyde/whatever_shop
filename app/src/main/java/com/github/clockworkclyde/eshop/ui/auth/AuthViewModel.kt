@@ -9,6 +9,7 @@ import com.github.clockworkclyde.domain.usecases.validate.ValidateEmailUseCase
 import com.github.clockworkclyde.domain.usecases.validate.ValidateFieldIsNotEmptyUseCase
 import com.github.clockworkclyde.eshop.di.IoDispatcher
 import com.github.clockworkclyde.core.navigation.INavigator
+import com.github.clockworkclyde.core.presentation.viewmodels.INavigationViewModel
 import com.github.clockworkclyde.core.utils.applyIfError
 import com.github.clockworkclyde.core.utils.applyIfSuccess
 import com.github.clockworkclyde.core.utils.toEmptySuccess
@@ -19,12 +20,9 @@ import com.github.clockworkclyde.domain.usecases.auth.SignInAttemptUseCase
 import com.github.clockworkclyde.eshop.navigation.directions.auth.AuthDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,9 +33,9 @@ class AuthViewModel @Inject constructor(
    private val loginAttempt: LoginAttemptUseCase,
    private val navigator: INavigator,
    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
-) : BaseFlowViewModel() {
+) : BaseFlowViewModel(), INavigationViewModel<AuthDirections> {
 
-   override val destinations = AuthDirections()
+   override val directions = AuthDirections()
 
    val firstNameError = MutableSharedFlow<String>()
    val lastNameError = MutableSharedFlow<String>()
@@ -89,7 +87,7 @@ class AuthViewModel @Inject constructor(
    fun onCreateAccountClicked() {
       viewModelScope.launch(ioDispatcher) {
          signInFlow.collect {
-            if (it.isSuccess()) processNavEvent(destinations.signInToCatalogCleared(), navigator)
+            if (it.isSuccess()) processNavEvent(directions.signInToShopCategoriesCleared(), navigator)
          }
       }
    }
@@ -125,7 +123,7 @@ class AuthViewModel @Inject constructor(
    fun onLoginAttemptClicked() {
       viewModelScope.launch(ioDispatcher) {
          loginFlow.collect {
-            if (it.isSuccess()) processNavEvent(destinations.loginToCatalogCleared(), navigator)
+            if (it.isSuccess()) processNavEvent(directions.loginToShopCategoriesCleared(), navigator)
          }
       }
    }
@@ -139,7 +137,7 @@ class AuthViewModel @Inject constructor(
    }
 
    fun onLoginClicked() {
-      processNavEvent(destinations.showLogin(), navigator)
+      processNavEvent(directions.showLogin(), navigator)
    }
 
    private val _firstName = MutableStateFlow("")

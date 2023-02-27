@@ -1,6 +1,6 @@
-package com.github.clockworkclyde.domain.dto
+package com.github.clockworkclyde.domain.model.user
 
-data class UserDto(
+data class User(
    val id: Int? = null,
    val firstName: String? = null,
    val lastName: String? = null,
