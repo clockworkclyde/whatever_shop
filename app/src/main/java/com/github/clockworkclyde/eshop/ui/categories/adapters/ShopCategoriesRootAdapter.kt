@@ -28,6 +28,20 @@ class ShopCategoriesRootAdapter(
    }
 
    companion object {
+//      private fun horizontalCommonCategoriesDelegate(onItemClick: (CommonCategory) -> Unit) =
+//         adapterDelegateViewBinding<CommonCategoryHorizontalItem, ListItem, LayoutShopCommonCategoriesHorizontalBinding>(
+//            { inflater, container ->
+//               LayoutShopCommonCategoriesHorizontalBinding.inflate(inflater, container, false)
+//            }) {
+//
+//            val adapter = ShopCategoriesCommonAdapter(onCatClick = onItemClick)
+//            bind {
+//               with(binding) {
+//                  recyclerView.adapter = adapter
+//                  adapter.items = item.items
+//               }
+//            }
+//         }
 
       private fun horizontalCategoriesDelegate(
          onHorizontalItemExpandClick: (ProductCardHorizontalItem) -> Unit,

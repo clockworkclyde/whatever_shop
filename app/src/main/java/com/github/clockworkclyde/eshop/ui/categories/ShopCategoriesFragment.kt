@@ -39,6 +39,7 @@ class ShopCategoriesFragment :
       setUpRecyclerViews()
       setUpCommonCategories()
       observeHorizontalItems()
+      setUpToolbar()
    }
 
    private fun setUpRecyclerViews() {
@@ -51,6 +52,13 @@ class ShopCategoriesFragment :
          commonCategories
             .applyIfError { commonCategoryAdapter.clear(); toast(it) }
             .applyIfSuccess { commonCategoryAdapter.items = it }
+      }
+   }
+
+   private fun setUpToolbar() {
+      binding.toolbarView.apply {
+         imgBtnNavDrawer.safeClick { viewModel.onProfilePictureClicked() }
+         imgBtnNavDrawer.safeClick { viewModel.onNavDrawerClicked() }
       }
    }
 

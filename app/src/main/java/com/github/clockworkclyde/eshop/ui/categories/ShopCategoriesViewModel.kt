@@ -50,11 +50,16 @@ class ShopCategoriesViewModel @Inject constructor(
    }
 
    fun onProductCardClicked(index: Int, item: BaseProductCard) {
-      // navigation to details
+      // todo: navigation to details
    }
 
-   fun onProductCardAddToCartClicked(index: Int, item: BaseProductCard) {
+   fun onProductCardAddToCartClicked(index: Int, item: BaseProductCard) = Unit
 
+   fun onProfilePictureClicked() {
+      // todo: navigation to profile
    }
 
+   fun onNavDrawerClicked() {
+      // click
+   }
 }
