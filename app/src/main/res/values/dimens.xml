@@ -8,4 +8,5 @@
    <dimen name="padding_vertical_product_categories">8dp</dimen>
    <dimen name="product_card_radius">9dp</dimen>
    <dimen name="large_product_card_radius">11dp</dimen>
+   <dimen name="radius_bottom_nav">38dp</dimen>
 </resources>

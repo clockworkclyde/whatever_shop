@@ -25,4 +25,7 @@
    <color name="txt_common_category">#A6A7AB</color>
    <color name="bg_discount">#F93A3A</color>
    <color name="bg_search_input">#F5F6F6</color>
+   <color name="nav_tab_selected">#FF737297</color>
+   <color name="nav_tab_not_selected">#FF909090</color>
+   <color name="bg_nav_tab_selected">#EEEFF4</color>
 </resources>

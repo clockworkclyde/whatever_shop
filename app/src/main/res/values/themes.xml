@@ -49,7 +49,7 @@
       <item name="android:textColor">@color/text_primary_button</item>
       <item name="cornerRadius">@dimen/bg_button_radius</item>
       <item name="android:textAllCaps">false</item>
-      <item name="backgroundTint">@color/primary_button_states</item>
+      <item name="backgroundTint">@color/selector_primary_button</item>
    </style>
 
    <style name="TextInputStyle">
@@ -88,5 +88,15 @@
       <item name="android:fontFamily">@font/pop_extralight</item>
    </style>
 
+   <style name="BottomNavigationStyle">
+      <item name="android:background">@drawable/bg_bottom_nav</item>
+      <item name="backgroundTint">@null</item>
+      <item name="elevation">1dp</item>
+      <item name="itemBackground">@drawable/bottom_navigation_item_bg</item>
+      <item name="android:minHeight">63dp</item>
+      <item name="enforceTextAppearance">true</item>
+      <item name="enforceMaterialTheme">true</item>
+      <item name="labelVisibilityMode">unlabeled</item>
+   </style>
 
 </resources>
