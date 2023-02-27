@@ -33,6 +33,16 @@
        android:name="com.github.clockworkclyde.eshop.ui.categories.ShopCategoriesFragment"
        android:label="@string/catalog"
        tools:layout="@layout/fragment_shop_categories" >
+      <action
+          android:id="@+id/action_categoriesFragment_to_profileFragment"
+          app:destination="@id/profileFragment" />
+   </fragment>
+
+   <fragment
+       android:id="@+id/profileFragment"
+       android:name="com.github.clockworkclyde.eshop.ui.profile.ProfileFragment"
+       android:label="@string/profile"
+       tools:layout="@layout/fragment_shop_categories" >
    </fragment>
 
 </navigation>

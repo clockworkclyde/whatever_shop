@@ -67,7 +67,7 @@
              android:layout_marginTop="2dp"
              android:layout_marginEnd="6dp"
              android:layout_marginBottom="2dp"
-             android:textColor="@color/base_black"
+             android:textColor="@color/base_light_black"
              android:textSize="6sp"
              tools:ignore="SmallSp"
              tools:text="Phones" />

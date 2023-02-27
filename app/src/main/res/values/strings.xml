@@ -26,4 +26,16 @@
    <string name="title_nav_cart">Корзина</string>
    <string name="title_nav_messages">Сообщения</string>
    <string name="title_nav_profile">Профиль</string>
+   <string name="txt_btn_change_photo">Change photo</string>
+   <string name="btn_upload_item">Upload item</string>
+   <string name="menu_trade_store">Trade store</string>
+   <string name="menu_payment_method">Payment method</string>
+   <string name="menu_balance">Balance</string>
+   <string name="menu_trade_history">Trade history</string>
+   <string name="menu_restore_purchase">Restore Purchase</string>
+   <string name="menu_help">Help</string>
+   <string name="menu_logout">Log out</string>
+   <string name="profile">Profile</string>
+   <string name="alert_logout_msg">Are you sure you want to logout?</string>
+   <string name="alert_logout_title">Logout account</string>
 </resources>

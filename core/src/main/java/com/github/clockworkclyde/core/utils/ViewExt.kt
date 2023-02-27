@@ -1,6 +1,9 @@
 package com.github.clockworkclyde.core.utils
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -58,7 +61,8 @@ fun EditText.clearError() {
 
 fun EditText.hasError(): Boolean = this.error != null
 
-fun Fragment.toast(message: Any? = "", duration: Int = Toast.LENGTH_SHORT) = Toast.makeText(requireContext(), message.toString(), duration).show()
+fun Fragment.toast(message: Any? = "", duration: Int = Toast.LENGTH_SHORT) =
+   Toast.makeText(requireContext(), message.toString(), duration).show()
 
 fun AsyncListDifferDelegationAdapter<*>.clear() {
    this.items = null
@@ -71,4 +75,28 @@ fun ViewGroup.setClipToOutline() {
 fun View.hideKeyboard() {
    val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
    imm.hideSoftInputFromWindow(windowToken, 0)
+}
+
+fun Any.alertDialog(
+   context: Context,
+   message: String,
+   title: String = "Title",
+   onSubmitText: String = "OK",
+   onCancelText: String = "Cancel",
+   onSubmit: () -> Unit,
+   onCancel: () -> Unit = {}
+) {
+   val resources = context.resources
+   return AlertDialog.Builder(context)
+      .setTitle(title)
+      .setMessage(message)
+      .setPositiveButton(onSubmitText) { _, _ ->
+         onSubmit()
+      }
+      .setNegativeButton(onCancelText) { dialog, _ ->
+         dialog.dismiss()
+         onCancel()
+      }
+      .create()
+      .show()
 }

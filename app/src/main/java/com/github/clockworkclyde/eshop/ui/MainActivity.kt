@@ -1,16 +1,11 @@
 package com.github.clockworkclyde.eshop.ui
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import com.github.clockworkclyde.core.navigation.Navigator
 import com.github.clockworkclyde.core.presentation.activities.NavHostActivity
 import com.github.clockworkclyde.eshop.R
-import com.github.clockworkclyde.eshop.ui.categories.ShopCategoriesFragment
 import com.github.clockworkclyde.eshop.ui.navigation.BottomNavigationFragment
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
