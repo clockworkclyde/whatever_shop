@@ -66,11 +66,11 @@ class ShopCategoriesFragment :
    }
 
    override fun initViews() {
+      setUpToolbar()
       setUpRecyclerViews()
       setUpCommonCategories()
       observeHorizontalItems()
       observeSearchSuggestions()
-      setUpToolbar()
       setUpProfilePicture()
    }
 
@@ -145,7 +145,6 @@ class ShopCategoriesFragment :
    }
 
    private fun setLoadingState() {
-      adapter.clear()
       adapter.items = IntRange(0, 3).map { index ->
          ProductCardHorizontalItem(
             title = "",

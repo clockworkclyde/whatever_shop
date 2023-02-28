@@ -31,4 +31,5 @@
    <color name="nav_tab_not_selected">#FF909090</color>
    <color name="bg_nav_tab_selected">#EEEFF4</color>
    <color name="bg_details_bottom_sheet">#181726</color>
+   <color name="stroke_product_color">#ADADAD</color>
 </resources>

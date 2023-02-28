@@ -59,6 +59,10 @@ class ProductDetailsViewModel @Inject constructor(
       quantity.value = quantity.value.dec()
    }
 
+   fun onColorClicked(index: Int, color: String) {
+
+   }
+
    companion object {
       const val VALUE_INITIAL_QUANTITY = 1
    }

@@ -123,7 +123,6 @@
       </androidx.constraintlayout.widget.ConstraintLayout>
 
       <FrameLayout
-          android:layout_marginBottom="-24dp"
           android:id="@+id/bottomSheetLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

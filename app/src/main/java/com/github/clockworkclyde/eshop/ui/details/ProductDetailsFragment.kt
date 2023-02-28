@@ -1,11 +1,17 @@
 package com.github.clockworkclyde.eshop.ui.details
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.clockworkclyde.core.presentation.fragments.BaseFragment
+import com.github.clockworkclyde.core.utils.safeClick
 import com.github.clockworkclyde.eshop.R
 import com.github.clockworkclyde.eshop.databinding.FragmentProductDetailsBinding
+import com.github.clockworkclyde.eshop.databinding.ItemProductColorBinding
+import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +39,7 @@ class ProductDetailsFragment: BaseFragment<FragmentProductDetailsBinding, Produc
 
    override fun initViews() {
       setUpBottomSheet()
+      setUpColorList()
    }
 
    private fun setUpBottomSheet() {
@@ -44,6 +51,27 @@ class ProductDetailsFragment: BaseFragment<FragmentProductDetailsBinding, Produc
                .addToBackStack(null)
                .commit()
          }
+      }
+   }
+
+   private fun setUpColorList() {
+      viewModel.item.collectWhileStarted {
+         it?.let {
+            addColorItemsView(binding.colorsLayout, it.colors)
+         }
+      }
+   }
+
+   private fun addColorItemsView(parent: ViewGroup, colors: List<String>) {
+      colors.forEachIndexed { index, item ->
+         val inflater = LayoutInflater.from(parent.context)
+         val itemBinding = ItemProductColorBinding.inflate(inflater, parent, false)
+         itemBinding.apply {
+            (this.root as MaterialCardView).let { view ->
+               view.setCardBackgroundColor(Color.parseColor(item))
+            }
+            this.root.safeClick { viewModel.onColorClicked(index, item) }
+         }.let { parent.addView(it.root) }
       }
    }
 }

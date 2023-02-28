@@ -56,7 +56,7 @@ class ShopCategoriesViewModel @Inject constructor(
    fun onProductCardAddToCartClicked(index: Int, item: BaseProductCard) = Unit
 
    fun onProfilePictureClicked() {
-      //processNavEvent(directions.rootToProfile(), navigator)
+      processNavEvent(directions.rootToProfile(), navigator)
    }
 
    fun onNavDrawerClicked() {
