@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
    <data>
+
       <variable
           name="viewModel"
           type="com.github.clockworkclyde.eshop.ui.categories.ShopCategoriesViewModel" />
+
+      <variable
+          name="searchVM"
+          type="com.github.clockworkclyde.eshop.ui.categories.SearchProductViewModel" />
    </data>
 
    <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,13 +19,13 @@
        android:layout_height="match_parent">
 
       <include
-          layout="@layout/layout_toolbar_shop_categories"
           android:id="@+id/toolbarView"
-          app:layout_constraintTop_toTopOf="parent"
+          layout="@layout/layout_toolbar_shop_categories"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent" />
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-      <EditText
+      <AutoCompleteTextView
           android:id="@+id/searchTextInput"
           style="@style/TextInputStyle"
           android:layout_width="match_parent"
@@ -29,8 +34,10 @@
           android:layout_marginEnd="54dp"
           android:autofillHints="none"
           android:drawableEnd="@drawable/ic_search"
+          android:dropDownVerticalOffset="6dp"
           android:hint="@string/hint_search_categories"
           android:inputType="textAutoComplete"
+          android:text="@{searchVM.searchFlow}"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/toolbarView" />

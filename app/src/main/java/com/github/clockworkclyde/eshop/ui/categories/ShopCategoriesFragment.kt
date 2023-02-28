@@ -3,6 +3,7 @@ package com.github.clockworkclyde.eshop.ui.categories
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -30,7 +31,8 @@ class ShopCategoriesFragment :
    override fun inflateView() = FragmentShopCategoriesBinding.inflate(layoutInflater)
 
    override val viewModel: ShopCategoriesViewModel by viewModels()
-   private val profileViewModel : ProfileViewModel by navGraphViewModels(R.id.host_nav_graph) { defaultViewModelProviderFactory }
+   private val searchViewModel: SearchProductViewModel by viewModels()
+   private val profileViewModel: ProfileViewModel by navGraphViewModels(R.id.host_nav_graph) { defaultViewModelProviderFactory }
 
    private val adapter by lazy {
       ShopCategoriesRootAdapter(
@@ -59,6 +61,7 @@ class ShopCategoriesFragment :
 
    override fun initBinding(binding: FragmentShopCategoriesBinding) {
       binding.viewModel = viewModel
+      binding.searchVM = searchViewModel
       binding.lifecycleOwner = viewLifecycleOwner
    }
 
@@ -66,15 +69,30 @@ class ShopCategoriesFragment :
       setUpRecyclerViews()
       setUpCommonCategories()
       observeHorizontalItems()
+      observeSearchSuggestions()
       setUpToolbar()
       setUpProfilePicture()
+   }
+
+   private fun observeSearchSuggestions() {
+      with(binding.searchTextInput) {
+         this.applyUserInteractionTyped<String> { index, item ->
+            searchViewModel.onSearchSuggestionClicked(index, item)
+         }
+         searchViewModel.items.collectWhileStarted {
+            this.setListAdapter(it, R.layout.item_dropdown_list)
+         }
+      }
    }
 
    private fun setUpProfilePicture() {
       profileViewModel.resultFlow.collectWhileStarted {
          it.run {
-            when(this) {
-               is Result.Success -> loadUserPhotoInto(binding.toolbarView.imgBtnProfilePic, this.data.pic?.bitmap)
+            when (this) {
+               is Result.Success -> loadUserPhotoInto(
+                  binding.toolbarView.imgBtnProfilePic,
+                  this.data.pic?.bitmap
+               )
                else -> setEmptyPhotoTemplate(binding.toolbarView.imgBtnProfilePic)
             }
          }
@@ -99,7 +117,7 @@ class ShopCategoriesFragment :
          return
       }
       Glide.with(binding.root)
-         .loadCircleRoundedBitmap(bitmap, view, )
+         .loadCircleRoundedBitmap(bitmap, view)
    }
 
    private fun setUpCommonCategories() {

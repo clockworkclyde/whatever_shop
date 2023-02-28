@@ -2,11 +2,9 @@ package com.github.clockworkclyde.data.di
 
 import com.github.clockworkclyde.data.PreferenceRepository
 import com.github.clockworkclyde.data.ProfilePhotoRepository
+import com.github.clockworkclyde.data.SearchSuggestionRepository
 import com.github.clockworkclyde.data.UserRepository
-import com.github.clockworkclyde.domain.repository.IPreferenceRepository
-import com.github.clockworkclyde.domain.repository.IProductCardRepository
-import com.github.clockworkclyde.domain.repository.IProfilePhotoRepository
-import com.github.clockworkclyde.domain.repository.IUserRepository
+import com.github.clockworkclyde.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -32,5 +30,9 @@ interface BindRepositoryModule {
    @Binds
    @Singleton
    fun bindProfilePhotoRepository(impl: ProfilePhotoRepository): IProfilePhotoRepository
+
+   @Binds
+   @Singleton
+   fun bindSearchSuggestionRepository(impl: SearchSuggestionRepository): ISearchSuggestionRepository
 
 }
