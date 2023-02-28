@@ -1,6 +1,6 @@
 package com.github.clockworkclyde.eshop.ui.auth
 
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.github.clockworkclyde.core.common.AnyResult
 import com.github.clockworkclyde.core.common.FlowAnyResult
 import com.github.clockworkclyde.core.dto.Result
@@ -31,7 +31,7 @@ class AuthViewModel @Inject constructor(
    private val navigator: INavigator,
    private val checkUserLoggedIn: CheckUserLoggedInUseCase,
    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
-) : BaseFlowViewModel(), INavigationViewModel<AuthDirections> {
+) : BaseFlowViewModel(), INavigationViewModel<AuthDirections>, DefaultLifecycleObserver {
 
    override val directions = AuthDirections()
 
@@ -53,9 +53,6 @@ class AuthViewModel @Inject constructor(
       userLoggedInFlow
          .flatMapConcat {
             flow {
-               it.applyIfSuccess {
-                  processNavEvent(directions.toShopCategoriesCleared(), navigator)
-               }
                when (it) {
                   is Result.Loading -> emit(true)
                   else -> emit(false)
@@ -64,10 +61,13 @@ class AuthViewModel @Inject constructor(
          }.stateIn(viewModelScope, SharingStarted.Lazily, true)
    }
 
-   init {
+   override fun onStart(owner: LifecycleOwner) {
+      super.onStart(owner)
       viewModelScope.launch {
-         progressShouldBeVisible.collect {
-            Timber.e(it.toString())
+         userLoggedInFlow.collect {
+            it.applyIfSuccess {
+               processNavEvent(directions.toShopCategoriesCleared(), navigator)
+            }
          }
       }
    }
