@@ -4,7 +4,6 @@ package com.github.clockworkclyde.core.utils
 
 import com.github.clockworkclyde.core.common.*
 import com.github.clockworkclyde.core.dto.Result
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 
@@ -22,7 +21,7 @@ fun Any?.emptyResult() = Result.Empty
 
 fun <T : Any> Any.successResult(data: T) = Result.Success<T>(data = data)
 
-fun <T: Any> Result<T>.get(): T? = this.data
+fun <T : Any> Result<T>.get(): T? = this.data
 
 inline fun <reified T : Any, reified R : Any> T.runToSuccess(block: T.() -> Result.Success<R>) =
    this.let(block)
@@ -126,24 +125,26 @@ inline fun <reified T : Any, reified R : Any> FlowResult<T>.flatMapFlowIfSuccess
    }
 }
 
-inline fun <reified T : Any, reified R: Any> ResultList<T>.mapListTo(
+inline fun <reified T : Any, reified R : Any> ResultList<T>.mapListTo(
    block: (T) -> R
 ): ResultList<R> {
    return when (this) {
       is Result.Success -> {
-         data.map { block(it) }.mapToSuccessResult()
+         data.map { block(it) }.mapToSuccessResultOrEmpty()
       }
       else -> this as ResultList<R>
    }
 }
 
-inline fun <reified T: Any> T.mapToSuccessResult(): Result<T> = this.toSuccessResult()
+inline fun <reified T : List<Any>> T.mapToSuccessResultOrEmpty(): Result<T> =
+   this.takeIf { it.isNotEmpty() }?.toSuccessResult() ?: emptyResult()
 
-inline fun <reified T: Any> T?.toSuccessResult(default: Result<T> = emptyResult()): Result<T> = this?.let {
-   successResult(it)
-} ?: default
+inline fun <reified T : Any> T?.toSuccessResult(default: Result<T> = emptyResult()): Result<T> =
+   this?.let {
+      successResult(it)
+   } ?: default
 
-inline fun <reified T: Any, reified R: Any> FlowResultList<T>.mapFlowListTo(
+inline fun <reified T : Any, reified R : Any> FlowResultList<T>.mapFlowListTo(
    crossinline block: (T) -> R
 ): FlowResultList<R> {
    return this.map { it.mapListTo(block) }

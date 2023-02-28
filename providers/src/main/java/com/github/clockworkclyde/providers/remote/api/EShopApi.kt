@@ -2,6 +2,7 @@ package com.github.clockworkclyde.providers.remote.api
 
 import com.github.clockworkclyde.data.models.dto.DiscountProductsResponse
 import com.github.clockworkclyde.data.models.dto.LatestProductsResponse
+import com.github.clockworkclyde.data.models.dto.SearchSuggestionsResponse
 import retrofit2.http.GET
 
 interface EShopApi {
@@ -12,4 +13,6 @@ interface EShopApi {
    @GET("a9ceeb6e-416d-4352-bde6-2203416576ac")
    suspend fun getDiscountProducts(): DiscountProductsResponse
 
+   @GET("4c9cd822-9479-4509-803d-63197e5a9e19")
+   suspend fun getSearchSuggestions(): SearchSuggestionsResponse
 }
