@@ -1,19 +1,24 @@
 package com.github.clockworkclyde.eshop.ui.auth
 
+import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.github.clockworkclyde.core.presentation.fragments.BaseFragment
 import com.github.clockworkclyde.core.utils.applyIfError
 import com.github.clockworkclyde.core.utils.onTextChanged
-import com.github.clockworkclyde.core.utils.toast
 import com.github.clockworkclyde.eshop.databinding.FragmentSignInBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignInFragment: BaseFragment<FragmentSignInBinding, AuthViewModel>() {
+class SignInFragment : BaseFragment<FragmentSignInBinding, AuthViewModel>() {
 
    override fun inflateView() = FragmentSignInBinding.inflate(layoutInflater)
 
    override val viewModel: AuthViewModel by viewModels()
+
+   override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(savedInstanceState)
+      lifecycle.addObserver(viewModel)
+   }
 
    override fun initViews() {
       setUpOnInputTextChanged()
@@ -28,7 +33,7 @@ class SignInFragment: BaseFragment<FragmentSignInBinding, AuthViewModel>() {
 
    override fun initBinding(binding: FragmentSignInBinding) {
       binding.viewModel = viewModel
-      binding.lifecycleOwner = this
+      binding.lifecycleOwner = viewLifecycleOwner
    }
 
    private fun setUpOnInputTextChanged() {

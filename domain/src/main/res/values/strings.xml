@@ -8,4 +8,5 @@
    <string name="cat_cars">Cars</string>
    <string name="cat_furniture">Furniture</string>
    <string name="cat_kids">Kids</string>
+   <string name="error_logout_with_email">Произошла ошибка, пожалуйста войдите заново в аккаунт</string>
 </resources>

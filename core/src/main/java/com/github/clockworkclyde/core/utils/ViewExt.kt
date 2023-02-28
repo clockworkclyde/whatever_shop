@@ -1,6 +1,11 @@
 package com.github.clockworkclyde.core.utils
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.graphics.Bitmap
+import android.net.Uri
+import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -15,7 +20,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.github.clockworkclyde.core.dto.IEvent
 import com.github.clockworkclyde.core.dto.UEvent
-import com.github.clockworkclyde.core.presentation.adapters.ListItem
 import com.github.clockworkclyde.core.presentation.fragments.IBaseFragment
 import com.github.clockworkclyde.core.presentation.viewmodels.IEventViewModel
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
@@ -58,7 +62,8 @@ fun EditText.clearError() {
 
 fun EditText.hasError(): Boolean = this.error != null
 
-fun Fragment.toast(message: Any? = "", duration: Int = Toast.LENGTH_SHORT) = Toast.makeText(requireContext(), message.toString(), duration).show()
+fun Fragment.toast(message: Any? = "", duration: Int = Toast.LENGTH_SHORT) =
+   Toast.makeText(requireContext(), message.toString(), duration).show()
 
 fun AsyncListDifferDelegationAdapter<*>.clear() {
    this.items = null
@@ -72,3 +77,34 @@ fun View.hideKeyboard() {
    val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
    imm.hideSoftInputFromWindow(windowToken, 0)
 }
+
+fun Any.alertDialog(
+   context: Context,
+   message: String,
+   title: String = "Title",
+   onSubmitText: String = "OK",
+   onCancelText: String = "Cancel",
+   onSubmit: (() -> Unit)? = null,
+   onCancel: () -> Unit = {}
+) {
+   val resources = context.resources
+   return AlertDialog.Builder(context)
+      .setTitle(title)
+      .setMessage(message)
+      .apply {
+         if (onSubmit != null) {
+            this.setPositiveButton(onSubmitText) { _, _ ->
+               onSubmit()
+            }
+         }
+      }
+      .setNegativeButton(onCancelText) { dialog, _ ->
+         dialog.dismiss()
+         onCancel()
+      }
+      .create()
+      .show()
+}
+
+fun Uri.asBitmap(activity: Activity): Bitmap =
+   MediaStore.Images.Media.getBitmap(activity.contentResolver, this)

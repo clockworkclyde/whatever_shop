@@ -68,12 +68,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, AuthViewModel>() {
    }
 
    private fun setUpOnInputTextChanged() {
-      binding.firstNameTextInput.onTextChanged { viewModel.setFirstName(it) }
+      binding.emailTextInput.onTextChanged { viewModel.setEmail(it) }
       binding.passwordTextInput.onTextChanged { viewModel.setPassword(it) }
    }
 
    private fun observeInputFieldsValidated() {
-      viewModel.firstNameError.collectWhileStarted { binding.firstNameTextInput.error = it }
+      viewModel.firstNameError.collectWhileStarted { binding.emailTextInput.error = it }
       viewModel.passwordError.collectWhileStarted { binding.passwordTextInput.error = it }
    }
 
