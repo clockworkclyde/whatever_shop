@@ -92,7 +92,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
          return
       }
       Glide.with(binding.root)
-         .loadCircleRoundedBitmap(bitmap, view, )
+         .loadCircleRoundedBitmap(bitmap, view)
    }
 
    private fun addMenuItemsView(parent: ViewGroup, dates: List<ProfileMenuItem>) {

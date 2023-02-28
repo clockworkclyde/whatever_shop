@@ -12,11 +12,12 @@ import com.github.clockworkclyde.data.sources.IInternalStorageProvider
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
 class InternalStorageProvider @Inject constructor(
-   @ApplicationContext private val context: Context // @ActivityContext
+   @ApplicationContext private val context: Context
 ): IInternalStorageProvider {
 
    override suspend fun loadPhotoFromInternalStorage(fileName: String): Result<UserPhotoDto> {
@@ -46,7 +47,7 @@ class InternalStorageProvider @Inject constructor(
 
    override suspend fun deletePhotoFromInternalStorage(filename: String): Result<Boolean> {
       return try {
-         context.deleteFile(filename).toSuccessResult()
+         context.deleteFile("$filename.jpg").toSuccessResult().also { Timber.e(it.data.toString()) }
       } catch (e: java.lang.Exception) {
          e.printStackTrace()
          errorResult(message = e.message, exception = e)

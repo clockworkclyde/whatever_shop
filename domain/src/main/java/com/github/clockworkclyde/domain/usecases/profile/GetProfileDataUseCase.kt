@@ -21,10 +21,10 @@ class GetUserDataUseCase @Inject constructor(
       return preferences.getCurrentUserEmail()?.let { email ->
          userRepository.findUserByEmail(email)
             .flatMapIfSuccess { user ->
-               photoRepository.getCurrentPhoto()
-                  .flatMapIfSuccess {
-                     user.copy(pic = it).toSuccessResult()
-                  }
+               when (val photoResult = photoRepository.getCurrentPhoto()) {
+                  is Result.Success -> user.copy(pic = photoResult.data)
+                  else -> user
+               }.toSuccessResult()
             }
       } ?: emptyResult()
    }

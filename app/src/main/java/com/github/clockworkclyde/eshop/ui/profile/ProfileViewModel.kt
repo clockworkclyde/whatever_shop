@@ -38,7 +38,6 @@ class ProfileViewModel @Inject constructor(
 
    val profile: FlowResult<User> by lazy {
       onEventFlow<UEvent.Fetch, Result<User>> {
-         emit(emptyResult())
          emit(loadingResult())
          emit(getUserData())
       }
