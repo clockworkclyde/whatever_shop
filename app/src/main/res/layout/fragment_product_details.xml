@@ -97,7 +97,7 @@
              app:layout_constraintBottom_toBottomOf="@id/ratingIV"
              app:layout_constraintStart_toEndOf="@id/ratingTV"
              app:layout_constraintTop_toTopOf="@id/ratingIV"
-             android:text="@{Integer.toString(viewModel.item.reviewsCount)}"
+             android:text="@{String.format(`(%s reviews)`, Integer.toString(viewModel.item.reviewsCount))}"
              tools:text="(4000 reviews)" />
 
          <TextView
