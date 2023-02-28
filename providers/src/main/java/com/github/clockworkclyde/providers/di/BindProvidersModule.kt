@@ -6,6 +6,7 @@ import com.github.clockworkclyde.providers.local.UserLocalDataSource
 import com.github.clockworkclyde.providers.local.pref.PreferenceProvider
 import com.github.clockworkclyde.providers.local.storage.InternalStorageProvider
 import com.github.clockworkclyde.providers.remote.ProductCardRemoteDataSource
+import com.github.clockworkclyde.providers.remote.ProductDetailsRemoteDataSource
 import com.github.clockworkclyde.providers.remote.SearchSuggestionRemoteDataSource
 import com.github.clockworkclyde.providers.resources.AndroidResourcesProvider
 import dagger.Binds
@@ -34,4 +35,7 @@ interface BindProvidersModule {
 
    @Binds
    fun bindSuggestionRemoteDataSource(impl: SearchSuggestionRemoteDataSource): ISearchSuggestionRemoteDataSource
+
+   @Binds
+   fun bindProductDetailsRemoteDataSource(impl: ProductDetailsRemoteDataSource): IProductDetailsRemoteDataSource
 }

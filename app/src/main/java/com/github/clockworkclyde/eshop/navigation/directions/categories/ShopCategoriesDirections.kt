@@ -7,7 +7,7 @@ import com.github.clockworkclyde.eshop.R
 class ShopCategoriesDirections
    : INavDirections {
 
-      fun rootToDetails() = Unit //INavEvent.ShowScreen()
+      fun rootToDetails() = INavEvent.ShowScreen(R.id.action_categoriesFragment_to_productDetailsFragment)
 
       fun rootToCategory() = Unit
 

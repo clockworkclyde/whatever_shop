@@ -130,7 +130,7 @@ class ShopCategoriesFragment :
 
    private fun setUpToolbar() {
       binding.toolbarView.apply {
-         imgBtnNavDrawer.safeClick { viewModel.onProfilePictureClicked() }
+         imgBtnProfilePic.safeClick { viewModel.onProfilePictureClicked() }
          imgBtnNavDrawer.safeClick { viewModel.onNavDrawerClicked() }
       }
    }

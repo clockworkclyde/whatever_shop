@@ -29,6 +29,9 @@
       <action
           android:id="@+id/action_categoriesFragment_to_profileFragment"
           app:destination="@id/profileFragment" />
+      <action
+          android:id="@+id/action_categoriesFragment_to_productDetailsFragment"
+          app:destination="@id/productDetailsFragment" />
    </fragment>
 
    <fragment
@@ -47,5 +50,12 @@
        app:launchSingleTop="true"
        app:popUpTo="@id/host_nav_graph"
        app:popUpToInclusive="true" />
+
+   <fragment
+       android:id="@+id/productDetailsFragment"
+       android:name="com.github.clockworkclyde.eshop.ui.details.ProductDetailsFragment"
+       android:label="ProductDetailsFragment"
+       tools:layout="@layout/fragment_product_details" />
+
 
 </navigation>

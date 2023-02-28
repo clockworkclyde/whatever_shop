@@ -1,9 +1,6 @@
 package com.github.clockworkclyde.data.di
 
-import com.github.clockworkclyde.data.PreferenceRepository
-import com.github.clockworkclyde.data.ProfilePhotoRepository
-import com.github.clockworkclyde.data.SearchSuggestionRepository
-import com.github.clockworkclyde.data.UserRepository
+import com.github.clockworkclyde.data.*
 import com.github.clockworkclyde.domain.repository.*
 import dagger.Binds
 import dagger.Module
@@ -34,5 +31,9 @@ interface BindRepositoryModule {
    @Binds
    @Singleton
    fun bindSearchSuggestionRepository(impl: SearchSuggestionRepository): ISearchSuggestionRepository
+
+   @Binds
+   @Singleton
+   fun bindDetailsRepository(impl: ProductDetailsRepository): IProductDetailsRepository
 
 }

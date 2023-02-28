@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+   <data>
+
+      <variable
+          name="viewModel"
+          type="com.github.clockworkclyde.eshop.ui.details.ProductDetailsViewModel" />
+   </data>
+
    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:app="http://schemas.android.com/apk/res-auto"
        xmlns:tools="http://schemas.android.com/tools"
@@ -37,6 +44,7 @@
              android:id="@+id/lessBtn"
              android:layout_width="36dp"
              android:layout_height="24dp"
+             android:safeClick="@{viewModel::onLessButtonClicked}"
              app:cardBackgroundColor="@color/bg_primary_button"
              app:cardCornerRadius="8dp">
 
@@ -57,14 +65,16 @@
              android:layout_height="wrap_content"
              android:layout_marginStart="12dp"
              android:paddingTop="4dp"
-             android:text="@string/quantity_one"
-             android:textColor="@color/white" />
+             android:text="@{viewModel.quantity.toString()}"
+             android:textColor="@color/white"
+             tools:text="@string/quantity_one" />
 
          <com.google.android.material.card.MaterialCardView
              android:id="@+id/moreBtn"
              android:layout_width="36dp"
              android:layout_height="24dp"
              android:layout_marginStart="12dp"
+             android:safeClick="@{viewModel::onMoreButtonClicked}"
              app:cardBackgroundColor="@color/bg_primary_button"
              app:cardCornerRadius="8dp">
 
@@ -86,6 +96,7 @@
           android:layout_height="wrap_content"
           android:fontFamily="@font/pop_semi_bold"
           android:paddingVertical="16dp"
+          android:safeClick="@{viewModel.onAddToCartClicked}"
           android:textSize="9sp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
