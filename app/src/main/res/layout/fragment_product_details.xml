@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+   <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+         <androidx.viewpager2.widget.ViewPager2
+             android:id="@+id/photosPager"
+             android:layout_width="328dp"
+             android:layout_height="278dp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/thumbnailRV"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="36dp"
+             android:orientation="horizontal"
+             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/photosPager" />
+
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:padding="24dp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/thumbnailRV">
+
+            <TextView
+                android:id="@+id/titleTV"
+                style="@style/TextViewStyle.Content.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="New balance \nSneakers" />
+
+            <TextView
+                android:id="@+id/descriptionTV"
+                style="@style/TextViewStyle.Content.Default"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titleTV"
+                tools:text="Features waterproof, fire, air resistant shoes. all changed when the country of fire attacked" />
+
+            <ImageView
+                android:id="@+id/ratingIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_rating_star"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/descriptionTV" />
+
+            <TextView
+                android:id="@+id/ratingTV"
+                style="@style/TextViewStyle.Content.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:paddingTop="2dp"
+                app:layout_constraintBottom_toBottomOf="@id/ratingIV"
+                app:layout_constraintStart_toEndOf="@id/ratingIV"
+                app:layout_constraintTop_toTopOf="@id/ratingIV"
+                tools:text="3.9" />
+
+            <TextView
+                android:id="@+id/ratingCountTV"
+                style="@style/TextViewStyle.Content.Default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:paddingTop="2dp"
+                app:layout_constraintBottom_toBottomOf="@id/ratingIV"
+                app:layout_constraintStart_toEndOf="@id/ratingTV"
+                app:layout_constraintTop_toTopOf="@id/ratingIV"
+                tools:text="(4000 reviews)" />
+
+            <TextView
+                android:id="@+id/prodColorTV"
+                style="@style/TextViewStyle.Content.Default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/color"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ratingIV" />
+
+            <LinearLayout
+                android:id="@+id/colorsLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/prodColorTV" />
+         </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <FrameLayout
+          android:id="@+id/bottomSheetLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent" />
+   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

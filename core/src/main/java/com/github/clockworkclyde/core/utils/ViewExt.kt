@@ -74,9 +74,13 @@ fun ViewGroup.setClipToOutline() {
    this.clipToOutline = true
 }
 
-fun View.hideKeyboard() {
-   val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-   imm.hideSoftInputFromWindow(windowToken, 0)
+fun View.hideKeyboard(): Boolean {
+   try {
+      val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+      return imm.hideSoftInputFromWindow(windowToken, 0)
+   } catch (ignored: RuntimeException) {
+   }
+   return false
 }
 
 fun Any.alertDialog(
@@ -109,3 +113,9 @@ fun Any.alertDialog(
 
 fun Uri.asBitmap(activity: Activity): Bitmap =
    MediaStore.Images.Media.getBitmap(activity.contentResolver, this)
+
+fun Activity.hideKeyboard(): Boolean {
+   val view = currentFocus ?: View(this)
+   if (view is EditText) view.clearFocus()
+   return view.hideKeyboard()
+}

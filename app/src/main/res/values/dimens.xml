@@ -9,4 +9,5 @@
    <dimen name="product_card_radius">9dp</dimen>
    <dimen name="large_product_card_radius">11dp</dimen>
    <dimen name="radius_bottom_nav">38dp</dimen>
+   <dimen name="radius_details_sheet">@dimen/radius_bottom_nav</dimen>
 </resources>
