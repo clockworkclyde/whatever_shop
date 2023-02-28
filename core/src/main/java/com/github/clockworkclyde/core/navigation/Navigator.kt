@@ -3,6 +3,7 @@ package com.github.clockworkclyde.core.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
+import com.github.clockworkclyde.core.utils.safeNavigate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -23,7 +24,7 @@ class Navigator @Inject constructor(
    )
 
    override fun navigateTo(direction: NavDirections, navOptions: NavOptions?) {
-      emit { it.navigate(direction, navOptions) }
+      emit { it.safeNavigate(direction, navOptions) }
    }
 
    override fun popBackStack(): Boolean {

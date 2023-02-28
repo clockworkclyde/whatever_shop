@@ -23,7 +23,9 @@ class MainActivity : NavHostActivity(R.layout.activity_main) {
       super.onStart()
       navHostController.addOnDestinationChangedListener { _, dest, _ ->
          when (dest.id) {
-            R.id.categoriesFragment -> addBottomNavigationView()
+            R.id.signInFragment -> removeBottomNavigationView()
+            R.id.loginFragment -> removeBottomNavigationView()
+            else -> addBottomNavigationView()
          }
       }
    }

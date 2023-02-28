@@ -2,8 +2,10 @@ package com.github.clockworkclyde.core.utils
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
+import android.graphics.Bitmap
+import android.net.Uri
+import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -18,7 +20,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.github.clockworkclyde.core.dto.IEvent
 import com.github.clockworkclyde.core.dto.UEvent
-import com.github.clockworkclyde.core.presentation.adapters.ListItem
 import com.github.clockworkclyde.core.presentation.fragments.IBaseFragment
 import com.github.clockworkclyde.core.presentation.viewmodels.IEventViewModel
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
@@ -83,15 +84,19 @@ fun Any.alertDialog(
    title: String = "Title",
    onSubmitText: String = "OK",
    onCancelText: String = "Cancel",
-   onSubmit: () -> Unit,
+   onSubmit: (() -> Unit)? = null,
    onCancel: () -> Unit = {}
 ) {
    val resources = context.resources
    return AlertDialog.Builder(context)
       .setTitle(title)
       .setMessage(message)
-      .setPositiveButton(onSubmitText) { _, _ ->
-         onSubmit()
+      .apply {
+         if (onSubmit != null) {
+            this.setPositiveButton(onSubmitText) { _, _ ->
+               onSubmit()
+            }
+         }
       }
       .setNegativeButton(onCancelText) { dialog, _ ->
          dialog.dismiss()
@@ -100,3 +105,6 @@ fun Any.alertDialog(
       .create()
       .show()
 }
+
+fun Uri.asBitmap(activity: Activity): Bitmap =
+   MediaStore.Images.Media.getBitmap(activity.contentResolver, this)

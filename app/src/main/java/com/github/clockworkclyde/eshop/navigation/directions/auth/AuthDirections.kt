@@ -9,14 +9,8 @@ class AuthDirections
 
    fun showLogin() = INavEvent.ShowScreen(R.id.action_signInFragment_to_loginFragment)
 
-   fun signInToShopCategoriesCleared() = INavEvent.ShowScreen(
-      id = R.id.action_signInFragment_to_categoriesFragment,
-      popUpTo = R.id.signInFragment,
-      inclusive = true
-   )
-
-   fun loginToShopCategoriesCleared() = INavEvent.ShowScreen(
-      id = R.id.action_loginFragment_to_categoriesFragment,
+   fun toShopCategoriesCleared() = INavEvent.ShowScreen(
+      id = R.id.action_global_categoriesFragment,
       popUpTo = R.id.signInFragment,
       inclusive = true
    )

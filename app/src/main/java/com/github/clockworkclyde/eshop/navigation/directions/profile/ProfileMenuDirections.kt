@@ -8,8 +8,6 @@ class ProfileMenuDirections
    : INavDirections {
 
       fun onLogOut() = INavEvent.ShowScreen(
-         id = R.id.action_signInFragment_to_loginFragment,
-         popUpTo = R.id.host_nav_graph,
-         inclusive = true
+         id = R.id.action_to_signInFragment_cleared,
       )
 }

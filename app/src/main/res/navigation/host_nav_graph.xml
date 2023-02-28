@@ -9,30 +9,23 @@
        android:id="@+id/signInFragment"
        android:name="com.github.clockworkclyde.eshop.ui.auth.SignInFragment"
        android:label="@string/sign_in"
-       tools:layout="@layout/fragment_sign_in" >
+       tools:layout="@layout/fragment_sign_in">
       <action
           android:id="@+id/action_signInFragment_to_loginFragment"
           app:destination="@id/loginFragment" />
-      <action
-          android:id="@+id/action_signInFragment_to_categoriesFragment"
-          app:destination="@id/categoriesFragment" />
    </fragment>
 
    <fragment
        android:id="@+id/loginFragment"
        android:name="com.github.clockworkclyde.eshop.ui.auth.LoginFragment"
        android:label="@string/login"
-       tools:layout="@layout/fragment_login" >
-      <action
-          android:id="@+id/action_loginFragment_to_categoriesFragment"
-          app:destination="@id/categoriesFragment" />
-   </fragment>
+       tools:layout="@layout/fragment_login"/>
 
    <fragment
        android:id="@+id/categoriesFragment"
        android:name="com.github.clockworkclyde.eshop.ui.categories.ShopCategoriesFragment"
        android:label="@string/catalog"
-       tools:layout="@layout/fragment_shop_categories" >
+       tools:layout="@layout/fragment_shop_categories">
       <action
           android:id="@+id/action_categoriesFragment_to_profileFragment"
           app:destination="@id/profileFragment" />
@@ -42,7 +35,16 @@
        android:id="@+id/profileFragment"
        android:name="com.github.clockworkclyde.eshop.ui.profile.ProfileFragment"
        android:label="@string/profile"
-       tools:layout="@layout/fragment_shop_categories" >
-   </fragment>
+       tools:layout="@layout/fragment_shop_categories" />
+   <action
+       android:id="@+id/action_to_signInFragment_cleared"
+       app:destination="@id/signInFragment"
+       app:popUpTo="@id/signInFragment"
+       app:popUpToInclusive="true" />
+   <action
+       android:id="@+id/action_global_categoriesFragment"
+       app:destination="@id/categoriesFragment"
+       app:popUpTo="@id/host_nav_graph"
+       app:popUpToInclusive="true" />
 
 </navigation>

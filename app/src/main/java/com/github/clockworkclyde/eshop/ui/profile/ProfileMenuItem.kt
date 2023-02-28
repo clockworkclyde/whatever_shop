@@ -30,10 +30,10 @@ sealed class ProfileMenuItem(
       ProfileMenuItem(R.string.menu_restore_purchase, R.drawable.ic_restore_purchase)
 
    object Help :
-      ProfileMenuItem(R.string.menu_help, R.drawable.ic_help)
+      ProfileMenuItem(R.string.menu_help, R.drawable.ic_help, arrowVisibility = false)
 
    object Logout :
-      ProfileMenuItem(R.string.menu_logout, R.drawable.ic_logout)
+      ProfileMenuItem(R.string.menu_logout, R.drawable.ic_logout, arrowVisibility = false)
 
    companion object {
       private const val balance = 1593

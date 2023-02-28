@@ -27,13 +27,13 @@
           android:text="@string/title_login" />
 
       <com.google.android.material.textfield.TextInputEditText
-          android:id="@+id/firstNameTextInput"
+          android:id="@+id/emailTextInput"
           style="@style/TextInputStyle"
           android:layout_width="match_parent"
           android:layout_marginTop="60dp"
-          android:hint="@string/hint_firstname"
-          android:inputType="text"
-          android:text="@{viewModel.firstName}" />
+          android:hint="@string/hint_email"
+          android:inputType="textEmailAddress"
+          android:text="@{viewModel.email}" />
 
       <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"

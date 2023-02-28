@@ -1,17 +1,26 @@
 package com.github.clockworkclyde.eshop.ui.categories
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.os.Bundle
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.navGraphViewModels
+import com.bumptech.glide.Glide
+import com.github.clockworkclyde.core.dto.Result
 import com.github.clockworkclyde.core.presentation.fragments.BaseFragment
 import com.github.clockworkclyde.core.utils.*
-import com.github.clockworkclyde.eshop.databinding.FragmentShopCategoriesBinding
-import com.github.clockworkclyde.eshop.ui.categories.adapters.ShopCategoriesRootAdapter
 import com.github.clockworkclyde.domain.model.product.BaseProductCard
 import com.github.clockworkclyde.domain.model.product.CommonCategory
 import com.github.clockworkclyde.domain.model.product.ProductCardHorizontalItem
-import com.github.clockworkclyde.eshop.ui.MainActivity
+import com.github.clockworkclyde.eshop.R
+import com.github.clockworkclyde.eshop.databinding.FragmentShopCategoriesBinding
 import com.github.clockworkclyde.eshop.ui.categories.adapters.ShopCategoriesCommonAdapter
+import com.github.clockworkclyde.eshop.ui.categories.adapters.ShopCategoriesRootAdapter
 import com.github.clockworkclyde.eshop.ui.categories.model.ProductCardDiscountProgress
 import com.github.clockworkclyde.eshop.ui.categories.model.ProductCardProgress
+import com.github.clockworkclyde.eshop.ui.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +30,7 @@ class ShopCategoriesFragment :
    override fun inflateView() = FragmentShopCategoriesBinding.inflate(layoutInflater)
 
    override val viewModel: ShopCategoriesViewModel by viewModels()
+   private val profileViewModel : ProfileViewModel by navGraphViewModels(R.id.host_nav_graph) { defaultViewModelProviderFactory }
 
    private val adapter by lazy {
       ShopCategoriesRootAdapter(
@@ -36,10 +46,20 @@ class ShopCategoriesFragment :
       )
    }
 
+   override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(savedInstanceState)
+      lifecycle.addObserver(profileViewModel)
+   }
+
    override fun onPause() {
       super.onPause()
       view?.hideKeyboard()
       view?.clearFocus()
+   }
+
+   override fun initBinding(binding: FragmentShopCategoriesBinding) {
+      binding.viewModel = viewModel
+      binding.lifecycleOwner = viewLifecycleOwner
    }
 
    override fun initViews() {
@@ -47,11 +67,39 @@ class ShopCategoriesFragment :
       setUpCommonCategories()
       observeHorizontalItems()
       setUpToolbar()
+      setUpProfilePicture()
    }
+
+   private fun setUpProfilePicture() {
+      profileViewModel.resultFlow.collectWhileStarted {
+         it.run {
+            when(this) {
+               is Result.Success -> loadUserPhotoInto(binding.toolbarView.imgBtnProfilePic, this.data.pic?.bitmap)
+               else -> setEmptyPhotoTemplate(binding.toolbarView.imgBtnProfilePic)
+            }
+         }
+      }
+   }
+
+   private val emptyPhotoTemplate: Drawable? by lazy {
+      ContextCompat.getDrawable(requireContext(), R.drawable.ic_user_photo)
+   }
+
+   private fun setEmptyPhotoTemplate(view: ImageView) =
+      view.setImageDrawable(emptyPhotoTemplate)
 
    private fun setUpRecyclerViews() {
       binding.rootRecyclerView.adapter = adapter
       binding.topCategoriesRecyclerView.adapter = commonCategoryAdapter
+   }
+
+   private fun loadUserPhotoInto(view: ImageView, bitmap: Bitmap?) {
+      if (bitmap == null) {
+         setEmptyPhotoTemplate(view)
+         return
+      }
+      Glide.with(binding.root)
+         .loadCircleRoundedBitmap(bitmap, view, )
    }
 
    private fun setUpCommonCategories() {

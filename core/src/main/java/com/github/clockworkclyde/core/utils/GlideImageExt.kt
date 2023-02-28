@@ -1,5 +1,6 @@
 package com.github.clockworkclyde.core.utils
 
+import android.graphics.Bitmap
 import android.widget.ImageView
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -15,5 +16,12 @@ fun RequestManager.loadRoundedImage(imageUrl: String, view: ImageView, radius: I
          )
       )
       .transition(DrawableTransitionOptions.withCrossFade())
+      .into(view)
+}
+
+fun RequestManager.loadCircleRoundedBitmap(bitmap: Bitmap, view: ImageView) {
+   this.asBitmap()
+      .load(bitmap)
+      .circleCrop()
       .into(view)
 }

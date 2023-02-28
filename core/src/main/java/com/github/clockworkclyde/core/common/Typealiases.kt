@@ -18,6 +18,11 @@ typealias FlowAnyResult = Flow<Result<Any>>
 
 typealias AnyResult = Result<Any>
 typealias ResultList<T> = Result<List<T>>
+typealias ErrorThrowableResult = Result.ResultThrowable
+typealias ErrorResult = Result.ResultThrowable.Error
+typealias SuccessResult<T> = Result.Success<T>
 
 typealias MutableStateFlowList<T> = MutableStateFlow<List<T>>
 typealias StateFlowList<T> = StateFlow<List<T>>
+typealias StateFlowResult<T> = StateFlow<Result<T>>
+typealias MutableStateFlowResult<T> = MutableStateFlow<Result<T>>

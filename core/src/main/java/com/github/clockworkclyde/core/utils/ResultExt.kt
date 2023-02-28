@@ -22,6 +22,8 @@ fun Any?.emptyResult() = Result.Empty
 
 fun <T : Any> Any.successResult(data: T) = Result.Success<T>(data = data)
 
+fun <T: Any> Result<T>.get(): T? = this.data
+
 inline fun <reified T : Any, reified R : Any> T.runToSuccess(block: T.() -> Result.Success<R>) =
    this.let(block)
 
@@ -37,6 +39,11 @@ inline fun <reified T : Any> Result<T>.applyIfError(block: InHandler<Result.Resu
 
 inline fun <reified T : Any> Result<T>.applyIfLoading(block: () -> Unit): Result<T> {
    if (this is Result.Loading) block()
+   return this
+}
+
+inline fun <reified T : Any> Result<T>.applyIfEmpty(block: () -> Unit): Result<T> {
+   if (this is Result.Empty) block()
    return this
 }
 
@@ -79,6 +86,13 @@ inline fun <reified T : Any, reified R : Any> Result<T>.flatMapIfSuccess(
    block: (T) -> Result<R>
 ): Result<R> {
    return if (this is Result.Success) block(this.data)
+   else this as Result<R>
+}
+
+inline fun <reified T : Any, reified R : Any> Result<T>.flatMapIfEmpty(
+   block: () -> Result<R>
+): Result<R> {
+   return if (this is Result.Empty) block()
    else this as Result<R>
 }
 

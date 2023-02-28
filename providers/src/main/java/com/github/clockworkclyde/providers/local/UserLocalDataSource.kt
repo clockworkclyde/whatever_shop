@@ -22,4 +22,8 @@ class UserLocalDataSource @Inject constructor(
    override suspend fun findUserByName(firstName: String): UserEntity? {
       return api.findUserByName(firstName)
    }
+
+   override suspend fun removeUserByEmail(email: String) {
+      api.removeUserByEmail(email)
+   }
 }

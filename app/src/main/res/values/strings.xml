@@ -38,4 +38,8 @@
    <string name="profile">Profile</string>
    <string name="alert_logout_msg">Are you sure you want to logout?</string>
    <string name="alert_logout_title">Logout account</string>
+   <string name="template_username">Username</string>
+   <string name="alert_ext_permission_title">Доступ к хранилищу</string>
+   <string name="alert_ext_permission_message">Невозможно получить доступ к галерее, в дальнейшем вы сможете поменять свой выбор в настройках приложения.</string>
+   <string name="alert_ext_permission_btn">Хорошо</string>
 </resources>

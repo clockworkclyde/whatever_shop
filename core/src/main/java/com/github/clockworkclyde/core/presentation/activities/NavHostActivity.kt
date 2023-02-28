@@ -33,7 +33,7 @@ abstract class NavHostActivity : AppCompatActivity {
    }
 
    open fun handleNavigationCommands() {
-      navigationHandler.commands.collectWhileStarted { handler ->
+      navigationHandler.commands.collectWhileCreated { handler ->
          navHostController.let(handler)
          Timber.e("Navigation command was handled when current fragment is $currentFragment")
       }
@@ -43,6 +43,12 @@ abstract class NavHostActivity : AppCompatActivity {
 
    protected fun <T> Flow<T>.collectWhileStarted(block: (T) -> Unit) {
       launchAndRepeatOnState(Lifecycle.State.STARTED) {
+         collect { block.invoke(it) }
+      }
+   }
+
+   protected fun <T> Flow<T>.collectWhileCreated(block: (T) -> Unit) {
+      launchAndRepeatOnState(Lifecycle.State.CREATED) {
          collect { block.invoke(it) }
       }
    }
