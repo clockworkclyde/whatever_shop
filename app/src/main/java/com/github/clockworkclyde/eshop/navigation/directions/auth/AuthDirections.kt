@@ -10,7 +10,7 @@ class AuthDirections
    fun showLogin() = INavEvent.ShowScreen(R.id.action_signInFragment_to_loginFragment)
 
    fun toShopCategoriesCleared() = INavEvent.ShowScreen(
-      id = R.id.action_global_categoriesFragment,
+      id = R.id.action_to_categoriesFragment_cleared,
       popUpTo = R.id.signInFragment,
       inclusive = true
    )

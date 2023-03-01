@@ -51,4 +51,7 @@ ext.libs = [
 
         // Kotlin delegate shared preferences
         kotPref                    : "com.chibatching.kotpref:kotpref:$versions.kotPref",
+
+        // Carousel
+        carouselRV                 : "com.github.sparrow007:carouselrecyclerview:1.2.6"
 ]

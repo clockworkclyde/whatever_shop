@@ -19,7 +19,7 @@
        android:id="@+id/loginFragment"
        android:name="com.github.clockworkclyde.eshop.ui.auth.LoginFragment"
        android:label="@string/login"
-       tools:layout="@layout/fragment_login"/>
+       tools:layout="@layout/fragment_login" />
 
    <fragment
        android:id="@+id/categoriesFragment"
@@ -29,6 +29,13 @@
       <action
           android:id="@+id/action_categoriesFragment_to_profileFragment"
           app:destination="@id/profileFragment" />
+      <action
+          android:id="@+id/action_categoriesFragment_to_productDetailsFragment"
+          app:destination="@id/productDetailsFragment"
+          app:enterAnim="@anim/anim_enter_up"
+          app:exitAnim="@anim/anim_exit_down"
+          app:popEnterAnim="@anim/anim_enter_up"
+          app:popExitAnim="@anim/anim_exit_down" />
    </fragment>
 
    <fragment
@@ -39,12 +46,20 @@
    <action
        android:id="@+id/action_to_signInFragment_cleared"
        app:destination="@id/signInFragment"
-       app:popUpTo="@id/signInFragment"
-       app:popUpToInclusive="true" />
-   <action
-       android:id="@+id/action_global_categoriesFragment"
-       app:destination="@id/categoriesFragment"
        app:popUpTo="@id/host_nav_graph"
        app:popUpToInclusive="true" />
+   <action
+       android:id="@+id/action_to_categoriesFragment_cleared"
+       app:destination="@id/categoriesFragment"
+       app:launchSingleTop="true"
+       app:popUpTo="@id/host_nav_graph"
+       app:popUpToInclusive="true" />
+
+   <fragment
+       android:id="@+id/productDetailsFragment"
+       android:name="com.github.clockworkclyde.eshop.ui.details.ProductDetailsFragment"
+       android:label="ProductDetailsFragment"
+       tools:layout="@layout/fragment_product_details" />
+
 
 </navigation>

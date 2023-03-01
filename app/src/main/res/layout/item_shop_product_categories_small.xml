@@ -45,7 +45,7 @@
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <androidx.cardview.widget.CardView
+      <com.google.android.material.card.MaterialCardView
           android:id="@+id/categoryLayout"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
              android:textSize="6sp"
              tools:ignore="SmallSp"
              tools:text="Phones" />
-      </androidx.cardview.widget.CardView>
+      </com.google.android.material.card.MaterialCardView>
 
       <TextView
           android:id="@+id/title_text_view"

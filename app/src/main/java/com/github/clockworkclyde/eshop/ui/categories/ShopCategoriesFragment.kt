@@ -66,11 +66,11 @@ class ShopCategoriesFragment :
    }
 
    override fun initViews() {
+      setUpToolbar()
       setUpRecyclerViews()
       setUpCommonCategories()
       observeHorizontalItems()
       observeSearchSuggestions()
-      setUpToolbar()
       setUpProfilePicture()
    }
 
@@ -130,7 +130,7 @@ class ShopCategoriesFragment :
 
    private fun setUpToolbar() {
       binding.toolbarView.apply {
-         imgBtnNavDrawer.safeClick { viewModel.onProfilePictureClicked() }
+         imgBtnProfilePic.safeClick { viewModel.onProfilePictureClicked() }
          imgBtnNavDrawer.safeClick { viewModel.onNavDrawerClicked() }
       }
    }
@@ -145,7 +145,6 @@ class ShopCategoriesFragment :
    }
 
    private fun setLoadingState() {
-      adapter.clear()
       adapter.items = IntRange(0, 3).map { index ->
          ProductCardHorizontalItem(
             title = "",

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+   <data>
+
+      <variable
+          name="viewModel"
+          type="com.github.clockworkclyde.eshop.ui.details.ProductDetailsViewModel" />
+   </data>
+
+   <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@drawable/bg_details_sheet"
+       android:paddingStart="@dimen/padding_content_default"
+       android:paddingTop="16dp"
+       android:paddingEnd="@dimen/padding_content_default"
+       android:paddingBottom="@dimen/frag_padding_bottom_double">
+
+      <TextView
+          android:id="@+id/quantityTitleTV"
+          style="@style/TextViewStyle.Content.Default"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:paddingBottom="10dp"
+          android:text="@string/quantity"
+          android:textColor="@color/base_dark_gray"
+          app:layout_constraintEnd_toEndOf="@+id/centerVertical"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          app:layout_constraintEnd_toEndOf="@+id/centerVertical"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/quantityTitleTV">
+
+         <com.google.android.material.card.MaterialCardView
+             android:id="@+id/lessBtn"
+             android:layout_width="36dp"
+             android:layout_height="24dp"
+             android:safeClick="@{viewModel::onLessButtonClicked}"
+             app:cardBackgroundColor="@color/bg_primary_button"
+             app:cardCornerRadius="8dp">
+
+            <TextView
+                style="@style/TextViewStyle.Content.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/quantity_less"
+                android:textColor="@color/white" />
+
+         </com.google.android.material.card.MaterialCardView>
+
+         <TextView
+             android:id="@+id/quantityTV"
+             style="@style/TextViewStyle.Content.Title"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="12dp"
+             android:paddingTop="4dp"
+             android:textColor="@color/white"
+             tools:text="@string/quantity_one" />
+
+         <com.google.android.material.card.MaterialCardView
+             android:id="@+id/moreBtn"
+             android:layout_width="36dp"
+             android:layout_height="24dp"
+             android:layout_marginStart="12dp"
+             android:safeClick="@{viewModel::onMoreButtonClicked}"
+             app:cardBackgroundColor="@color/bg_primary_button"
+             app:cardCornerRadius="8dp">
+
+            <TextView
+                style="@style/TextViewStyle.Content.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/quantity_more"
+                android:textColor="@color/white" />
+
+         </com.google.android.material.card.MaterialCardView>
+      </LinearLayout>
+
+      <Button
+          android:id="@+id/addToCartBtn"
+          style="@style/PrimaryRoundedButton"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:fontFamily="@font/pop_semi_bold"
+          android:paddingVertical="16dp"
+          android:safeClick="@{viewModel.onAddToCartClicked}"
+          android:textSize="9sp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="@id/centerVertical"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:ignore="SmallSp" />
+
+      <TextView
+          android:id="@+id/positionNumberBtnTV"
+          style="@style/TextViewStyle.Content.Default"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:elevation="3dp"
+          android:text="@string/btn_position_number"
+          android:textColor="@color/base_secondary"
+          android:textStyle="bold"
+          app:layout_constraintBottom_toBottomOf="@id/addToCartBtn"
+          app:layout_constraintEnd_toEndOf="@id/btnCenterVertical"
+          app:layout_constraintStart_toStartOf="@id/centerVertical"
+          app:layout_constraintTop_toTopOf="@id/addToCartBtn" />
+
+      <TextView
+          style="@style/TextViewStyle.Content.Default"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:elevation="3dp"
+          android:text="@string/btn_add_to_cart"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          app:layout_constraintBottom_toBottomOf="@id/addToCartBtn"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="@id/btnCenterVertical"
+          app:layout_constraintTop_toTopOf="@id/addToCartBtn" />
+
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/btnCenterVertical"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:orientation="vertical"
+          app:layout_constraintGuide_percent="0.72" />
+
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/centerVertical"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:orientation="vertical"
+          app:layout_constraintGuide_percent="0.45" />
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

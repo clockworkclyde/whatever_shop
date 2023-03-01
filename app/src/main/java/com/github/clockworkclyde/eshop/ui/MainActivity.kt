@@ -48,4 +48,8 @@ class MainActivity : NavHostActivity(R.layout.activity_main) {
             .commit()
       }
    }
+
+   override fun onSupportNavigateUp(): Boolean {
+      return navHostController.navigateUp()
+   }
 }

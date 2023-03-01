@@ -17,4 +17,6 @@ interface IBaseFragment<V: ViewDataBinding, VM: IEventViewModel> {
 
    fun initBinding(binding: V)
 
+   val onBackPressAllowed: Boolean
+
 }

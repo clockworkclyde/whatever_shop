@@ -143,7 +143,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
    }
 
    private fun initToolbar() {
-      binding.toolbarLayout.setNavigationOnClickListener { findNavController().popBackStack() }
+      binding.toolbarLayout.setNavigationOnClickListener { findNavController().navigateUp() }
    }
 
    private fun setUpOnProfilePicClick() {
@@ -166,6 +166,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
       }
    }
 
+   /** if user needs to take fresh photo **/
 //   private fun onChangeProfilePicture() {
 //      val manager = PermissionManager(requireContext())
 //      val permission = PermissionManager.Permissions.READ_EXTERNAL_STORAGE
