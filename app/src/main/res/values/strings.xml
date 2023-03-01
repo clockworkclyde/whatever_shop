@@ -52,4 +52,6 @@
    <string name="btn_position_number">#2,500</string>
    <string name="desc_add_to_favorites">Add to favorites</string>
    <string name="desc_share">Share</string>
+   <string name="format_price_us_with_cents">$ %s,00</string>
+   <string name="price_stub">$ XX,XX</string>
 </resources>

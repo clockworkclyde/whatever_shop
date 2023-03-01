@@ -7,13 +7,14 @@ import com.github.clockworkclyde.core.common.FlowResult
 import com.github.clockworkclyde.core.dto.Result
 import com.github.clockworkclyde.core.dto.UEvent
 import com.github.clockworkclyde.core.presentation.viewmodels.BaseFlowViewModel
-import com.github.clockworkclyde.core.utils.get
-import com.github.clockworkclyde.core.utils.loadingResult
-import com.github.clockworkclyde.core.utils.onEventFlow
+import com.github.clockworkclyde.core.utils.*
 import com.github.clockworkclyde.domain.model.product.ProductDetails
 import com.github.clockworkclyde.domain.usecases.details.GetProductDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,6 +54,12 @@ class ProductDetailsViewModel @Inject constructor(
    val quantity = MutableStateFlow(INITIAL_QUANTITY)
    val selectedColor = MutableStateFlow(INITIAL_COLOR_INDEX)
 
+   val totalPrice by lazy {
+      item.combine(quantity) { item, quantity ->
+         item?.price.orDefault() * quantity
+      }.stateIn(viewModelScope, SharingStarted.Eagerly, INITIAL_TOTAL_PRICE)
+   }
+
    fun onMoreButtonClicked() {
       quantity.value.let {
          if (it < 25) {
@@ -73,6 +80,7 @@ class ProductDetailsViewModel @Inject constructor(
    }
 
    companion object {
+      const val INITIAL_TOTAL_PRICE = 0
       const val INITIAL_QUANTITY = 1
       const val INITIAL_COLOR_INDEX = 0
    }
