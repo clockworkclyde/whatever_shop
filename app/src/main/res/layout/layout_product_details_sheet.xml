@@ -104,18 +104,18 @@
           tools:ignore="SmallSp" />
 
       <TextView
-          android:id="@+id/positionNumberBtnTV"
+          android:id="@+id/totalPriceTV"
           style="@style/TextViewStyle.Content.Default"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:elevation="3dp"
-          android:text="@string/btn_position_number"
           android:textColor="@color/base_secondary"
           android:textStyle="bold"
           app:layout_constraintBottom_toBottomOf="@id/addToCartBtn"
           app:layout_constraintEnd_toEndOf="@id/btnCenterVertical"
           app:layout_constraintStart_toStartOf="@id/centerVertical"
-          app:layout_constraintTop_toTopOf="@id/addToCartBtn" />
+          app:layout_constraintTop_toTopOf="@id/addToCartBtn"
+          tools:text="@string/btn_position_number" />
 
       <TextView
           style="@style/TextViewStyle.Content.Default"
