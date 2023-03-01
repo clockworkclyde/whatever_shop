@@ -40,16 +40,16 @@ class InternalStorageProvider @Inject constructor(
          }
          loadPhotoFromInternalStorage(filename)
       } catch (e: Exception) {
-         e.printStackTrace()
+         Timber.e(e)
          errorResult(message = e.message, exception = e)
       }
    }
 
    override suspend fun deletePhotoFromInternalStorage(filename: String): Result<Boolean> {
       return try {
-         context.deleteFile("$filename.jpg").toSuccessResult().also { Timber.e(it.data.toString()) }
+         context.deleteFile("$filename.jpg").toSuccessResult()
       } catch (e: java.lang.Exception) {
-         e.printStackTrace()
+         Timber.e(e)
          errorResult(message = e.message, exception = e)
       }
    }

@@ -2,6 +2,7 @@ package com.github.clockworkclyde.data.models.dto
 
 import com.github.clockworkclyde.core.common.IConvertableTo
 import com.github.clockworkclyde.domain.model.product.ProductDetails
+import com.github.clockworkclyde.domain.model.product.ProductPhoto
 import com.google.gson.annotations.SerializedName
 
 data class ProductDetailsDto(
@@ -22,7 +23,7 @@ data class ProductDetailsDto(
          reviewsCount = reviewsCount,
          price = price,
          colors = colors,
-         imageUrls = imageUrls
+         imageUrls = imageUrls.map { ProductPhoto(it) }
       )
    }
 }

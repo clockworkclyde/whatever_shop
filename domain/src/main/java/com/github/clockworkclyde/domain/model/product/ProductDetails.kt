@@ -7,5 +7,5 @@ data class ProductDetails(
    val reviewsCount: Int,
    val price: Int,
    val colors: List<String>,
-   val imageUrls: List<String>
+   val imageUrls: List<ProductPhoto>
 )

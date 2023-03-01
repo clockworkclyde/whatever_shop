@@ -12,12 +12,15 @@
        xmlns:app="http://schemas.android.com/apk/res-auto"
        xmlns:tools="http://schemas.android.com/tools"
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
+       android:layout_height="match_parent"
+       android:paddingBottom="@dimen/frag_padding_bottom">
 
       <androidx.viewpager2.widget.ViewPager2
           android:id="@+id/photosPager"
-          android:layout_width="328dp"
-          android:layout_height="278dp"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:orientation="horizontal"
+          app:layout_constraintDimensionRatio="1:1"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +39,7 @@
       <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:padding="24dp"
+          android:padding="@dimen/padding_content_default"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/thumbnailRV">
@@ -46,19 +49,19 @@
              style="@style/TextViewStyle.Content.Title"
              android:layout_width="0dp"
              android:layout_height="wrap_content"
+             android:text="@{viewModel.item.name}"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toTopOf="parent"
-             android:text="@{viewModel.item.name}"
              tools:text="New balance \nSneakers" />
 
          <TextView
              android:id="@+id/descriptionTV"
              style="@style/TextViewStyle.Content.Default"
              android:layout_width="0dp"
-             android:text="@{viewModel.item.description}"
              android:layout_height="wrap_content"
              android:layout_marginTop="4dp"
+             android:text="@{viewModel.item.description}"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toBottomOf="@id/titleTV"
@@ -75,13 +78,13 @@
              app:layout_constraintTop_toBottomOf="@id/descriptionTV" />
 
          <TextView
-             android:text="@{Double.toString(viewModel.item.rating)}"
              android:id="@+id/ratingTV"
              style="@style/TextViewStyle.Content.Bold"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginStart="4dp"
              android:paddingTop="2dp"
+             android:text="@{Double.toString(viewModel.item.rating)}"
              app:layout_constraintBottom_toBottomOf="@id/ratingIV"
              app:layout_constraintStart_toEndOf="@id/ratingIV"
              app:layout_constraintTop_toTopOf="@id/ratingIV"
@@ -94,10 +97,10 @@
              android:layout_height="wrap_content"
              android:layout_marginStart="4dp"
              android:paddingTop="2dp"
+             android:text="@{String.format(`(%s reviews)`, Integer.toString(viewModel.item.reviewsCount))}"
              app:layout_constraintBottom_toBottomOf="@id/ratingIV"
              app:layout_constraintStart_toEndOf="@id/ratingTV"
              app:layout_constraintTop_toTopOf="@id/ratingIV"
-             android:text="@{String.format(`(%s reviews)`, Integer.toString(viewModel.item.reviewsCount))}"
              tools:text="(4000 reviews)" />
 
          <TextView

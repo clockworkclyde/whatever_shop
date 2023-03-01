@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import com.github.clockworkclyde.core.dto.Result
 import com.github.clockworkclyde.core.presentation.viewmodels.BaseFlowViewModel
 import com.github.clockworkclyde.core.utils.launchAndRepeatOnState
@@ -34,6 +36,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseFlowViewModel>
 
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
+      setUpOnBackPressHandler()
       initViews()
       handleResultError()
    }
@@ -43,6 +46,24 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseFlowViewModel>
    override fun initBinding(binding: V) = Unit
 
    override fun handleResultError() = Unit
+
+   protected open fun setUpOnBackPressHandler() {
+      requireActivity().onBackPressedDispatcher.addCallback(
+         viewLifecycleOwner,
+         onBackPressedCallback
+      )
+   }
+
+   override val onBackPressAllowed: Boolean
+      get() = true
+
+   protected open val onBackPressedCallback by lazy {
+      object : OnBackPressedCallback(onBackPressAllowed) {
+         override fun handleOnBackPressed() {
+            findNavController().popBackStack()
+         }
+      }
+   }
 
    override fun onDestroyView() {
       super.onDestroyView()

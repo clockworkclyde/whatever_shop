@@ -49,22 +49,31 @@ class ProductDetailsViewModel @Inject constructor(
       processEvent(UEvent.Fetch)
    }
 
-   val quantity = MutableStateFlow(VALUE_INITIAL_QUANTITY)
+   val quantity = MutableStateFlow(INITIAL_QUANTITY)
+   val selectedColor = MutableStateFlow(INITIAL_COLOR_INDEX)
 
    fun onMoreButtonClicked() {
-      quantity.value = quantity.value.inc()
+      quantity.value.let {
+         if (it < 25) {
+            quantity.value = it.inc()
+         }
+      }
    }
 
    fun onLessButtonClicked() {
-      quantity.value = quantity.value.dec()
+      quantity.value.let {
+         if (it > 1)
+            quantity.value = it.dec()
+      }
    }
 
    fun onColorClicked(index: Int, color: String) {
-
+      selectedColor.value = index
    }
 
    companion object {
-      const val VALUE_INITIAL_QUANTITY = 1
+      const val INITIAL_QUANTITY = 1
+      const val INITIAL_COLOR_INDEX = 0
    }
 
 }

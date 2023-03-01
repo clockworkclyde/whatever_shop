@@ -16,6 +16,16 @@ class ProductBottomSheetLayout: BaseFragment<LayoutProductDetailsSheetBinding, P
       binding.viewModel = viewModel
    }
 
+   override fun initViews() {
+      observeQuantity()
+   }
+
+   private fun observeQuantity() {
+      viewModel.quantity.collectWhileStarted {
+         binding.quantityTV.text = it.toString()
+      }
+   }
+
    companion object {
       fun newInstance() = ProductBottomSheetLayout()
    }
