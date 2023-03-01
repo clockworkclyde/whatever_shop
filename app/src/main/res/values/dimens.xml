@@ -13,4 +13,5 @@
    <dimen name="frag_padding_bottom">28dp</dimen>
    <dimen name="frag_padding_bottom_double">56dp</dimen>
    <dimen name="padding_content_default">24dp</dimen>
+   <dimen name="radius_details_thumbnail">6dp</dimen>
 </resources>

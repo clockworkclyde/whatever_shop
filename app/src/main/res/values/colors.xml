@@ -32,4 +32,6 @@
    <color name="bg_nav_tab_selected">#EEEFF4</color>
    <color name="bg_details_bottom_sheet">#181726</color>
    <color name="stroke_product_color">#ADADAD</color>
+   <color name="bg_details_share_favorites">#E5E9EF</color>
+   <color name="stroke_details_thumbnail">#EBEBEB</color>
 </resources>

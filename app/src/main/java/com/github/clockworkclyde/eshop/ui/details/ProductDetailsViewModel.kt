@@ -42,7 +42,8 @@ class ProductDetailsViewModel @Inject constructor(
    }
 
    fun onAddToCartClicked() {
-
+      val quantity = quantity.value
+      val item = item.value
    }
 
    fun onRetryClicked() {
@@ -75,5 +76,4 @@ class ProductDetailsViewModel @Inject constructor(
       const val INITIAL_QUANTITY = 1
       const val INITIAL_COLOR_INDEX = 0
    }
-
 }

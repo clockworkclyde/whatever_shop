@@ -2,27 +2,24 @@ package com.github.clockworkclyde.eshop.ui.details
 
 import android.graphics.Color
 import android.os.Bundle
-import android.transition.Slide
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.github.clockworkclyde.core.presentation.fragments.BaseFragment
-import com.github.clockworkclyde.core.utils.applyIfError
-import com.github.clockworkclyde.core.utils.applyIfLoading
-import com.github.clockworkclyde.core.utils.applyIfSuccess
-import com.github.clockworkclyde.core.utils.safeClick
+import com.github.clockworkclyde.core.utils.*
 import com.github.clockworkclyde.domain.model.product.ProductPhoto
 import com.github.clockworkclyde.eshop.R
 import com.github.clockworkclyde.eshop.databinding.FragmentProductDetailsBinding
 import com.github.clockworkclyde.eshop.databinding.ItemProductColorBinding
-import com.github.clockworkclyde.eshop.ui.details.adapters.ProductDetailsAdapter
+import com.github.clockworkclyde.eshop.ui.details.adapters.ProductPhotoAdapter
 import com.github.clockworkclyde.eshop.ui.details.adapters.ProductPhotoProgress
+import com.github.clockworkclyde.eshop.ui.details.adapters.ProductThumbnailAdapter
 import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,8 +29,14 @@ class ProductDetailsFragment :
 
    override val viewModel: ProductDetailsViewModel by viewModels({ this@ProductDetailsFragment })
 
+   private var currentPage: Int = DEFAULT_PAGE
+
    private val photoAdapter by lazy {
-      ProductDetailsAdapter(::onPhotoClick)
+      ProductPhotoAdapter(::onPhotoClick)
+   }
+
+   private val thumbnailAdapter by lazy {
+      ProductThumbnailAdapter(::onThumbnailClick)
    }
 
    private val currentChildFragment: Fragment?
@@ -47,6 +50,7 @@ class ProductDetailsFragment :
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
       lifecycle.addObserver(viewModel)
+      currentPage = savedInstanceState?.getInt(KEY_PAGE) ?: DEFAULT_PAGE
    }
 
    override fun initBinding(binding: FragmentProductDetailsBinding) {
@@ -55,9 +59,16 @@ class ProductDetailsFragment :
    }
 
    override fun initViews() {
+      initToolbar()
       setUpBottomSheet()
+      observePhotoItems()
+      setUpThumbnailList()
       setUpPhotoList()
       setUpColorList()
+   }
+
+   private fun initToolbar() {
+      binding.toolbarLayout.setNavigationOnClickListener { findNavController().navigateUp() }
    }
 
    private fun setUpBottomSheet() {
@@ -75,12 +86,46 @@ class ProductDetailsFragment :
 
    private fun setUpPhotoList() {
       binding.photosPager.adapter = photoAdapter
+      binding.photosPager.apply {
+         //selectPhoto(currentPage)
+         registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+               super.onPageSelected(position)
+               currentPage = position
+               selectThumbnail(position)
+            }
+         })
+      }
+   }
+
+   private fun observePhotoItems() {
       viewModel.resultFlow.collectWhileStarted { detailsResult ->
          detailsResult
-            .applyIfLoading { photoAdapter.items = listOf(ProductPhotoProgress) }
-            .applyIfSuccess { photoAdapter.items = it.imageUrls }
-            .applyIfError { photoAdapter.items = listOf(ProductPhotoProgress) }
+            .applyIfLoading {
+               photoAdapter.items = listOf(ProductPhotoProgress)
+               thumbnailAdapter.clear()
+            }
+            .applyIfSuccess {
+               photoAdapter.items = it.imageUrls
+               thumbnailAdapter.items = it.imageUrls
+            }
+            .applyIfError {
+               photoAdapter.items = listOf(ProductPhotoProgress)
+               thumbnailAdapter.clear()
+            }
       }
+   }
+
+   private fun setUpThumbnailList() {
+      binding.thumbnailRV.adapter = thumbnailAdapter
+      binding.thumbnailRV.apply {
+         setInfinite(false)
+         set3DItem(false)
+         setIntervalRatio(0.72f)
+         setAlpha(false)
+         setFlat(false)
+      }
+      //selectThumbnail(currentPage)
    }
 
    private fun setUpColorList() {
@@ -118,5 +163,31 @@ class ProductDetailsFragment :
 
    private fun onPhotoClick(index: Int, item: ProductPhoto) {
 
+   }
+
+   private fun onThumbnailClick(index: Int, item: ProductPhoto) {
+      selectThumbnail(index)
+      selectPhoto(index)
+      currentPage = index
+   }
+
+   private fun selectThumbnail(index: Int) {
+      binding.thumbnailRV.getCarouselLayoutManager().apply {
+         smoothScrollToPosition(binding.thumbnailRV, RecyclerView.State(), index)
+      }
+   }
+
+   private fun selectPhoto(index: Int, smooth: Boolean = false) {
+      binding.photosPager.setCurrentItem(index, smooth)
+   }
+
+   override fun onSaveInstanceState(outState: Bundle) {
+      super.onSaveInstanceState(outState)
+      outState.putInt(KEY_PAGE, currentPage)
+   }
+
+   companion object {
+      private const val KEY_PAGE = "current_page"
+      private const val DEFAULT_PAGE = 0
    }
 }

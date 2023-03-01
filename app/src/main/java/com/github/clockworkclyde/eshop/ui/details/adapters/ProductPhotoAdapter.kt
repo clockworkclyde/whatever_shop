@@ -13,7 +13,7 @@ import com.github.clockworkclyde.eshop.databinding.ItemProductDetailsPhotoProgre
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
-class ProductDetailsAdapter(
+class ProductPhotoAdapter(
    onItemClickListener: (Int, ProductPhoto) -> Unit
 ) : AsyncListDifferDelegationAdapter<ListItem>(BaseDiffUtilCallback()) {
 

@@ -2,7 +2,7 @@
 <layout>
 
    <data>
-
+      <import type="android.view.View"/>
       <variable
           name="viewModel"
           type="com.github.clockworkclyde.eshop.ui.details.ProductDetailsViewModel" />
@@ -15,31 +15,82 @@
        android:layout_height="match_parent"
        android:paddingBottom="@dimen/frag_padding_bottom">
 
-      <androidx.viewpager2.widget.ViewPager2
-          android:id="@+id/photosPager"
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/toolbarLayout"
           android:layout_width="match_parent"
-          android:layout_height="0dp"
-          android:orientation="horizontal"
-          app:layout_constraintDimensionRatio="1:1"
+          android:layout_height="?attr/actionBarSize"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
+          app:layout_constraintTop_toTopOf="parent"
+          app:navigationIcon="@drawable/ic_arrow_back" />
 
-      <androidx.recyclerview.widget.RecyclerView
+      <androidx.viewpager2.widget.ViewPager2
+          android:id="@+id/photosPager"
+          android:layout_width="328dp"
+          android:layout_height="278dp"
+          android:orientation="horizontal"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/toolbarLayout" />
+
+      <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
           android:id="@+id/thumbnailRV"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginTop="36dp"
+          android:clipToPadding="false"
           android:orientation="horizontal"
           app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/photosPager" />
 
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="24dp"
+          android:background="@drawable/bg_details_panel"
+          android:gravity="center_horizontal"
+          android:orientation="vertical"
+          android:paddingHorizontal="12dp"
+          android:paddingVertical="16dp"
+          app:layout_constraintBottom_toBottomOf="@id/photosPager"
+          app:layout_constraintEnd_toEndOf="@id/photosPager"
+          app:layout_constraintStart_toEndOf="@id/photosPager">
+
+         <ImageButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:background="@android:color/transparent"
+             android:contentDescription="@string/desc_share"
+             android:padding="4dp"
+             android:src="@drawable/ic_favorites" />
+
+         <ImageView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="16dp"
+             android:contentDescription="@null"
+             android:src="@drawable/ic_small_divider" />
+
+         <ImageButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="16dp"
+             android:background="@android:color/transparent"
+             android:contentDescription="@string/desc_add_to_favorites"
+             android:padding="4dp"
+             android:src="@drawable/ic_share" />
+
+      </LinearLayout>
+
       <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:padding="@dimen/padding_content_default"
+          android:paddingStart="@dimen/padding_content_default"
+          android:paddingTop="16dp"
+          android:paddingEnd="@dimen/padding_content_default"
+          android:paddingBottom="@dimen/padding_content_default"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/thumbnailRV">
@@ -54,6 +105,16 @@
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toTopOf="parent"
              tools:text="New balance \nSneakers" />
+
+         <TextView
+             android:id="@+id/priceTV"
+             style="@style/TextViewStyle.Content.Title"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@{String.format(`$ %s,00`, Integer.toString(viewModel.item.price))}"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             tools:text="$ 22,50" />
 
          <TextView
              android:id="@+id/descriptionTV"
@@ -104,6 +165,7 @@
              tools:text="(4000 reviews)" />
 
          <TextView
+             android:visibility="@{viewModel.item.colors.empty ? View.INVISIBLE : View.VISIBLE }"
              android:id="@+id/prodColorTV"
              style="@style/TextViewStyle.Content.Default"
              android:layout_width="wrap_content"
