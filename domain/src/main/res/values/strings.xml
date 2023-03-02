@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <string name="invalid_email_error">Некорректный формат почты</string>
+   <string name="empty_input_error">Поле не может быть пустым</string>
+   <string name="cat_phones">Phones</string>
+   <string name="cat_headphones">Headphones</string>
+   <string name="cat_games">Games</string>
+   <string name="cat_cars">Cars</string>
+   <string name="cat_furniture">Furniture</string>
+   <string name="cat_kids">Kids</string>
+   <string name="error_logout_with_email">Произошла ошибка, пожалуйста войдите заново в аккаунт</string>
+</resources>

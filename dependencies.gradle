@@ -1,0 +1,61 @@
+ext.versions = [
+        kotlinCoreKtx   : '1.9.0',
+        retrofit        : '2.9.0',
+        glide           : '4.13.2',
+        adapterDelegates: '4.3.2',
+        dagger          : '2.42',
+        lifecycle       : '2.4.0',
+        navigation      : '2.4.2',
+        kotPref         : '2.13.1',
+]
+
+ext.libs = [
+        kotlinCoreKtx              : "androidx.core:core-ktx:${versions.kotlinCoreKtx}",
+        appCompat                  : "androidx.appcompat:appcompat:1.6.1",
+        material                   : "com.google.android.material:material:1.8.0",
+        constraintLayout           : "androidx.constraintlayout:constraintlayout:2.1.4",
+
+        // Network
+        retrofit                   : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+        gson                       : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+        okhttpLogging              : "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2",
+        coroutinesAdapterRetrofit  : "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2",
+
+        //Glide
+        glide                      : "com.github.bumptech.glide:glide:${versions.glide}",
+        glideKapt                  : "com.github.bumptech.glide:compiler:${versions.glide}",
+
+        // Adapter Delegates
+        adapterDelegates           : "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:$versions.adapterDelegates",
+        adapterDelegatesViewBinding: "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$versions.adapterDelegates",
+
+        // DI
+        dagger                     : "com.google.dagger:hilt-android:${versions.dagger}",
+        daggerKapt                 : "com.google.dagger:hilt-compiler:${versions.dagger}",
+
+        // Android Ktx
+        viewModelKtx               : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}",
+        lifecycleKtx               : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}",
+
+        // Timber logger
+        timber                     : "com.jakewharton.timber:timber:5.0.1",
+
+        // Navigation Component
+        navigationUiFragmentKtx    : "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
+        navigationUiKtx            : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
+
+        // Room db
+        room                       : "androidx.room:room-runtime:2.5.0",
+        roomKapt                   : "androidx.room:room-compiler:2.5.0",
+        roomKtx                    : "androidx.room:room-ktx:2.5.0",
+
+        // Kotlin delegate shared preferences
+        kotPref                    : "com.chibatching.kotpref:kotpref:$versions.kotPref",
+        kotPrefLD                  : "com.chibatching.kotpref:livedata-support:$versions.kotPref",
+
+        // Livedata
+        livedataKtx : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle",
+
+        // Carousel
+        carouselRV                 : "com.github.sparrow007:carouselrecyclerview:1.2.6"
+]

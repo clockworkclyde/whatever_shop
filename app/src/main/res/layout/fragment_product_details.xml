@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+   <data>
+
+      <import type="android.view.View" />
+
+      <variable
+          name="viewModel"
+          type="com.github.clockworkclyde.eshop.ui.details.ProductDetailsViewModel" />
+   </data>
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:paddingBottom="@dimen/frag_padding_bottom">
+
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/toolbarLayout"
+          android:layout_width="match_parent"
+          android:layout_height="?attr/actionBarSize"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:navigationIcon="@drawable/ic_arrow_back" />
+
+      <ScrollView
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:orientation="vertical"
+          app:layout_constraintBottom_toTopOf="@id/bottomSheetLayout"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/toolbarLayout">
+
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/photosPager"
+                android:layout_width="328dp"
+                android:layout_height="278dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/bg_img_progress" />
+
+            <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                android:id="@+id/thumbnailRV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="true"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/photosPager" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_details_panel"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/photosPager"
+                app:layout_constraintEnd_toEndOf="@id/photosPager"
+                app:layout_constraintStart_toEndOf="@id/photosPager">
+
+               <ImageButton
+                   android:id="@+id/favoriteBtn"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:background="@android:color/transparent"
+                   android:contentDescription="@string/desc_add_to_favorites"
+                   android:padding="4dp"
+                   tools:src="@drawable/ic_favorites_empty"
+                   android:safeClick="@{viewModel::onFavoriteClicked}"
+                   android:src="@{viewModel.isProductContainsFavorites() ? @drawable/ic_favorites_filled : @drawable/ic_favorites_empty }" />
+
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="16dp"
+                   android:contentDescription="@null"
+                   android:src="@drawable/ic_small_divider" />
+
+               <ImageButton
+                   android:id="@+id/shareBtn"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="16dp"
+                   android:background="@android:color/transparent"
+                   android:contentDescription="@string/desc_share"
+                   android:padding="4dp"
+                   android:src="@drawable/ic_share" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/padding_content_default"
+                android:paddingTop="8dp"
+                android:paddingEnd="@dimen/padding_content_default"
+                android:paddingBottom="@dimen/padding_content_default"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/thumbnailRV">
+
+               <TextView
+                   android:id="@+id/titleTV"
+                   style="@style/TextViewStyle.Content.Title"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:text="@{viewModel.item.name}"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent"
+                   tools:text="New balance \nSneakers" />
+
+               <TextView
+                   android:id="@+id/priceTV"
+                   style="@style/TextViewStyle.Content.Title"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@{String.format(`$ %s,00`, Integer.toString(viewModel.item.price))}"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="parent"
+                   tools:text="$ 22,50" />
+
+               <TextView
+                   android:id="@+id/descriptionTV"
+                   style="@style/TextViewStyle.Content.Default"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="4dp"
+                   android:text="@{viewModel.item.description}"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@id/titleTV"
+                   tools:text="Features waterproof, fire, air resistant shoes. all changed when the country of fire attacked" />
+
+               <ImageView
+                   android:id="@+id/ratingIV"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="12dp"
+                   android:contentDescription="@null"
+                   android:src="@drawable/ic_rating_star"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@id/descriptionTV" />
+
+               <TextView
+                   android:id="@+id/ratingTV"
+                   style="@style/TextViewStyle.Content.Bold"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="4dp"
+                   android:paddingTop="2dp"
+                   android:text="@{Double.toString(viewModel.item.rating)}"
+                   app:layout_constraintBottom_toBottomOf="@id/ratingIV"
+                   app:layout_constraintStart_toEndOf="@id/ratingIV"
+                   app:layout_constraintTop_toTopOf="@id/ratingIV"
+                   tools:text="3.9" />
+
+               <TextView
+                   android:id="@+id/reviewsCountTV"
+                   style="@style/TextViewStyle.Content.Default"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="4dp"
+                   android:paddingTop="2dp"
+                   android:text="@{String.format(`(%s reviews)`, Integer.toString(viewModel.item.reviewsCount))}"
+                   app:layout_constraintBottom_toBottomOf="@id/ratingIV"
+                   app:layout_constraintStart_toEndOf="@id/ratingTV"
+                   app:layout_constraintTop_toTopOf="@id/ratingIV"
+                   tools:text="(4000 reviews)" />
+
+               <TextView
+                   android:id="@+id/prodColorTV"
+                   style="@style/TextViewStyle.Content.Default"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="12dp"
+                   android:text="@string/color"
+                   android:textStyle="bold"
+                   android:visibility="@{viewModel.item.colors.empty ? View.INVISIBLE : View.VISIBLE }"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@id/ratingIV" />
+
+               <LinearLayout
+                   android:id="@+id/colorsLayout"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="12dp"
+                   android:orientation="horizontal"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@id/prodColorTV" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+         </androidx.constraintlayout.widget.ConstraintLayout>
+      </ScrollView>
+
+      <FrameLayout
+          android:id="@+id/bottomSheetLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent" />
+   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

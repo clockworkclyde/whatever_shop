@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
    <!-- Base application theme. -->
-   <style name="Theme.Eshop" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+   <style name="Theme.Eshop" parent="Theme.MaterialComponents.DayNight.NoActionBar">
       <!-- Primary brand color. -->
       <item name="colorPrimary">@color/purple_500</item>
       <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -11,6 +11,138 @@
       <item name="colorOnSecondary">@color/black</item>
       <!-- Status bar color. -->
       <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+      <item name="android:editTextColor">@null</item>
       <!-- Customize your theme here. -->
    </style>
+
+
+   <style name="TextViewStyle" parent="Widget.MaterialComponents.TextView">
+      <item name="fontFamily">@font/mon_regular</item>
+   </style>
+
+   <style name="TextViewStyle.Default" parent="Widget.MaterialComponents.TextView">
+      <item name="fontFamily">@font/mon_medium</item>
+      <item name="android:textColor">@color/base_light_black</item>
+      <item name="android:textSize">15sp</item>
+   </style>
+
+   <style name="TextViewStyle.Title">
+      <item name="android:textSize">26sp</item>
+      <item name="android:textColor">@color/base_light_black</item>
+      <item name="fontFamily">@font/mon_bold</item>
+   </style>
+
+   <style name="TextViewStyle.Small" parent="Widget.MaterialComponents.TextView">
+      <item name="fontFamily">@font/mon_regular</item>
+      <item name="android:textSize">8sp</item>
+      <item name="android:textColor">#808080</item>
+   </style>
+
+   <style name="TextViewStyle.Title.Medium" parent="TextViewStyle.Title">
+      <item name="android:textSize">17sp</item>
+   </style>
+
+   <style name="TextViewStyle.ButtonText">
+      <item name="android:textSize">14sp</item>
+      <item name="android:textColor">@color/base_light_gray</item>
+   </style>
+
+   <style name="TextViewStyle.ButtonText.Quantity">
+      <item name="android:textSize">8sp</item>
+      <item name="android:textColor">@color/white</item>
+   </style>
+
+   <style name="TextViewStyle.Content.Title" parent="TextViewStyle.Title">
+      <item name="android:textSize">17sp</item>
+      <item name="fontFamily">@font/pop_semi_bold</item>
+      <item name="android:textStyle">bold</item>
+   </style>
+
+   <style name="TextViewStyle.Content.Default" parent="TextViewStyle">
+      <item name="android:textSize">9sp</item>
+      <item name="fontFamily">@font/pop_regular</item>
+   </style>
+
+   <style name="TextViewStyle.Content.Bold" parent="TextViewStyle">
+      <item name="android:textSize">9sp</item>
+      <item name="fontFamily">@font/pop_semi_bold</item>
+      <item name="android:textStyle">bold</item>
+      <item name="android:textColor">@color/base_black</item>
+   </style>
+
+   <style name="TextViewStyle.TextInput">
+      <item name="fontFamily">@font/mon_medium</item>
+      <item name="android:textColor">@color/base_dark_gray</item>
+      <item name="android:textSize">10sp</item>
+   </style>
+
+   <style name="PrimaryRoundedButton" parent="TextAppearance.MaterialComponents.Button">
+      <item name="android:textAppearance">@style/TextViewStyle.ButtonText</item>
+      <item name="android:elevation">0dp</item>
+      <item name="android:paddingTop">@dimen/button_inner_padding</item>
+      <item name="android:paddingBottom">@dimen/button_inner_padding</item>
+      <item name="android:textColor">@color/text_primary_button</item>
+      <item name="cornerRadius">@dimen/bg_button_radius</item>
+      <item name="android:textAllCaps">false</item>
+      <item name="backgroundTint">@color/selector_primary_button</item>
+   </style>
+
+   <style name="QuantityRoundedButton" parent="PrimaryRoundedButton">
+      <item name="android:textAppearance">@style/TextViewStyle.ButtonText.Quantity</item>
+      <item name="android:elevation">0dp</item>
+      <item name="minHeight">0dp</item>
+      <item name="minWidth">0dp</item>
+      <item name="android:textColor">@color/text_primary_button</item>
+      <item name="cornerRadius">8dp</item>
+      <item name="android:textAllCaps">false</item>
+      <item name="backgroundTint">@color/selector_primary_button</item>
+   </style>
+
+   <style name="TextInputStyle">
+      <item name="android:paddingStart">8dp</item>
+      <item name="android:paddingEnd">8dp</item>
+      <item name="android:gravity">center</item>
+      <item name="android:textAppearance">@style/TextViewStyle.TextInput</item>
+      <item name="android:background">@drawable/bg_text_input</item>
+      <item name="android:layout_height">32dp</item>
+   </style>
+
+   <style name="SearchTextInputStyle">
+      <item name="android:paddingStart">8dp</item>
+      <item name="android:paddingEnd">8dp</item>
+      <item name="android:gravity">center</item>
+      <item name="android:textAppearance">@style/TextViewStyle.TextInput</item>
+      <item name="android:background">@drawable/bg_search_input</item>
+      <item name="android:layout_height">32dp</item>
+   </style>
+
+   <style name="TextViewStyle.CategoriesCard">
+      <item name="android:textColor">@color/white</item>
+      <item name="android:fontFamily">@font/pop_extra_bold</item>
+      <item name="android:textStyle">bold</item>
+   </style>
+
+   <style name="TextViewStyle.CategoryLabel">
+      <item name="android:textColor">@color/white</item>
+      <item name="android:fontFamily">@font/pop_extralight</item>
+      <item name="android:textStyle">bold</item>
+   </style>
+
+   <style name="TextViewStyle.CommonCategoryTitle">
+      <item name="android:textColor">@color/txt_common_category</item>
+      <item name="android:textSize">8sp</item>
+      <item name="android:fontFamily">@font/pop_extralight</item>
+   </style>
+
+   <style name="BottomNavigationStyle">
+      <item name="android:background">@drawable/bg_bottom_nav</item>
+      <item name="backgroundTint">@null</item>
+      <item name="elevation">8dp</item>
+      <item name="itemBackground">@drawable/bottom_navigation_item_bg</item>
+      <item name="android:minHeight">63dp</item>
+      <item name="enforceTextAppearance">true</item>
+      <item name="enforceMaterialTheme">true</item>
+      <item name="labelVisibilityMode">unlabeled</item>
+   </style>
+
 </resources>

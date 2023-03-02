@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/host_nav_graph"
+    app:startDestination="@id/signInFragment">
+
+   <fragment
+       android:id="@+id/signInFragment"
+       android:name="com.github.clockworkclyde.eshop.ui.auth.SignInFragment"
+       android:label="@string/sign_in"
+       tools:layout="@layout/fragment_sign_in">
+      <action
+          android:id="@+id/action_signInFragment_to_loginFragment"
+          app:destination="@id/loginFragment" />
+   </fragment>
+
+   <fragment
+       android:id="@+id/loginFragment"
+       android:name="com.github.clockworkclyde.eshop.ui.auth.LoginFragment"
+       android:label="@string/login"
+       tools:layout="@layout/fragment_login" />
+
+   <fragment
+       android:id="@+id/categoriesFragment"
+       android:name="com.github.clockworkclyde.eshop.ui.categories.ShopCategoriesFragment"
+       android:label="@string/catalog"
+       tools:layout="@layout/fragment_shop_categories">
+      <action
+          android:id="@+id/action_categoriesFragment_to_profileFragment"
+          app:destination="@id/profileFragment" />
+      <action
+          android:id="@+id/action_categoriesFragment_to_productDetailsFragment"
+          app:destination="@id/productDetailsFragment"
+          app:enterAnim="@anim/anim_enter_up"
+          app:exitAnim="@anim/anim_exit_down"
+          app:popEnterAnim="@anim/anim_enter_up"
+          app:popExitAnim="@anim/anim_exit_down" />
+   </fragment>
+
+   <fragment
+       android:id="@+id/profileFragment"
+       android:name="com.github.clockworkclyde.eshop.ui.profile.ProfileFragment"
+       android:label="@string/profile"
+       tools:layout="@layout/fragment_shop_categories" />
+   <action
+       android:id="@+id/action_to_signInFragment_cleared"
+       app:destination="@id/signInFragment"
+       app:popUpTo="@id/host_nav_graph"
+       app:popUpToInclusive="true" />
+   <action
+       android:id="@+id/action_to_categoriesFragment_cleared"
+       app:destination="@id/categoriesFragment"
+       app:launchSingleTop="true"
+       app:popUpTo="@id/host_nav_graph"
+       app:popUpToInclusive="true" />
+
+   <fragment
+       android:id="@+id/productDetailsFragment"
+       android:name="com.github.clockworkclyde.eshop.ui.details.ProductDetailsFragment"
+       android:label="ProductDetailsFragment"
+       tools:layout="@layout/fragment_product_details" />
+
+
+</navigation>

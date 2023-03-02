@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+   <data>
+
+      <variable
+          name="viewModel"
+          type="com.github.clockworkclyde.eshop.ui.auth.AuthViewModel" />
+
+   </data>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       android:paddingStart="44dp"
+       android:paddingTop="122dp"
+       android:paddingEnd="@dimen/padding_auth">
+
+      <TextView
+          style="@style/TextViewStyle.Title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:text="@string/title_login" />
+
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/emailTextInput"
+          style="@style/TextInputStyle"
+          android:layout_width="match_parent"
+          android:layout_marginTop="60dp"
+          android:hint="@string/hint_email"
+          android:inputType="textEmailAddress"
+          android:text="@{viewModel.email}" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="32dp"
+          android:orientation="horizontal">
+
+         <com.google.android.material.textfield.TextInputEditText
+             android:id="@+id/passwordTextInput"
+             style="@style/TextInputStyle"
+             android:layout_width="0dp"
+             android:hint="@string/hint_password"
+             android:inputType="textPassword"
+             android:text="@{viewModel.password}"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <ImageButton
+             android:id="@+id/imgBtnChangePasswordVisibility"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:backgroundTint="@android:color/transparent"
+             android:contentDescription="@string/show_or_hide_pass"
+             android:src="@drawable/ic_password_hidden_eye"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/stub"
+          style="@style/TextInputStyle"
+          android:layout_width="match_parent"
+          android:layout_marginTop="32dp"
+          android:visibility="invisible" />
+
+      <Button
+          android:id="@+id/btnSignIn"
+          style="@style/PrimaryRoundedButton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="32dp"
+          android:fontFamily="@font/mon_bold"
+          android:safeClick="@{viewModel::onLoginAttemptClicked}"
+          android:text="@string/btn_sign_in" />
+
+   </LinearLayout>
+</layout>

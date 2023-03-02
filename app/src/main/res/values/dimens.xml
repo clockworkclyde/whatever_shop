@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+   <dimen name="bg_button_radius">15dp</dimen>
+   <dimen name="bg_radius_text_input">15dp</dimen>
+   <dimen name="button_inner_padding">14dp</dimen>
+   <dimen name="padding_auth">44dp</dimen>
+   <dimen name="padding_horizontal_product_categories">12dp</dimen>
+   <dimen name="padding_vertical_product_categories">8dp</dimen>
+   <dimen name="product_card_radius">9dp</dimen>
+   <dimen name="large_product_card_radius">11dp</dimen>
+   <dimen name="radius_bottom_nav">38dp</dimen>
+   <dimen name="radius_details_sheet">@dimen/radius_bottom_nav</dimen>
+   <dimen name="frag_padding_bottom">28dp</dimen>
+   <dimen name="frag_padding_bottom_double">56dp</dimen>
+   <dimen name="padding_content_default">24dp</dimen>
+   <dimen name="radius_details_thumbnail">6dp</dimen>
+</resources>
