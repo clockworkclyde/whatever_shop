@@ -1,9 +1,11 @@
 package com.github.clockworkclyde.eshop.ui.details
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
@@ -65,6 +67,7 @@ class ProductDetailsFragment :
       setUpThumbnailList()
       setUpPhotoList()
       setUpColorList()
+      setUpShareClick()
    }
 
    private fun initToolbar() {
@@ -169,6 +172,19 @@ class ProductDetailsFragment :
       selectThumbnail(index)
       selectPhoto(index)
       currentPage = index
+   }
+
+   private fun setUpShareClick() {
+      binding.shareBtn.safeClick {
+         viewModel.item.value?.let {
+            val sendIntent = Intent().apply {
+               action = Intent.ACTION_SEND
+               putExtra(Intent.EXTRA_TEXT, it.toString())
+               type = "text/plain"
+            }
+            startActivity(Intent.createChooser(sendIntent, null))
+         }
+      }
    }
 
    private fun selectThumbnail(index: Int) {
