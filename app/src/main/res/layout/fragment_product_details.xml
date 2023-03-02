@@ -76,6 +76,7 @@
                 app:layout_constraintStart_toEndOf="@id/photosPager">
 
                <ImageButton
+                   android:id="@+id/favoriteBtn"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:background="@android:color/transparent"
@@ -93,6 +94,7 @@
                    android:src="@drawable/ic_small_divider" />
 
                <ImageButton
+                   android:id="@+id/shareBtn"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_marginTop="16dp"
