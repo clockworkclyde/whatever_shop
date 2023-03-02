@@ -1,4 +1,4 @@
-package com.github.clockworkclyde.eshop.ui.navigation
+package com.github.clockworkclyde.eshop.ui.bottomnav
 
 import android.os.Bundle
 import android.view.View

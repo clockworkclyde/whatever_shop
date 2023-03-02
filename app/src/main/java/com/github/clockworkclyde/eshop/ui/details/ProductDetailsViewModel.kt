@@ -9,20 +9,25 @@ import com.github.clockworkclyde.core.dto.UEvent
 import com.github.clockworkclyde.core.presentation.viewmodels.BaseFlowViewModel
 import com.github.clockworkclyde.core.utils.*
 import com.github.clockworkclyde.domain.model.product.ProductDetails
+import com.github.clockworkclyde.domain.usecases.details.AddProductToFavoritesUseCase
+import com.github.clockworkclyde.domain.usecases.details.CheckProductContainsFavoritesUseCase
 import com.github.clockworkclyde.domain.usecases.details.GetProductDetailsUseCase
+import com.github.clockworkclyde.domain.usecases.details.RemoveFavoriteProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailsViewModel @Inject constructor(
-   private val getProductDetails: GetProductDetailsUseCase
+   private val getProductDetails: GetProductDetailsUseCase,
+   private val addToFavorites: AddProductToFavoritesUseCase,
+   private val checkProductContainsFavorites: CheckProductContainsFavoritesUseCase,
+   private val removeFromFavorites: RemoveFavoriteProductUseCase,
 ) : BaseFlowViewModel(), DefaultLifecycleObserver {
 
-   val item by lazy {
+   val item: StateFlow<ProductDetails?> by lazy {
       resultFlow
          .filter { it is Result.Success }
          .distinctUntilChanged()
@@ -45,6 +50,7 @@ class ProductDetailsViewModel @Inject constructor(
    fun onAddToCartClicked() {
       val quantity = quantity.value
       val item = item.value
+      val selectedColor = item?.colors?.elementAtOrNull(selectedColor.value)
    }
 
    fun onRetryClicked() {
@@ -54,7 +60,7 @@ class ProductDetailsViewModel @Inject constructor(
    val quantity = MutableStateFlow(INITIAL_QUANTITY)
    val selectedColor = MutableStateFlow(INITIAL_COLOR_INDEX)
 
-   val totalPrice by lazy {
+   val totalPrice: StateFlow<Int> by lazy {
       item.combine(quantity) { item, quantity ->
          item?.price.orDefault() * quantity
       }.stateIn(viewModelScope, SharingStarted.Eagerly, INITIAL_TOTAL_PRICE)
@@ -77,6 +83,22 @@ class ProductDetailsViewModel @Inject constructor(
 
    fun onColorClicked(index: Int, color: String) {
       selectedColor.value = index
+   }
+
+   @OptIn(ExperimentalCoroutinesApi::class)
+   val isProductContainsFavorites: StateFlow<Boolean> by lazy {
+      item.flatMapLatest { item ->
+         checkProductContainsFavorites(item?.name)
+      }.stateIn(viewModelScope, SharingStarted.Lazily, false)
+   }
+
+   fun onFavoriteClicked() {
+      item.value?.let {
+         viewModelScope.launch {
+            if (!isProductContainsFavorites.value) addToFavorites.invoke(it.name)
+            else removeFromFavorites.invoke(it.name)
+         }
+      }
    }
 
    companion object {

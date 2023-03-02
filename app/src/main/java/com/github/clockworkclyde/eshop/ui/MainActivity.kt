@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import com.github.clockworkclyde.core.navigation.Navigator
 import com.github.clockworkclyde.core.presentation.activities.NavHostActivity
 import com.github.clockworkclyde.eshop.R
-import com.github.clockworkclyde.eshop.ui.navigation.BottomNavigationFragment
+import com.github.clockworkclyde.eshop.ui.bottomnav.BottomNavigationFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
