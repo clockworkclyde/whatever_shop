@@ -44,6 +44,7 @@
 
    <style name="TextViewStyle.ButtonText">
       <item name="android:textSize">14sp</item>
+      <item name="fontFamily">@font/mon_medium</item>
       <item name="android:textColor">@color/base_light_gray</item>
    </style>
 

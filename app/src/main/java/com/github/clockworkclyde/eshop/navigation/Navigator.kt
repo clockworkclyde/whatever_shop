@@ -1,8 +1,10 @@
-package com.github.clockworkclyde.core.navigation
+package com.github.clockworkclyde.eshop.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
+import com.github.clockworkclyde.core.common.NavigationHandler
+import com.github.clockworkclyde.core.navigation.INavigationEventHandler
+import com.github.clockworkclyde.core.navigation.INavigator
 import com.github.clockworkclyde.core.utils.safeNavigate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.BufferOverflow
@@ -10,8 +12,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
-
-typealias NavigationHandler = (NavController) -> Unit
 
 class Navigator @Inject constructor(
    private val coroutineScope: CoroutineScope
@@ -45,7 +45,7 @@ class Navigator @Inject constructor(
 
    init {
       coroutineScope.launch {
-         commands.collect { Timber.e("Navigation command was received to observers") }
+         commands.collect { Timber.d("Navigation command was received to observers") }
       }
    }
 }
