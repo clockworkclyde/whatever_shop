@@ -1,5 +1,6 @@
 package com.github.clockworkclyde.data
 
+import com.github.clockworkclyde.core.common.FlowList
 import com.github.clockworkclyde.data.sources.IPreferenceProvider
 import com.github.clockworkclyde.domain.repository.IPreferenceRepository
 import javax.inject.Inject
@@ -20,7 +21,11 @@ class PreferenceRepository @Inject constructor(
       return provider.saveAsFavorite(name)
    }
 
-   override fun getFavorites(): List<String> {
+   override fun removeFavorite(name: String): Boolean {
+      return provider.removeFavorite(name)
+   }
+
+   override fun getFavorites(): FlowList<String> {
       return provider.getFavorites()
    }
 }

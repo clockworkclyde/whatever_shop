@@ -42,12 +42,12 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/photosPager"
                 android:layout_width="328dp"
-                tools:background="@drawable/bg_img_progress"
                 android:layout_height="278dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/bg_img_progress" />
 
             <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                 android:id="@+id/thumbnailRV"
@@ -79,9 +79,11 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:background="@android:color/transparent"
-                   android:contentDescription="@string/desc_share"
+                   android:contentDescription="@string/desc_add_to_favorites"
                    android:padding="4dp"
-                   android:src="@drawable/ic_favorites" />
+                   tools:src="@drawable/ic_favorites_empty"
+                   android:safeClick="@{viewModel::onFavoriteClicked}"
+                   android:src="@{viewModel.isProductContainsFavorites() ? @drawable/ic_favorites_filled : @drawable/ic_favorites_empty }" />
 
                <ImageView
                    android:layout_width="wrap_content"
@@ -95,7 +97,7 @@
                    android:layout_height="wrap_content"
                    android:layout_marginTop="16dp"
                    android:background="@android:color/transparent"
-                   android:contentDescription="@string/desc_add_to_favorites"
+                   android:contentDescription="@string/desc_share"
                    android:padding="4dp"
                    android:src="@drawable/ic_share" />
 

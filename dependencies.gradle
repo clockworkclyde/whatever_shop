@@ -51,6 +51,10 @@ ext.libs = [
 
         // Kotlin delegate shared preferences
         kotPref                    : "com.chibatching.kotpref:kotpref:$versions.kotPref",
+        kotPrefLD                  : "com.chibatching.kotpref:livedata-support:$versions.kotPref",
+
+        // Livedata
+        livedataKtx : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle",
 
         // Carousel
         carouselRV                 : "com.github.sparrow007:carouselrecyclerview:1.2.6"

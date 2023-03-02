@@ -46,11 +46,12 @@ dependencies {
     api libs.gson
     api libs.okhttpLogging
     api libs.coroutinesAdapterRetrofit
-
     implementation libs.room
     kapt libs.roomKapt
     implementation libs.roomKtx
     implementation libs.kotPref
+    implementation libs.kotPrefLD
+    implementation libs.livedataKtx
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

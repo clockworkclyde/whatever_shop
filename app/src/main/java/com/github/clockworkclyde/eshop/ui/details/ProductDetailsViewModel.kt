@@ -14,6 +14,7 @@ import com.github.clockworkclyde.domain.usecases.details.CheckProductContainsFav
 import com.github.clockworkclyde.domain.usecases.details.GetProductDetailsUseCase
 import com.github.clockworkclyde.domain.usecases.details.RemoveFavoriteProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,7 +23,7 @@ import javax.inject.Inject
 class ProductDetailsViewModel @Inject constructor(
    private val getProductDetails: GetProductDetailsUseCase,
    private val addToFavorites: AddProductToFavoritesUseCase,
-   private val isProductContainsInFavorites: CheckProductContainsFavoritesUseCase,
+   private val checkProductContainsFavorites: CheckProductContainsFavoritesUseCase,
    private val removeFromFavorites: RemoveFavoriteProductUseCase,
 ) : BaseFlowViewModel(), DefaultLifecycleObserver {
 
@@ -84,11 +85,18 @@ class ProductDetailsViewModel @Inject constructor(
       selectedColor.value = index
    }
 
+   @OptIn(ExperimentalCoroutinesApi::class)
+   val isProductContainsFavorites: StateFlow<Boolean> by lazy {
+      item.flatMapLatest { item ->
+         checkProductContainsFavorites(item?.name)
+      }.stateIn(viewModelScope, SharingStarted.Lazily, false)
+   }
+
    fun onFavoriteClicked() {
       item.value?.let {
          viewModelScope.launch {
-            if (!isProductContainsInFavorites(it.name)) addToFavorites.invoke(it.name)
-            // else remove
+            if (!isProductContainsFavorites.value) addToFavorites.invoke(it.name)
+            else removeFromFavorites.invoke(it.name)
          }
       }
    }
