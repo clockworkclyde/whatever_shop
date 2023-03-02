@@ -1,8 +1,10 @@
 package com.github.clockworkclyde.providers.di
 
+import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
@@ -19,6 +21,10 @@ open class NetworkModule {
    @Provides
    @BaseUrl
    fun provideBaseUrl() = getBaseUrl()
+
+   @Provides
+   @Singleton
+   fun provideGson() = Gson()
 
    @Provides
    @Singleton

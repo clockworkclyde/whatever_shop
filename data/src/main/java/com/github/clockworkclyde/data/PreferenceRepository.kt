@@ -15,4 +15,12 @@ class PreferenceRepository @Inject constructor(
    override fun saveCurrentUserEmail(email: String) {
       return provider.saveCurrentUserEmail(email)
    }
+
+   override fun saveFavorite(name: String): Boolean {
+      return provider.saveAsFavorite(name)
+   }
+
+   override fun getFavorites(): List<String> {
+      return provider.getFavorites()
+   }
 }
