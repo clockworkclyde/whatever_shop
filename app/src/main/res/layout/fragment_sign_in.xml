@@ -99,6 +99,7 @@
                 android:padding="4dp"
                 android:safeClick="@{viewModel::onLoginClicked}"
                 android:text="@string/txt_btn_login"
+                android:fontFamily="@font/mon_medium"
                 android:textColor="@color/text_primary" />
          </LinearLayout>
 
@@ -111,7 +112,8 @@
 
             <TextView
                 android:id="@+id/txtBtnGoogleSignIn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                style="@style/TextViewStyle.Small"
                 android:layout_height="wrap_content"
                 android:drawablePadding="12dp"
                 android:gravity="center_vertical"
@@ -122,7 +124,8 @@
 
             <TextView
                 android:id="@+id/txtBtnAppleSignIn"
-                android:layout_width="wrap_content"
+                style="@style/TextViewStyle.Small"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:drawablePadding="8dp"

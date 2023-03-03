@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.github.clockworkclyde.core.presentation.fragments.BaseFragment
 import com.github.clockworkclyde.core.utils.*
@@ -90,6 +91,7 @@ class ProductDetailsFragment :
    private fun setUpPhotoList() {
       binding.photosPager.adapter = photoAdapter
       binding.photosPager.apply {
+         setPageTransformer(MarginPageTransformer(64))
          //selectPhoto(currentPage)
          registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -124,7 +126,7 @@ class ProductDetailsFragment :
       binding.thumbnailRV.apply {
          setInfinite(false)
          set3DItem(false)
-         setIntervalRatio(0.72f)
+         setIntervalRatio(0.67f)
          setAlpha(false)
          setFlat(false)
       }

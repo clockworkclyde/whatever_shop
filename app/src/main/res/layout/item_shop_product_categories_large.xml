@@ -48,8 +48,8 @@
 
          <ImageView
              android:id="@+id/imageView"
-             android:layout_width="174dp"
-             android:layout_height="222dp"
+             android:layout_width="194dp"
+             android:layout_height="242dp"
              android:contentDescription="@null"
              android:scaleType="centerCrop"
              app:layout_constraintBottom_toBottomOf="parent"
@@ -108,7 +108,7 @@
           android:lines="2"
           android:textSize="13sp"
           app:layout_constraintBottom_toTopOf="@id/priceTextView"
-          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintEnd_toStartOf="@id/btnAddToCart"
           app:layout_constraintStart_toStartOf="parent"
           tools:text="New balance sneakers" />
 
