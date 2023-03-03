@@ -73,7 +73,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, AuthViewModel>() {
    }
 
    private fun observeInputFieldsValidated() {
-      viewModel.firstNameError.collectWhileStarted { binding.emailTextInput.error = it }
+      viewModel.emailError.collectWhileStarted { binding.emailTextInput.error = it }
       viewModel.passwordError.collectWhileStarted { binding.passwordTextInput.error = it }
    }
 
