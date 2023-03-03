@@ -79,7 +79,7 @@
           android:layout_marginTop="32dp"
           android:fontFamily="@font/mon_bold"
           android:safeClick="@{viewModel::onLoginAttemptClicked}"
-          android:text="@string/btn_sign_in" />
+          android:text="@string/btn_login" />
 
    </LinearLayout>
 </layout>
