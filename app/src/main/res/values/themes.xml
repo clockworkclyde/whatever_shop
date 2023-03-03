@@ -49,6 +49,11 @@
       <item name="fontFamily">@font/mon_semi_bold</item>
    </style>
 
+   <style name="TextViewStyle.Toolbar" parent="TextViewStyle.Title">
+      <item name="android:textSize">17sp</item>
+      <item name="fontFamily">@font/mon_semi_bold</item>
+   </style>
+
    <style name="TextViewStyle.Content.Title" parent="TextViewStyle.Title">
       <item name="android:textSize">17sp</item>
       <item name="fontFamily">@font/pop_semi_bold</item>
@@ -150,6 +155,8 @@
       <item name="android:background">@drawable/bg_bottom_nav</item>
       <item name="backgroundTint">@null</item>
       <item name="elevation">8dp</item>
+      <item name="android:paddingTop">8dp</item>
+      <item name="android:paddingBottom">8dp</item>
       <item name="itemBackground">@drawable/bottom_navigation_item_bg</item>
       <item name="android:minHeight">63dp</item>
       <item name="enforceTextAppearance">true</item>

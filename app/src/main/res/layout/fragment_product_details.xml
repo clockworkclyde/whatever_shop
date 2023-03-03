@@ -20,7 +20,8 @@
       <androidx.appcompat.widget.Toolbar
           android:id="@+id/toolbarLayout"
           android:layout_width="match_parent"
-          android:layout_height="?attr/actionBarSize"
+          android:layout_height="wrap_content"
+          android:paddingTop="8dp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
@@ -81,11 +82,11 @@
                    android:layout_height="wrap_content"
                    android:background="@android:color/transparent"
                    android:contentDescription="@string/desc_add_to_favorites"
-                   android:paddingVertical="8dp"
                    android:paddingHorizontal="6dp"
-                   tools:src="@drawable/ic_favorites_empty"
+                   android:paddingVertical="8dp"
                    android:safeClick="@{viewModel::onFavoriteClicked}"
-                   android:src="@{viewModel.isProductContainsFavorites() ? @drawable/ic_favorites_filled : @drawable/ic_favorites_empty }" />
+                   android:src="@{viewModel.isProductContainsFavorites() ? @drawable/ic_favorites_filled : @drawable/ic_favorites_empty }"
+                   tools:src="@drawable/ic_favorites_empty" />
 
                <ImageView
                    android:layout_width="wrap_content"
@@ -95,8 +96,6 @@
                    android:src="@drawable/ic_small_divider" />
 
                <ImageButton
-                   android:paddingVertical="8dp"
-                   android:paddingHorizontal="6dp"
                    android:id="@+id/shareBtn"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -104,6 +103,8 @@
                    android:background="@android:color/transparent"
                    android:contentDescription="@string/desc_share"
                    android:padding="4dp"
+                   android:paddingHorizontal="6dp"
+                   android:paddingVertical="8dp"
                    android:src="@drawable/ic_share" />
 
             </LinearLayout>
