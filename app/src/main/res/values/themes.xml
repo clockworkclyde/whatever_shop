@@ -45,7 +45,8 @@
    </style>
 
    <style name="TextViewStyle.Title.Medium" parent="TextViewStyle.Title">
-      <item name="android:textSize">17sp</item>
+      <item name="android:textSize">15sp</item>
+      <item name="fontFamily">@font/mon_semi_bold</item>
    </style>
 
    <style name="TextViewStyle.Content.Title" parent="TextViewStyle.Title">
@@ -104,7 +105,7 @@
    <style name="TextViewStyle.TextInput">
       <item name="fontFamily">@font/mon_medium</item>
       <item name="android:textColor">@color/base_dark_gray</item>
-      <item name="android:textSize">13sp</item>
+      <item name="android:textSize">12sp</item>
    </style>
 
    <style name="TextInputStyle">
@@ -134,14 +135,14 @@
 
    <style name="TextViewStyle.CategoryLabel">
       <item name="android:textColor">@color/white</item>
-      <item name="android:fontFamily">@font/pop_extra_light</item>
+      <item name="android:fontFamily">@font/pop_extra_bold</item>
       <item name="android:textStyle">bold</item>
    </style>
 
    <style name="TextViewStyle.CommonCategoryTitle">
       <item name="android:textColor">@color/txt_common_category</item>
       <item name="android:textSize">8sp</item>
-      <item name="android:fontFamily">@font/pop_extra_light</item>
+      <item name="android:fontFamily">@font/pop_extra_bold</item>
    </style>
 
    <!-- Bottom nav-->

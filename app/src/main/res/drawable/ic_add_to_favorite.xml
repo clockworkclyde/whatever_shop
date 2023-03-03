@@ -6,7 +6,7 @@
     android:viewportHeight="28">
    <group>
       <path
-          android:fillColor="#FFEEEFF4"
+          android:fillColor="#E5E9EF"
           android:pathData="M14 28c7.73 0 14-6.27 14-14S21.73 0 14 0 0 6.27 0 14s6.27 14 14 14Z"/>
       <path
           android:strokeColor="#FF545589"
