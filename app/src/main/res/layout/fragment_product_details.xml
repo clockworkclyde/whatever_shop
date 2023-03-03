@@ -41,8 +41,8 @@
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/photosPager"
-                android:layout_width="328dp"
-                android:layout_height="278dp"
+                android:layout_width="348dp"
+                android:layout_height="298dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,8 +69,8 @@
                 android:background="@drawable/bg_details_panel"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="16dp"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="8dp"
                 app:layout_constraintBottom_toBottomOf="@id/photosPager"
                 app:layout_constraintEnd_toEndOf="@id/photosPager"
                 app:layout_constraintStart_toEndOf="@id/photosPager">
@@ -81,7 +81,8 @@
                    android:layout_height="wrap_content"
                    android:background="@android:color/transparent"
                    android:contentDescription="@string/desc_add_to_favorites"
-                   android:padding="4dp"
+                   android:paddingVertical="8dp"
+                   android:paddingHorizontal="6dp"
                    tools:src="@drawable/ic_favorites_empty"
                    android:safeClick="@{viewModel::onFavoriteClicked}"
                    android:src="@{viewModel.isProductContainsFavorites() ? @drawable/ic_favorites_filled : @drawable/ic_favorites_empty }" />
@@ -89,15 +90,17 @@
                <ImageView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_marginTop="16dp"
+                   android:layout_marginTop="8dp"
                    android:contentDescription="@null"
                    android:src="@drawable/ic_small_divider" />
 
                <ImageButton
+                   android:paddingVertical="8dp"
+                   android:paddingHorizontal="6dp"
                    android:id="@+id/shareBtn"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_marginTop="16dp"
+                   android:layout_marginTop="8dp"
                    android:background="@android:color/transparent"
                    android:contentDescription="@string/desc_share"
                    android:padding="4dp"
