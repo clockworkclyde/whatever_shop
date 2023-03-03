@@ -1,9 +1,13 @@
 package com.github.clockworkclyde.core.common
 
+import androidx.navigation.NavController
 import com.github.clockworkclyde.core.dto.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+
+// Navigation
+typealias NavigationHandler = (NavController) -> Unit
 
 typealias UnitHandler = () -> Unit
 typealias InHandler<T> = (T) -> Unit

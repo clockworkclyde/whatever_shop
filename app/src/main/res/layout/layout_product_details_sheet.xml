@@ -22,6 +22,7 @@
       <TextView
           android:id="@+id/quantityTitleTV"
           style="@style/TextViewStyle.Content.Default"
+          android:fontFamily="@font/pop_semi_bold"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:paddingBottom="10dp"

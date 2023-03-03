@@ -54,4 +54,5 @@
    <string name="desc_share">Share</string>
    <string name="format_price_us_with_cents">$ %s,00</string>
    <string name="price_stub">$ XX,XX</string>
+   <string name="btn_login">Login</string>
 </resources>

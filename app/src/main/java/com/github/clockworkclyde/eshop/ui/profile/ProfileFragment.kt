@@ -108,7 +108,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
                )
             )
             this.itemNameTextView.text = getString(item.titleResId)
-            this.arrowImgBtn.isVisible = item.balance == null || item.arrowVisibility
+            this.arrowImgBtn.isVisible = item.balance == null && item.arrowVisibility
             this.balanceTextView.isVisible = item.balance != null && !item.arrowVisibility
             this.balanceTextView.text = balanceFormat.format(item.balance)
             this.itemMenuLayout.safeClick { onMenuItemClick(index, item) }

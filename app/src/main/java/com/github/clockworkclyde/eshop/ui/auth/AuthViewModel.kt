@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.github.clockworkclyde.core.common.AnyResult
 import com.github.clockworkclyde.core.common.FlowAnyResult
 import com.github.clockworkclyde.core.dto.Result
+import com.github.clockworkclyde.core.dto.UEvent
 import com.github.clockworkclyde.core.presentation.viewmodels.BaseFlowViewModel
 import com.github.clockworkclyde.domain.usecases.validate.ValidateEmailUseCase
 import com.github.clockworkclyde.domain.usecases.validate.ValidateFieldIsNotEmptyUseCase
@@ -14,11 +15,8 @@ import com.github.clockworkclyde.core.utils.*
 import com.github.clockworkclyde.domain.usecases.auth.*
 import com.github.clockworkclyde.eshop.navigation.directions.auth.AuthDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -41,7 +39,7 @@ class AuthViewModel @Inject constructor(
    val passwordError = MutableSharedFlow<String>()
 
    private val userLoggedInFlow: Flow<AnyResult> by lazy {
-      flow {
+      asyncFlow {
          emit(loadingResult())
          delay(300L)
          emitAll(checkUserLoggedIn())
@@ -82,10 +80,10 @@ class AuthViewModel @Inject constructor(
 
    /* Sign in validation */
    override val supportFlow: Flow<SignInAttempt> by lazy {
-      val firstName = firstName.value
-      val lastName = lastName.value
-      val email = email.value
-      asyncFlow {
+      onEventFlow<UEvent.Validate, SignInAttempt> {
+         val firstName = firstName.value
+         val lastName = lastName.value
+         val email = email.value
          val firstNameHasError =
             validateIsNotEmpty(firstName)?.also { firstNameError.emit(it) }?.isNotEmpty()
                .orFalse()
@@ -95,18 +93,18 @@ class AuthViewModel @Inject constructor(
          val emailHasError =
             validateEmail(email)?.also { emailError.emit(it) }?.isNotEmpty().orFalse()
 
-         if (!(firstNameHasError && lastNameHasError && emailHasError)) {
+         if (!(firstNameHasError || lastNameHasError || emailHasError)) {
             emit(SignInAttempt(firstName = firstName, lastName = lastName, email = email))
          }
       }
    }
 
-   @OptIn(FlowPreview::class)
+   @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
    private val signInFlow: FlowAnyResult by lazy {
       supportFlow
-         //.debounce(200L)
-         .flatMapConcat {
-            flow {
+         .debounce(HANDLE_EVENT_TIMEOUT)
+         .flatMapLatest {
+            asyncFlow {
                signInAttempt.invoke(it)
                   .applyIfError { resultFlow.emit(it) }
                   .applyIfSuccess { emit(toEmptySuccess()) }
@@ -114,8 +112,11 @@ class AuthViewModel @Inject constructor(
          }
    }
 
+   private var signJob: Job? = null
    fun onCreateAccountClicked() {
-      viewModelScope.launch(ioDispatcher) {
+      signJob?.run { if (isActive) cancel() }
+      signJob = viewModelScope.launch(ioDispatcher) {
+         processEvent(UEvent.Validate)
          signInFlow.collect {
             if (it.isSuccess()) processNavEvent(
                directions.toShopCategoriesCleared(),
@@ -127,34 +128,40 @@ class AuthViewModel @Inject constructor(
 
    /* Login validation */
    private val secondSupportFlow: Flow<LoginAttempt> by lazy {
-      val firstName = email.value
-      val pass = password.value
-      asyncFlow {
+      onEventFlow<UEvent.Validate, LoginAttempt> {
+         val email = email.value
+         val pass = password.value
          val emailHasError =
-            validateEmail(firstName)?.also { emailError.emit(it) }?.isNotEmpty()
+            validateEmail(email)?.also { emailError.emit(it) }?.isNotEmpty()
                .orFalse()
          val passwordHasError =
             validateIsNotEmpty(pass)?.also { passwordError.emit(it) }?.isNotEmpty()
                .orFalse()
 
-         if (!(emailHasError && passwordHasError)) {
-            emit(LoginAttempt(firstName, pass))
+         if (!(emailHasError || passwordHasError)) {
+            emit(LoginAttempt(email, pass))
          }
       }
    }
 
+   @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
    private val loginFlow: FlowAnyResult by lazy {
-      secondSupportFlow.flatMapConcat {
-         flow {
-            loginAttempt(it)
-               .applyIfError { resultFlow.emit(it) }
-               .applyIfSuccess { emit(toEmptySuccess()) }
+      secondSupportFlow
+         .debounce(HANDLE_EVENT_TIMEOUT)
+         .flatMapLatest {
+            asyncFlow {
+               loginAttempt(it)
+                  .applyIfError { resultFlow.emit(it) }
+                  .applyIfSuccess { emit(toEmptySuccess()) }
+            }
          }
-      }
    }
 
+   private var loginJob: Job? = null
    fun onLoginAttemptClicked() {
-      viewModelScope.launch(ioDispatcher) {
+      loginJob?.run { if (isActive) cancel() }
+      loginJob = viewModelScope.launch(ioDispatcher) {
+         processEvent(UEvent.Validate)
          loginFlow.collect {
             if (it.isSuccess()) processNavEvent(
                directions.toShopCategoriesCleared(),
@@ -200,5 +207,9 @@ class AuthViewModel @Inject constructor(
 
    fun setPassword(text: String) {
       _password.value = text
+   }
+
+   companion object {
+      const val HANDLE_EVENT_TIMEOUT = 200L
    }
 }

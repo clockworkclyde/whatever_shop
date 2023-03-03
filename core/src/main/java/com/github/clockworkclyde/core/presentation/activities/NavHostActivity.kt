@@ -35,7 +35,7 @@ abstract class NavHostActivity : AppCompatActivity {
    open fun handleNavigationCommands() {
       navigationHandler.commands.collectWhileCreated { handler ->
          navHostController.let(handler)
-         Timber.e("Navigation command was handled when current fragment is $currentFragment")
+         Timber.d("Navigation command was handled when current fragment is $currentFragment")
       }
    }
 
