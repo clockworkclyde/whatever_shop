@@ -9,14 +9,17 @@ import com.github.clockworkclyde.core.dto.UEvent
 import com.github.clockworkclyde.core.presentation.viewmodels.BaseFlowViewModel
 import com.github.clockworkclyde.core.utils.*
 import com.github.clockworkclyde.domain.model.product.ProductDetails
+import com.github.clockworkclyde.domain.usecases.cart.AddProductToShoppingCartUseCase
+import com.github.clockworkclyde.domain.usecases.cart.AddProductToShoppingCartUseCaseModel
 import com.github.clockworkclyde.domain.usecases.details.AddProductToFavoritesUseCase
 import com.github.clockworkclyde.domain.usecases.details.CheckProductContainsFavoritesUseCase
 import com.github.clockworkclyde.domain.usecases.details.GetProductDetailsUseCase
 import com.github.clockworkclyde.domain.usecases.details.RemoveFavoriteProductUseCase
+import com.github.clockworkclyde.eshop.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +28,8 @@ class ProductDetailsViewModel @Inject constructor(
    private val addToFavorites: AddProductToFavoritesUseCase,
    private val checkProductContainsFavorites: CheckProductContainsFavoritesUseCase,
    private val removeFromFavorites: RemoveFavoriteProductUseCase,
+   private val addProductToCart: AddProductToShoppingCartUseCase,
+   @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : BaseFlowViewModel(), DefaultLifecycleObserver {
 
    val item: StateFlow<ProductDetails?> by lazy {
@@ -51,6 +56,20 @@ class ProductDetailsViewModel @Inject constructor(
       val quantity = quantity.value
       val item = item.value
       val selectedColor = item?.colors?.elementAtOrNull(selectedColor.value)
+      if (item == null || selectedColor == null) return
+      viewModelScope.launch(ioDispatcher) {
+         val tasks = IntRange(1, quantity).map {
+            addProductToCart(
+               AddProductToShoppingCartUseCaseModel(
+                  name = item.name,
+                  color = selectedColor
+               )
+            )
+         }
+         tasks.find { it.isError() }
+            ?.applyIfError { Timber.e("Got at least one error result in add to cart process: $it") }
+
+      }
    }
 
    fun onRetryClicked() {
