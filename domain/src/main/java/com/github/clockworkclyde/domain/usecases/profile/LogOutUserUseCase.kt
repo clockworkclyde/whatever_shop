@@ -3,6 +3,7 @@ package com.github.clockworkclyde.domain.usecases.profile
 import com.github.clockworkclyde.core.common.AnyResult
 import com.github.clockworkclyde.core.common.IResourcesProvider
 import com.github.clockworkclyde.core.utils.errorResult
+import com.github.clockworkclyde.core.utils.flatMapIfError
 import com.github.clockworkclyde.core.utils.flatMapIfSuccess
 import com.github.clockworkclyde.domain.R
 import com.github.clockworkclyde.domain.repository.IPreferenceRepository
@@ -19,12 +20,15 @@ class LogOutUserUseCase @Inject constructor(
 ) : ILogOutUserUseCase {
 
    override suspend fun invoke(): AnyResult {
-      return preferenceRepository.getCurrentUserEmail()?.let {
+      return preferenceRepository.getCurrentUserEmail().flatMapIfSuccess {
          userRepository.logoutCurrentUser(it).flatMapIfSuccess {
             preferenceRepository.saveCurrentUserEmail("")
+            preferenceRepository.clearShoppingCart()
             profileRepository.removeCurrentPhoto()
+         }.flatMapIfError {
+            errorResult(message = resources.getString(R.string.error_logout_with_email))
          }
-      } ?: errorResult(message = resources.getString(R.string.error_logout_with_email))
+      }
    }
 }
 

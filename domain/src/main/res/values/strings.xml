@@ -9,4 +9,6 @@
    <string name="cat_furniture">Furniture</string>
    <string name="cat_kids">Kids</string>
    <string name="error_logout_with_email">Произошла ошибка, пожалуйста войдите заново в аккаунт</string>
+   <string name="empty_input_data_error">Невозможно выполнить действие</string>
+   <string name="color_not_selected_error">Необходимо сначала выбрать цвет</string>
 </resources>

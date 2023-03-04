@@ -18,7 +18,7 @@ class GetUserDataUseCase @Inject constructor(
 ) : IGetUserDataUseCase {
 
    override suspend fun invoke(): Result<User> {
-      return preferences.getCurrentUserEmail()?.let { email ->
+      return preferences.getCurrentUserEmail().flatMapIfSuccess { email ->
          userRepository.findUserByEmail(email)
             .flatMapIfSuccess { user ->
                when (val photoResult = photoRepository.getCurrentPhoto()) {
@@ -26,7 +26,7 @@ class GetUserDataUseCase @Inject constructor(
                   else -> user
                }.toSuccessResult()
             }
-      } ?: emptyResult()
+      }
    }
 }
 
