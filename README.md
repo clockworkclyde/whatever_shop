@@ -1,6 +1,3 @@
-# whatever_shop
-Online store app which provides a wide range of household and personal goods.
-
 #### Modules:
 1. <b>App:</b> contains app di, navigation impl with directions, UI and jetpack navigation
 2. <b>Core:</b> contains base classes and interfaces, utils, inline funs, etc. Also contract for custom app navigation, result DTO, typealiases
